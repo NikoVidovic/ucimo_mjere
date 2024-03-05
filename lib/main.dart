@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main_button.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,45 +30,35 @@ class MainMenu extends StatelessWidget {
             title: const Text('Učimo mjere',
                 style: TextStyle(color: Colors.white)),
             leading: IconButton(
-                icon: Icon(Icons.menu),
+                icon: const Icon(Icons.menu),
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.white)),
                 onPressed: () {}),
             backgroundColor: const Color.fromARGB(255, 22, 56, 74)),
-        body: const Column(
+        body: const SingleChildScrollView(
+            child: Column(
           children: [
             MainButton(
-                naziv: 'Vrijeme', boja: Color.fromARGB(255, 222, 207, 73)),
+                naziv: 'Mjerne jedinice za masu/duljinu/vrijeme',
+                boja: Color.fromARGB(255, 232, 196, 80),
+                imagePath: 'assets/kategorija1.png'),
             MainButton(
-                naziv: 'Površina', boja: Color.fromARGB(255, 125, 31, 142)),
+                naziv: 'Mjerne jedinice za površinu',
+                boja: Color.fromARGB(255, 126, 55, 108),
+                imagePath: 'assets/kategorija2.png'),
             MainButton(
-                naziv: 'Obujam', boja: Color.fromARGB(255, 77, 147, 153)),
-            MainButton(naziv: 'Temperatura', boja: Colors.red),
+                naziv: 'Mjerne jedinice za obujam',
+                boja: Color.fromARGB(255, 34, 194, 190),
+                imagePath: 'assets/kategorija3.png'),
             MainButton(
-                naziv: 'Količina informacije',
-                boja: Color.fromARGB(255, 28, 127, 209))
+                naziv: 'Mjerne jedinice za temperaturu',
+                boja: Color.fromARGB(255, 246, 78, 81),
+                imagePath: 'assets/kategorija4.png'),
+            MainButton(
+                naziv: 'Mjerne jedinice za kolilinu informacija',
+                boja: Color.fromARGB(255, 17, 134, 209),
+                imagePath: 'assets/kategorija5.png')
           ],
-        ));
-  }
-}
-
-class MainButton extends StatelessWidget {
-  final String naziv;
-  final Color boja;
-  const MainButton({super.key, required this.naziv, required this.boja});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.all(16.0),
-        child: ElevatedButton(
-            onPressed: () {},
-            style: ButtonStyle(
-                minimumSize:
-                    MaterialStateProperty.all(const Size(double.infinity, 100)),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(0.0))),
-                backgroundColor: MaterialStateProperty.all(boja)),
-            child: Text(naziv,
-                style: TextStyle(color: Colors.white, fontSize: 30))));
+        )));
   }
 }
