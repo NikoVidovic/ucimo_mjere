@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'izbornik.dart';
 import 'main_button.dart';
 
 void main() {
@@ -30,10 +31,16 @@ class MainMenu extends StatelessWidget {
             title: const Text('Učimo mjere',
                 style: TextStyle(color: Colors.white)),
             leading: IconButton(
-                icon: const Icon(Icons.menu),
+                icon: const Icon(Icons.menu, color: Colors.white),
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.white)),
-                onPressed: () {}),
+                    backgroundColor: MaterialStateProperty.all(
+                        const Color.fromARGB(255, 22, 56, 74))),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Izbornik()));
+                }),
             backgroundColor: const Color.fromARGB(255, 22, 56, 74)),
         body: const SingleChildScrollView(
             child: Column(
