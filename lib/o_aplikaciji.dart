@@ -8,20 +8,16 @@ class OAplikaciji extends StatelessWidget {
   Widget build(BuildContext context) {
     return (Scaffold(
         appBar: AppBar(
+            iconTheme: const IconThemeData(color: Colors.white),
             title: const Text('O aplikaciji',
                 style: TextStyle(color: Colors.white)),
-            leading: IconButton(
-                icon: const Icon(Icons.menu, color: Colors.white),
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        const Color.fromARGB(255, 22, 56, 74))),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Izbornik()));
-                }),
             backgroundColor: const Color.fromARGB(255, 22, 56, 74)),
+        drawer: const SizedBox(
+          width: 500,
+          child: Drawer(
+            child: Izbornik(),
+          ),
+        ),
         body: Row(children: [
           Container(
               margin: const EdgeInsets.only(left: 60.0, top: 60.0),
