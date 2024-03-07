@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/main.dart';
+import 'package:hello_world/o_aplikaciji.dart';
 import 'izbornik_button.dart';
 
 class Izbornik extends StatelessWidget {
@@ -33,9 +35,16 @@ class Izbornik extends StatelessWidget {
             backgroundColor: const Color.fromARGB(255, 244, 188, 66)),
         body: const Column(
           children: [
-            IzbornikButton(ikona: Icon(Icons.apps), title: 'Izbornik'),
-            IzbornikButton(ikona: Icon(Icons.error), title: 'O aplikaciji'),
-            IzbornikButton(ikona: Icon(Icons.email), title: 'Prijavi problem')
+            IzbornikButton(
+                ikona: Icon(Icons.apps), title: 'Izbornik', route: MainMenu()),
+            IzbornikButton(
+                ikona: Icon(Icons.error),
+                title: 'O aplikaciji',
+                route: OAplikaciji()),
+            IzbornikButton(
+                ikona: Icon(Icons.email),
+                title: 'Prijavi problem',
+                route: MainMenu())
           ],
         )));
   }
