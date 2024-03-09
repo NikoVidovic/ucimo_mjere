@@ -19,7 +19,7 @@ class MainButton extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Game()),
+                MaterialPageRoute(builder: (context) => const Game()),
               );
             },
             style: ButtonStyle(

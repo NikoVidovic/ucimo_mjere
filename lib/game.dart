@@ -13,6 +13,6 @@ class Game extends StatelessWidget {
                 style: TextStyle(color: Colors.white)),
             toolbarHeight: 100,
             backgroundColor: const Color.fromARGB(255, 22, 56, 74)),
-        body: GameBody()));
+        body: const GameBody()));
   }
 }

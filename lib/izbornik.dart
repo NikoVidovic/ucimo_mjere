@@ -36,15 +36,20 @@ class Izbornik extends StatelessWidget {
         body: const Column(
           children: [
             IzbornikButton(
-                ikona: Icon(Icons.apps), title: 'Izbornik', route: MainMenu()),
+                ikona: Icon(Icons.apps),
+                title: 'Izbornik',
+                route: MainMenu(),
+                boja: Colors.black),
             IzbornikButton(
                 ikona: Icon(Icons.error),
                 title: 'O aplikaciji',
-                route: OAplikaciji()),
+                route: OAplikaciji(),
+                boja: Colors.black),
             IzbornikButton(
                 ikona: Icon(Icons.email),
                 title: 'Prijavi problem',
-                route: MainMenu())
+                route: MainMenu(),
+                boja: Colors.black)
           ],
         )));
   }
