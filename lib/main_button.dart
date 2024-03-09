@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'game.dart';
 import 'main_image.dart';
 
 class MainButton extends StatelessWidget {
@@ -15,7 +16,12 @@ class MainButton extends StatelessWidget {
     return Container(
         margin: const EdgeInsets.all(16.0),
         child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Game()),
+              );
+            },
             style: ButtonStyle(
                 minimumSize:
                     MaterialStateProperty.all(const Size(double.infinity, 220)),
