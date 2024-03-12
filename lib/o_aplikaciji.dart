@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/app_bar.dart';
 
 import 'izbornik.dart';
 
@@ -7,11 +8,7 @@ class OAplikaciji extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (Scaffold(
-        appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.white),
-            title: const Text('O aplikaciji',
-                style: TextStyle(color: Colors.white)),
-            backgroundColor: const Color.fromARGB(255, 22, 56, 74)),
+        appBar: const AppBarCustom(title: 'O aplikaciji', height: 65.5),
         drawer: const SizedBox(
           width: 500,
           child: Drawer(

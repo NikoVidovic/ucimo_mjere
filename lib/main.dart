@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/app_bar.dart';
 import 'izbornik.dart';
 import 'main_button.dart';
 
@@ -26,19 +27,15 @@ class MainMenu extends StatelessWidget {
   const MainMenu({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.white),
-            title: const Text('Učimo mjere',
-                style: TextStyle(color: Colors.white)),
-            backgroundColor: const Color.fromARGB(255, 22, 56, 74)),
-        drawer: const SizedBox(
+    return const Scaffold(
+        appBar: AppBarCustom(title: 'Učimo mjere', height: 65.0),
+        drawer: SizedBox(
           width: 500,
           child: Drawer(
             child: Izbornik(),
           ),
         ),
-        body: const SingleChildScrollView(
+        body: SingleChildScrollView(
             child: Column(
           children: [
             MainButton(
