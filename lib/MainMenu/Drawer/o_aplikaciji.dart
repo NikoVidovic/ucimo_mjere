@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/app_bar.dart';
 
-import 'izbornik.dart';
+import 'opening_drawer.dart';
 
 class OAplikaciji extends StatelessWidget {
   const OAplikaciji({super.key});

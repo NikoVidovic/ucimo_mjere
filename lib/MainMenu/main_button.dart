@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'game.dart';
+import '../bottom_app_bar.dart';
 import 'main_image.dart';
 
 class MainButton extends StatelessWidget {

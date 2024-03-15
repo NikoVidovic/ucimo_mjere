@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/main.dart';
-import 'package:hello_world/o_aplikaciji.dart';
-import 'izbornik_button.dart';
+import 'package:hello_world/MainMenu/main.dart';
+import 'package:hello_world/MainMenu/Drawer/o_aplikaciji.dart';
+import 'drawer_button.dart';
 
 class Izbornik extends StatelessWidget {
   const Izbornik({super.key});
