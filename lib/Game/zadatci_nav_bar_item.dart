@@ -30,7 +30,7 @@ class _AnswerInputState extends State<AnswerInput> {
           const EdgeInsets.only(top: 70, left: 390, right: 390, bottom: 300),
       child: Column(children: [
         const Text(
-          'Duljina/masa/vrijeme',
+          'Duljina',
           style: TextStyle(fontSize: 50),
         ),
         Row(children: [
