@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/app_bar.dart';
-import 'Drawer/opening_drawer.dart';
-import 'main_button.dart';
+import 'MainMenu/Drawer/opening_drawer.dart';
+import 'MainMenu/main_button.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/MainMenu/main.dart';
+import 'package:hello_world/main.dart';
 import 'package:hello_world/MainMenu/Drawer/o_aplikaciji.dart';
 import 'drawer_button.dart';
 
