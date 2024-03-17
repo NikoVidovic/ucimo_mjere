@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class AnswerInput extends StatefulWidget {
+class AnswerInputDuljina extends StatefulWidget {
   final String title;
-  const AnswerInput({super.key, required this.title});
+  const AnswerInputDuljina({super.key, required this.title});
 
   @override
-  State<AnswerInput> createState() => _AnswerInputState();
+  State<AnswerInputDuljina> createState() => _AnswerInputDuljinaState();
 }
 
-class _AnswerInputState extends State<AnswerInput> {
+class _AnswerInputDuljinaState extends State<AnswerInputDuljina> {
   final controller = TextEditingController();
   String text = "";
 

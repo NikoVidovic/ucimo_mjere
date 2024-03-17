@@ -5,7 +5,8 @@ import '../app_bar.dart';
 import 'zadatci_nav_bar_item.dart';
 
 class Game extends StatefulWidget {
-  const Game({super.key});
+  final String title;
+  const Game({super.key, required this.title});
 
   @override
   State<Game> createState() => _GameState();
@@ -14,7 +15,13 @@ class Game extends StatefulWidget {
 class _GameState extends State<Game> {
   int selectedIndex = 0;
 
-  final List<Widget> pages = [const AnswerInput(), const Postavke()];
+  late List<Widget> pages;
+
+  @override
+  void initState() {
+    super.initState();
+    pages = [AnswerInput(title: widget.title), const Postavke()];
+  }
 
   void navigateBottomBar(int index) {
     setState(() {

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'zadatci_button.dart';
+import '../zadatci_button.dart';
 
 class PostavkeDuljina extends StatefulWidget {
   const PostavkeDuljina({super.key});

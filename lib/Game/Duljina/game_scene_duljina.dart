@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:hello_world/Game/postavke_duljina.dart';
-import '../app_bar.dart';
-import 'zadatci_nav_bar_item.dart';
+import 'package:hello_world/Game/Duljina/postavke_duljina.dart';
+import '../../app_bar.dart';
+import 'zadatci_duljina.dart';
 
 class GameDuljina extends StatefulWidget {
   const GameDuljina({super.key});
@@ -14,7 +14,12 @@ class GameDuljina extends StatefulWidget {
 class _GameDuljinaState extends State<GameDuljina> {
   int selectedIndex = 0;
 
-  final List<Widget> pages = [const AnswerInput(), const PostavkeDuljina()];
+  final List<Widget> pages = [
+    const AnswerInputDuljina(
+      title: 'Duljina',
+    ),
+    const PostavkeDuljina()
+  ];
 
   void navigateBottomBar(int index) {
     setState(() {

@@ -13,6 +13,9 @@ class ZadatciButton extends StatelessWidget {
             minimumSize: MaterialStateProperty.all<Size>(
                 const Size.square(50))), // Adjust the size as needed
         onPressed: () {},
-        child: const Text('UNESITE VLASTITI ZADATAK'));
+        child: const Text(
+          'UNESITE VLASTITI ZADATAK',
+          style: TextStyle(fontSize: 20),
+        ));
   }
 }

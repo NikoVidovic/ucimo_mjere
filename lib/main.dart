@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/Game/game_scene.dart';
-import 'package:hello_world/Game/game_scene_duljina.dart';
+import 'package:hello_world/Game/Duljina/game_scene_duljina.dart';
 import 'app_bar.dart';
 import 'MainMenu/Drawer/opening_drawer.dart';
 import 'MainMenu/main_button.dart';
@@ -50,25 +50,29 @@ class MainMenu extends StatelessWidget {
               naziv: 'Mjerne jedinice za površinu',
               boja: Color.fromARGB(255, 126, 55, 108),
               imagePath: 'assets/kategorija2.png',
-              route: Game(),
+              route: Game(
+                title: 'Mjerne jedinice za površinu',
+              ),
             ),
             MainButton(
               naziv: 'Mjerne jedinice za obujam',
               boja: Color.fromARGB(255, 34, 194, 190),
               imagePath: 'assets/kategorija3.png',
-              route: Game(),
+              route: Game(
+                title: 'Mjerne jedinice za obujam',
+              ),
             ),
             MainButton(
               naziv: 'Mjerne jedinice za temperaturu',
               boja: Color.fromARGB(255, 246, 78, 81),
               imagePath: 'assets/kategorija4.png',
-              route: Game(),
+              route: Game(title: 'Mjerne jedinice za temperaturu'),
             ),
             MainButton(
-              naziv: 'Mjerne jedinice za kolilinu informacija',
+              naziv: 'Mjerne jedinice za količinu informacija',
               boja: Color.fromARGB(255, 17, 134, 209),
               imagePath: 'assets/kategorija5.png',
-              route: Game(),
+              route: Game(title: 'Mjerne jedinice za količinu informacija'),
             )
           ],
         )));
