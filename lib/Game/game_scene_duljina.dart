@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'postavke_nav_bar_item.dart';
+import 'package:hello_world/Game/postavke_duljina.dart';
 import '../app_bar.dart';
 import 'zadatci_nav_bar_item.dart';
 
-class Game extends StatefulWidget {
-  const Game({super.key});
+class GameDuljina extends StatefulWidget {
+  const GameDuljina({super.key});
 
   @override
-  State<Game> createState() => _GameState();
+  State<GameDuljina> createState() => _GameDuljinaState();
 }
 
-class _GameState extends State<Game> {
+class _GameDuljinaState extends State<GameDuljina> {
   int selectedIndex = 0;
 
-  final List<Widget> pages = [const AnswerInput(), const Postavke()];
+  final List<Widget> pages = [const AnswerInput(), const PostavkeDuljina()];
 
   void navigateBottomBar(int index) {
     setState(() {

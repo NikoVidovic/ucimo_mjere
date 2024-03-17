@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import '../Game/game_scene.dart';
 import 'main_image.dart';
 
 class MainButton extends StatelessWidget {
   final String naziv;
   final Color boja;
   final String imagePath;
+  final Widget route;
   const MainButton(
       {super.key,
       required this.naziv,
       required this.boja,
-      required this.imagePath});
+      required this.imagePath,
+      required this.route});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +20,7 @@ class MainButton extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Game()),
+                MaterialPageRoute(builder: (context) => route),
               );
             },
             style: ButtonStyle(

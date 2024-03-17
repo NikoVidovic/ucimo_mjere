@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/app_bar.dart';
+import 'package:hello_world/Game/game_scene.dart';
+import 'package:hello_world/Game/game_scene_duljina.dart';
+import 'app_bar.dart';
 import 'MainMenu/Drawer/opening_drawer.dart';
 import 'MainMenu/main_button.dart';
 
@@ -39,25 +41,35 @@ class MainMenu extends StatelessWidget {
             child: Column(
           children: [
             MainButton(
-                naziv: 'Mjerne jedinice za masu/duljinu/vrijeme',
-                boja: Color.fromARGB(255, 232, 196, 80),
-                imagePath: 'assets/kategorija1.png'),
+              naziv: 'Mjerne jedinice za masu/duljinu/vrijeme',
+              boja: Color.fromARGB(255, 232, 196, 80),
+              imagePath: 'assets/kategorija1.png',
+              route: GameDuljina(),
+            ),
             MainButton(
-                naziv: 'Mjerne jedinice za površinu',
-                boja: Color.fromARGB(255, 126, 55, 108),
-                imagePath: 'assets/kategorija2.png'),
+              naziv: 'Mjerne jedinice za površinu',
+              boja: Color.fromARGB(255, 126, 55, 108),
+              imagePath: 'assets/kategorija2.png',
+              route: Game(),
+            ),
             MainButton(
-                naziv: 'Mjerne jedinice za obujam',
-                boja: Color.fromARGB(255, 34, 194, 190),
-                imagePath: 'assets/kategorija3.png'),
+              naziv: 'Mjerne jedinice za obujam',
+              boja: Color.fromARGB(255, 34, 194, 190),
+              imagePath: 'assets/kategorija3.png',
+              route: Game(),
+            ),
             MainButton(
-                naziv: 'Mjerne jedinice za temperaturu',
-                boja: Color.fromARGB(255, 246, 78, 81),
-                imagePath: 'assets/kategorija4.png'),
+              naziv: 'Mjerne jedinice za temperaturu',
+              boja: Color.fromARGB(255, 246, 78, 81),
+              imagePath: 'assets/kategorija4.png',
+              route: Game(),
+            ),
             MainButton(
-                naziv: 'Mjerne jedinice za kolilinu informacija',
-                boja: Color.fromARGB(255, 17, 134, 209),
-                imagePath: 'assets/kategorija5.png')
+              naziv: 'Mjerne jedinice za kolilinu informacija',
+              boja: Color.fromARGB(255, 17, 134, 209),
+              imagePath: 'assets/kategorija5.png',
+              route: Game(),
+            )
           ],
         )));
   }

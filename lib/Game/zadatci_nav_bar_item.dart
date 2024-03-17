@@ -26,8 +26,7 @@ class _AnswerInputState extends State<AnswerInput> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.only(top: 70, left: 390, right: 390, bottom: 300),
+      padding: const EdgeInsets.only(top: 70, left: 390, right: 390),
       child: Column(children: [
         const Text(
           'Duljina',
