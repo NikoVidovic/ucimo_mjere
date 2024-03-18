@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'zadatci_button.dart';
 
 class Postavke extends StatefulWidget {
-  const Postavke({super.key});
+  final bool allSettingsVisible;
+  const Postavke({super.key, required this.allSettingsVisible});
 
   @override
   State<Postavke> createState() => _PostavkeState();
@@ -12,6 +13,9 @@ class Postavke extends StatefulWidget {
 class _PostavkeState extends State<Postavke> {
   bool switchPostupak = false;
   bool switchRjesenje = false;
+  bool switchDuljina = true;
+  bool switchVrijeme = true;
+  bool switchMasa = true;
   double currentSliderValue = 1;
 
   onSwitchMethodPostupak(bool newValue) {
@@ -23,6 +27,57 @@ class _PostavkeState extends State<Postavke> {
   onSwitchMethodRjesenje(bool newValue) {
     setState(() {
       switchRjesenje = newValue;
+    });
+  }
+
+  onSwitchMethodDuljina(bool newValue) {
+    setState(() {
+      if (switchVrijeme == true || switchMasa == true) {
+        switchDuljina = newValue;
+      } else {
+        const snackBar = SnackBar(
+          content: Text(
+            'Barem jedna od kategorija mora biti uključena',
+            textAlign: TextAlign.center,
+          ),
+          duration: Duration(seconds: 2),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    });
+  }
+
+  onSwitchMethodVrijeme(bool newValue) {
+    setState(() {
+      if (switchDuljina == true || switchMasa == true) {
+        switchVrijeme = newValue;
+      } else {
+        const snackBar = SnackBar(
+          content: Text(
+            'Barem jedna od kategorija mora biti uključena',
+            textAlign: TextAlign.center,
+          ),
+          duration: Duration(seconds: 2),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    });
+  }
+
+  onSwitchMethodMasa(bool newValue) {
+    setState(() {
+      if (switchVrijeme == true || switchDuljina == true) {
+        switchMasa = newValue;
+      } else {
+        const snackBar = SnackBar(
+          content: Text(
+            'Barem jedna od kategorija mora biti uključena',
+            textAlign: TextAlign.center,
+          ),
+          duration: Duration(seconds: 2),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
     });
   }
 
@@ -65,6 +120,20 @@ class _PostavkeState extends State<Postavke> {
                     currentSliderValue = value;
                   });
                 }),
+          ),
+          Visibility(
+            visible: widget.allSettingsVisible,
+            child: buildSwitchOption(
+                'Duljina', switchDuljina, onSwitchMethodDuljina),
+          ),
+          Visibility(
+            visible: widget.allSettingsVisible,
+            child: buildSwitchOption(
+                'Vrijeme', switchVrijeme, onSwitchMethodVrijeme),
+          ),
+          Visibility(
+            visible: widget.allSettingsVisible,
+            child: buildSwitchOption('Masa', switchMasa, onSwitchMethodMasa),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 3),

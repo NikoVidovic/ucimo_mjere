@@ -6,7 +6,9 @@ import 'zadatci_nav_bar_item.dart';
 
 class Game extends StatefulWidget {
   final String title;
-  const Game({super.key, required this.title});
+  final bool allSettingsVisible;
+  const Game(
+      {super.key, required this.title, required this.allSettingsVisible});
 
   @override
   State<Game> createState() => _GameState();
@@ -20,7 +22,12 @@ class _GameState extends State<Game> {
   @override
   void initState() {
     super.initState();
-    pages = [AnswerInput(title: widget.title), const Postavke()];
+    pages = [
+      AnswerInput(title: widget.title),
+      Postavke(
+        allSettingsVisible: widget.allSettingsVisible,
+      )
+    ];
   }
 
   void navigateBottomBar(int index) {

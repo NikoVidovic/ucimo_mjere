@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/Game/game_scene.dart';
-import 'package:hello_world/Game/Duljina/game_scene_duljina.dart';
 import 'app_bar.dart';
 import 'MainMenu/Drawer/opening_drawer.dart';
 import 'MainMenu/main_button.dart';
@@ -44,7 +43,10 @@ class MainMenu extends StatelessWidget {
               naziv: 'Mjerne jedinice za masu/duljinu/vrijeme',
               boja: Color.fromARGB(255, 232, 196, 80),
               imagePath: 'assets/kategorija1.png',
-              route: GameDuljina(),
+              route: Game(
+                title: 'Mjerne jedinice za duljinu',
+                allSettingsVisible: true,
+              ),
             ),
             MainButton(
               naziv: 'Mjerne jedinice za površinu',
@@ -52,6 +54,7 @@ class MainMenu extends StatelessWidget {
               imagePath: 'assets/kategorija2.png',
               route: Game(
                 title: 'Mjerne jedinice za površinu',
+                allSettingsVisible: false,
               ),
             ),
             MainButton(
@@ -60,19 +63,26 @@ class MainMenu extends StatelessWidget {
               imagePath: 'assets/kategorija3.png',
               route: Game(
                 title: 'Mjerne jedinice za obujam',
+                allSettingsVisible: false,
               ),
             ),
             MainButton(
               naziv: 'Mjerne jedinice za temperaturu',
               boja: Color.fromARGB(255, 246, 78, 81),
               imagePath: 'assets/kategorija4.png',
-              route: Game(title: 'Mjerne jedinice za temperaturu'),
+              route: Game(
+                title: 'Mjerne jedinice za temperaturu',
+                allSettingsVisible: false,
+              ),
             ),
             MainButton(
               naziv: 'Mjerne jedinice za količinu informacija',
               boja: Color.fromARGB(255, 17, 134, 209),
               imagePath: 'assets/kategorija5.png',
-              route: Game(title: 'Mjerne jedinice za količinu informacija'),
+              route: Game(
+                title: 'Mjerne jedinice za količinu informacija',
+                allSettingsVisible: false,
+              ),
             )
           ],
         )));

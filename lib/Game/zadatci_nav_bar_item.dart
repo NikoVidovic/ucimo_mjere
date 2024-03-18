@@ -10,7 +10,6 @@ class AnswerInput extends StatefulWidget {
 
 class _AnswerInputState extends State<AnswerInput> {
   final controller = TextEditingController();
-  String text = "";
 
   @override
   void dispose() {
