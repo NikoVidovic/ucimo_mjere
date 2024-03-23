@@ -20,12 +20,30 @@ class MainMenu extends StatelessWidget {
             child: Column(
           children: [
             MainButton(
-              naziv: 'Mjerne jedinice za masu/duljinu/vrijeme',
+              naziv: 'Mjerne jedinice za duljinu',
               boja: Color.fromARGB(255, 232, 196, 80),
               imagePath: 'assets/kategorija1.png',
               route: Game(
                 title: 'Mjerne jedinice za duljinu',
                 allSettingsVisible: true,
+              ),
+            ),
+            MainButton(
+              naziv: 'Mjerne jedinice za masu',
+              boja: Color.fromARGB(255, 17, 134, 209),
+              imagePath: 'assets/kategorija5.png',
+              route: Game(
+                title: 'Mjerne jedinice za količinu informacija',
+                allSettingsVisible: false,
+              ),
+            ),
+            MainButton(
+              naziv: 'Mjerne jedinice za vrijeme',
+              boja: Color.fromARGB(255, 17, 134, 209),
+              imagePath: 'assets/kategorija5.png',
+              route: Game(
+                title: 'Mjerne jedinice za količinu informacija',
+                allSettingsVisible: false,
               ),
             ),
             MainButton(

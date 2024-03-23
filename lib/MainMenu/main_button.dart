@@ -6,38 +6,48 @@ class MainButton extends StatelessWidget {
   final Color boja;
   final String imagePath;
   final Widget route;
-  const MainButton(
-      {super.key,
-      required this.naziv,
-      required this.boja,
-      required this.imagePath,
-      required this.route});
+
+  const MainButton({
+    Key? key,
+    required this.naziv,
+    required this.boja,
+    required this.imagePath,
+    required this.route,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(16.0),
+      child: SizedBox(
+        width: 700, // Adjust the width here
+        height: 50, // Adjust the height here
         child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => route),
-              );
-            },
-            style: ButtonStyle(
-                minimumSize:
-                    MaterialStateProperty.all(const Size(double.infinity, 220)),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(0.0))),
-                backgroundColor: MaterialStateProperty.all(boja)),
-            child: Row(children: [
-              MainImage(path: imagePath),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                      padding: const EdgeInsets.only(left: 26.0),
-                      child: Text(naziv,
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 30))))
-            ])));
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => route),
+            );
+          },
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0.0),
+            )),
+            backgroundColor: MaterialStateProperty.all(boja),
+          ),
+          child: Row(
+            children: [
+              MainImage(
+                path: imagePath,
+              ),
+              Text(
+                naziv,
+                style: const TextStyle(color: Colors.white, fontSize: 30),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
