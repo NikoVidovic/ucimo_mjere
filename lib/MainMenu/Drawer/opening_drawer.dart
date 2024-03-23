@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/main.dart';
-import 'package:hello_world/MainMenu/Drawer/o_aplikaciji.dart';
+import '../main_menu.dart';
+import '/MainMenu/Drawer/o_aplikaciji.dart';
 import 'drawer_button.dart';
 
 class Izbornik extends StatelessWidget {
