@@ -13,9 +13,6 @@ class Postavke extends StatefulWidget {
 class _PostavkeState extends State<Postavke> {
   bool switchPostupak = false;
   bool switchRjesenje = false;
-  bool switchDuljina = true;
-  bool switchVrijeme = true;
-  bool switchMasa = true;
   double currentSliderValue = 1;
 
   onSwitchMethodPostupak(bool newValue) {
@@ -30,57 +27,6 @@ class _PostavkeState extends State<Postavke> {
     });
   }
 
-  onSwitchMethodDuljina(bool newValue) {
-    setState(() {
-      if (switchVrijeme == true || switchMasa == true) {
-        switchDuljina = newValue;
-      } else {
-        const snackBar = SnackBar(
-          content: Text(
-            'Barem jedna od kategorija mora biti uključena',
-            textAlign: TextAlign.center,
-          ),
-          duration: Duration(seconds: 2),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
-    });
-  }
-
-  onSwitchMethodVrijeme(bool newValue) {
-    setState(() {
-      if (switchDuljina == true || switchMasa == true) {
-        switchVrijeme = newValue;
-      } else {
-        const snackBar = SnackBar(
-          content: Text(
-            'Barem jedna od kategorija mora biti uključena',
-            textAlign: TextAlign.center,
-          ),
-          duration: Duration(seconds: 2),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
-    });
-  }
-
-  onSwitchMethodMasa(bool newValue) {
-    setState(() {
-      if (switchVrijeme == true || switchDuljina == true) {
-        switchMasa = newValue;
-      } else {
-        const snackBar = SnackBar(
-          content: Text(
-            'Barem jedna od kategorija mora biti uključena',
-            textAlign: TextAlign.center,
-          ),
-          duration: Duration(seconds: 2),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -89,7 +35,7 @@ class _PostavkeState extends State<Postavke> {
         children: [
           const SizedBox(height: 40),
           const Text(
-            'Prilagodite postavke',
+            'Prilagodba zadataka',
             style: TextStyle(fontSize: 40),
           ),
           const Divider(
@@ -97,43 +43,71 @@ class _PostavkeState extends State<Postavke> {
             color: Colors.black,
           ),
           const SizedBox(height: 10),
+          const Padding(
+            padding: EdgeInsets.only(left: 30.0),
+            child: Text('Prikaz postupka rješavanja zadataka',
+                style: TextStyle(fontSize: 25)),
+          ),
           buildSwitchOption('Postupak', switchPostupak, onSwitchMethodPostupak),
+          const SizedBox(
+            height: 25,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 30.0),
+            child: Text('Prikaz opcije rješenja zadtaka',
+                style: TextStyle(fontSize: 25)),
+          ),
           buildSwitchOption('Rješenje', switchRjesenje, onSwitchMethodRjesenje),
           const SizedBox(height: 5),
+          const SizedBox(
+            height: 25,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
             child: Text(
               'Težina zadatka: ${currentSliderValue.round()}',
-              style: const TextStyle(fontSize: 15),
+              style: const TextStyle(fontSize: 25),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
-            child: Slider(
-                value: currentSliderValue,
+            child: SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                trackHeight: 20.0,
+                activeTrackColor: const Color.fromARGB(255, 22, 56, 74),
+                inactiveTrackColor:
+                    const Color.fromARGB(255, 22, 56, 74).withOpacity(0.4),
+                thumbShape: const RoundSliderThumbShape(
+                  enabledThumbRadius: 14.0,
+                  pressedElevation: 8.0,
+                ),
+                thumbColor: Colors.pinkAccent,
+                overlayColor: Colors.pink.withOpacity(0.2),
+                overlayShape:
+                    const RoundSliderOverlayShape(overlayRadius: 32.0),
+                tickMarkShape: const RoundSliderTickMarkShape(),
+                activeTickMarkColor: Colors.pinkAccent,
+                inactiveTickMarkColor: Colors.white,
+                valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
+                valueIndicatorColor: Colors.black,
+                valueIndicatorTextStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
+                ),
+              ),
+              child: Slider(
                 min: 1,
                 max: 4,
+                value: currentSliderValue,
                 divisions: 3,
-                label: currentSliderValue.round().toString(),
-                onChanged: (double value) {
+                label: '${currentSliderValue.round()}',
+                onChanged: (value) {
                   setState(() {
                     currentSliderValue = value;
                   });
-                }),
-          ),
-          Visibility(
-            visible: widget.allSettingsVisible,
-            child: buildSwitchOption(
-                'Duljina', switchDuljina, onSwitchMethodDuljina),
-          ),
-          Visibility(
-            visible: widget.allSettingsVisible,
-            child: buildSwitchOption(
-                'Vrijeme', switchVrijeme, onSwitchMethodVrijeme),
-          ),
-          Visibility(
-            visible: widget.allSettingsVisible,
-            child: buildSwitchOption('Masa', switchMasa, onSwitchMethodMasa),
+                },
+              ),
+            ),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 3),
@@ -150,9 +124,11 @@ class _PostavkeState extends State<Postavke> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(title, style: const TextStyle(fontSize: 20)),
+            Text(title,
+                style: const TextStyle(fontSize: 35),
+                textAlign: TextAlign.left),
             Transform.scale(
-                scale: 0.7,
+                scale: 1.0,
                 child: CupertinoSwitch(
                   activeColor: Colors.orange,
                   trackColor: Colors.grey,

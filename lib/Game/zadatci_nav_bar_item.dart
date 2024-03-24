@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AnswerInput extends StatefulWidget {
-  final String title;
-  const AnswerInput({super.key, required this.title});
+  const AnswerInput({super.key});
 
   @override
   State<AnswerInput> createState() => _AnswerInputState();
@@ -27,34 +26,30 @@ class _AnswerInputState extends State<AnswerInput> {
   Widget build(BuildContext context) {
     return Column(children: [
       Padding(
-        padding: const EdgeInsets.only(top: 70, left: 90, right: 90),
-        child: Text(
-          widget.title,
-          style: const TextStyle(fontSize: 50),
-        ),
-      ),
-      Padding(
         padding: const EdgeInsets.only(left: 390, right: 390),
-        child: Row(children: [
-          const Text(
-            '25 dm',
-            style: TextStyle(fontSize: 50),
-          ),
-          Expanded(
-              child: TextField(
-            textAlign: TextAlign.center,
-            controller: controller,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              hintText: 'Unesite rješenje',
-              alignLabelWithHint: true,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 190.0),
+          child: Row(children: [
+            const Text(
+              '25 dm',
+              style: TextStyle(fontSize: 50),
             ),
-          )),
-          const Text(
-            'm',
-            style: TextStyle(fontSize: 50),
-          )
-        ]),
+            Expanded(
+                child: TextField(
+              textAlign: TextAlign.center,
+              controller: controller,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                hintText: 'Unesite rješenje',
+                alignLabelWithHint: true,
+              ),
+            )),
+            const Text(
+              'm',
+              style: TextStyle(fontSize: 50),
+            )
+          ]),
+        ),
       ),
       OutlinedButton(
           style: ButtonStyle(

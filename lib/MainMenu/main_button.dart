@@ -40,9 +40,12 @@ class MainButton extends StatelessWidget {
               MainImage(
                 path: imagePath,
               ),
+              const SizedBox(
+                width: 30,
+              ),
               Text(
                 naziv,
-                style: const TextStyle(color: Colors.white, fontSize: 20),
+                style: const TextStyle(color: Colors.white, fontSize: 23),
               ),
             ],
           ),

@@ -31,18 +31,18 @@ class MainMenu extends StatelessWidget {
               MainButton(
                 naziv: 'Mjerne jedinice za masu',
                 boja: Color.fromARGB(255, 17, 134, 209),
-                imagePath: 'assets/kategorija5.png',
+                imagePath: 'assets/vaga.png',
                 route: Game(
-                  title: 'Mjerne jedinice za količinu informacija',
+                  title: 'Mjerne jedinice za masu',
                   allSettingsVisible: false,
                 ),
               ),
               MainButton(
                 naziv: 'Mjerne jedinice za vrijeme',
                 boja: Color.fromARGB(255, 17, 134, 209),
-                imagePath: 'assets/kategorija5.png',
+                imagePath: 'assets/sat.png',
                 route: Game(
-                  title: 'Mjerne jedinice za količinu informacija',
+                  title: 'Mjerne jedinice za vrijeme',
                   allSettingsVisible: false,
                 ),
               ),
