@@ -8,20 +8,20 @@ class MainButton extends StatelessWidget {
   final Widget route;
 
   const MainButton({
-    Key? key,
+    super.key,
     required this.naziv,
     required this.boja,
     required this.imagePath,
     required this.route,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(10.0),
       child: SizedBox(
-        width: 700, // Adjust the width here
-        height: 50, // Adjust the height here
+        width: 620, // Adjust the width here
+        height: 148, // Adjust the height here
         child: ElevatedButton(
           onPressed: () {
             Navigator.push(
@@ -42,7 +42,7 @@ class MainButton extends StatelessWidget {
               ),
               Text(
                 naziv,
-                style: const TextStyle(color: Colors.white, fontSize: 30),
+                style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
             ],
           ),

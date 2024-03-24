@@ -7,8 +7,8 @@ class MainImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       path,
-      width: 100, // Adjust the width as needed
-      height: 200, // Adjust the height as needed
+      width: 150, // Adjust the width as needed
+      height: 250, // Adjust the height as needed
     );
   }
 }
