@@ -25,31 +25,36 @@ class _AnswerInputState extends State<AnswerInput> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Padding(
-        padding: const EdgeInsets.only(left: 390, right: 390),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 190.0),
-          child: Row(children: [
-            const Text(
-              '25 dm',
-              style: TextStyle(fontSize: 50),
-            ),
-            Expanded(
-                child: TextField(
-              textAlign: TextAlign.center,
-              controller: controller,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                hintText: 'Unesite rješenje',
-                alignLabelWithHint: true,
-              ),
-            )),
-            const Text(
-              'm',
-              style: TextStyle(fontSize: 50),
-            )
-          ]),
+      const Padding(
+        padding: EdgeInsets.only(top: 25, left: 10, right: 10),
+        child: Text(
+          "Preračunaj mjeru s lijeve strane crte u mjeru s desne strane crte. Zatim odgovor upiši na crtu 'Unesite rješenje'!",
+          style: TextStyle(fontSize: 30),
+          textAlign: TextAlign.left,
         ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 50, left: 390, right: 390),
+        child: Row(children: [
+          const Text(
+            '25 dm',
+            style: TextStyle(fontSize: 50),
+          ),
+          Expanded(
+              child: TextField(
+            textAlign: TextAlign.center,
+            controller: controller,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              hintText: 'Unesite rješenje',
+              alignLabelWithHint: true,
+            ),
+          )),
+          const Text(
+            'm',
+            style: TextStyle(fontSize: 50),
+          )
+        ]),
       ),
       OutlinedButton(
           style: ButtonStyle(
