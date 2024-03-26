@@ -1,5 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../app_state.dart';
 
 class ZadatciMasa extends StatefulWidget {
   const ZadatciMasa({super.key});
@@ -10,15 +13,17 @@ class ZadatciMasa extends StatefulWidget {
 
 class _ZadatciMasaState extends State<ZadatciMasa> {
   final controller = TextEditingController();
+  late AppState appState;
 
   int numValue = Random().nextInt(5) + 1;
   var values = ['g', "dg", "kg", "t"];
-  int valueFromIndex = 0;
+  int valueFromIndex = Random().nextInt(4);
   int valueToIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    appState = Provider.of<AppState>(context, listen: false);
     generateIndexAndNumber();
   }
 
@@ -30,8 +35,37 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
 
   void generateIndexAndNumber() {
     valueFromIndex = Random().nextInt(4);
-    valueToIndex = Random().nextInt(4);
+    valueToIndex = 0;
     numValue = Random().nextInt(5) + 1;
+    switch (appState.currentSliderValue.round()) {
+      case 1:
+        if (valueFromIndex == 0) {
+          valueFromIndex++;
+        }
+        valueToIndex = valueFromIndex - 1;
+        break;
+      case 2:
+        if (valueFromIndex == 0 || valueFromIndex == 1) {
+          valueFromIndex += 2;
+        }
+        valueToIndex = valueFromIndex - 2;
+        break;
+      case 3:
+        if (valueFromIndex == values.length - 1) {
+          valueFromIndex--;
+        }
+        if (valueFromIndex == 0) {
+          valueFromIndex++;
+        }
+        valueToIndex =
+            (Random().nextBool()) ? valueFromIndex + 1 : valueFromIndex - 1;
+        break;
+      case 4:
+      default:
+        while (valueFromIndex == valueToIndex) {
+          valueToIndex = Random().nextInt(4);
+        }
+    }
   }
 
   void checkAnswer(int num, String from, String to) {

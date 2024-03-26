@@ -36,7 +36,7 @@ class MainMenu extends StatelessWidget {
               ),
               MainButton(
                 naziv: 'Mjerne jedinice za masu',
-                boja: Color.fromARGB(255, 17, 134, 209),
+                boja: Colors.green,
                 imagePath: 'assets/vaga.png',
                 route: GameMasa(
                   title: 'Mjerne jedinice za masu',
@@ -45,7 +45,7 @@ class MainMenu extends StatelessWidget {
               ),
               MainButton(
                 naziv: 'Mjerne jedinice za vrijeme',
-                boja: Color.fromARGB(255, 17, 134, 209),
+                boja: Colors.teal,
                 imagePath: 'assets/sat.png',
                 route: GameVrijeme(
                   title: 'Mjerne jedinice za vrijeme',

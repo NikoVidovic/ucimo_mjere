@@ -1,5 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../app_state.dart';
 
 class ZadatciTemperatura extends StatefulWidget {
   const ZadatciTemperatura({super.key});
@@ -10,15 +13,19 @@ class ZadatciTemperatura extends StatefulWidget {
 
 class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
   final controller = TextEditingController();
+  late AppState appState;
 
   int numValue = Random().nextInt(200) + 1;
   var values = ['C', "K"];
   int valueFromIndex = 0;
-  int valueToIndex = 0;
+  int valueToIndex = 1;
+  int kelvin = 300;
+  int celsius = 100;
 
   @override
   void initState() {
     super.initState();
+    appState = Provider.of<AppState>(context, listen: false);
     generateIndexAndNumber();
   }
 
@@ -29,9 +36,27 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
   }
 
   void generateIndexAndNumber() {
-    valueFromIndex = Random().nextInt(2);
-    valueToIndex = Random().nextInt(2);
-    numValue = Random().nextInt(200) + 1;
+    switch (appState.currentSliderValue) {
+      case 1:
+      case 2:
+        celsius = 100;
+        kelvin = 300;
+        numValue = (valueFromIndex == 1)
+            ? Random().nextInt(kelvin)
+            : Random().nextInt(celsius);
+        break;
+      case 3:
+      case 4:
+      default:
+        celsius = (300 - 273.15).toInt();
+        kelvin = 400;
+        valueFromIndex = Random().nextInt(values.length);
+        valueToIndex = (valueFromIndex + 1) % values.length;
+        numValue = (valueFromIndex == 1)
+            ? Random().nextInt(kelvin)
+            : Random().nextInt(celsius);
+        break;
+    }
   }
 
   void checkAnswer(int num, String from, String to) {

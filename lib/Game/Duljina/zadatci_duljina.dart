@@ -29,9 +29,8 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
   @override
   void initState() {
     super.initState();
-    appState =
-        Provider.of<AppState>(context, listen: false); // Initialize appState
-    generateIndexAndNumber(); // Call generateIndexAndNumber once
+    appState = Provider.of<AppState>(context, listen: false);
+    generateIndexAndNumber();
   }
 
   void generateIndexAndNumber() {

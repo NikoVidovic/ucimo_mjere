@@ -1,5 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../app_state.dart';
 
 class ZadatciVrijeme extends StatefulWidget {
   const ZadatciVrijeme({super.key});
@@ -10,15 +13,17 @@ class ZadatciVrijeme extends StatefulWidget {
 
 class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
   final controller = TextEditingController();
+  late AppState appState;
 
   int numValue = Random().nextInt(3) + 1;
   var values = ['ms', "s", "min", "h", "dan"];
-  int valueFromIndex = 0;
+  int valueFromIndex = Random().nextInt(5);
   int valueToIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    appState = Provider.of<AppState>(context, listen: false);
     generateIndexAndNumber();
   }
 
@@ -30,8 +35,27 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
 
   void generateIndexAndNumber() {
     valueFromIndex = Random().nextInt(5);
-    valueToIndex = Random().nextInt(5);
+    valueToIndex = 0;
     numValue = Random().nextInt(3) + 1;
+    switch (appState.currentSliderValue) {
+      case 1:
+      case 2:
+        if (valueFromIndex == 0) {
+          valueFromIndex++;
+        }
+        valueToIndex = valueFromIndex - 1;
+        break;
+
+      case 3:
+      case 4:
+      default:
+        if (valueFromIndex == 0 || valueFromIndex == 1) {
+          valueFromIndex += 2;
+        }
+        valueToIndex =
+            (Random().nextBool()) ? valueFromIndex - 1 : valueFromIndex - 2;
+        break;
+    }
   }
 
   void checkAnswer(int num, String from, String to) {
