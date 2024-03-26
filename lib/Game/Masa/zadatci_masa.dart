@@ -13,8 +13,14 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
 
   int numValue = Random().nextInt(5) + 1;
   var values = ['g', "dg", "kg", "t"];
-  var valueFromIndex = Random().nextInt(4);
-  var valueToIndex = Random().nextInt(4);
+  int valueFromIndex = 0;
+  int valueToIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    generateIndexAndNumber();
+  }
 
   @override
   void dispose() {
@@ -22,86 +28,68 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
     controller.dispose();
   }
 
+  void generateIndexAndNumber() {
+    valueFromIndex = Random().nextInt(4);
+    valueToIndex = Random().nextInt(4);
+    numValue = Random().nextInt(5) + 1;
+  }
+
   void checkAnswer(int num, String from, String to) {
     setState(() {
       switch (from) {
         case 'g':
           if (to == "t" && controller.text == (num / 1000000).toString()) {
-            valueFromIndex = Random().nextInt(4);
-            valueToIndex = Random().nextInt(4);
-            numValue = Random().nextInt(5) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "kg" && controller.text == (num / 1000).toString()) {
-            valueFromIndex = Random().nextInt(4);
-            valueToIndex = Random().nextInt(4);
-            numValue = Random().nextInt(5) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dg" && controller.text == (num / 10).toString()) {
-            valueFromIndex = Random().nextInt(4);
-            valueToIndex = Random().nextInt(4);
-            numValue = Random().nextInt(5) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'dg':
           if (to == "t" && controller.text == (num / 100000).toString()) {
-            valueFromIndex = Random().nextInt(4);
-            valueToIndex = Random().nextInt(4);
-            numValue = Random().nextInt(5) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "kg" && controller.text == (num / 100).toString()) {
-            valueFromIndex = Random().nextInt(4);
-            valueToIndex = Random().nextInt(4);
-            numValue = Random().nextInt(5) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "g" && controller.text == (num * 10).toString()) {
-            valueFromIndex = Random().nextInt(4);
-            valueToIndex = Random().nextInt(4);
-            numValue = Random().nextInt(5) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'kg':
           if (to == "t" && controller.text == (num / 1000).toString()) {
-            valueFromIndex = Random().nextInt(4);
-            valueToIndex = Random().nextInt(4);
-            numValue = Random().nextInt(5) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dg" && controller.text == (num * 100).toString()) {
-            valueFromIndex = Random().nextInt(4);
-            valueToIndex = Random().nextInt(4);
-            numValue = Random().nextInt(5) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "g" && controller.text == (num * 10000).toString()) {
-            valueFromIndex = Random().nextInt(4);
-            valueToIndex = Random().nextInt(4);
-            numValue = Random().nextInt(5) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 't':
           if (to == "g" && controller.text == (num * 1000000).toString()) {
-            valueFromIndex = Random().nextInt(4);
-            valueToIndex = Random().nextInt(4);
-            numValue = Random().nextInt(5) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dg" && controller.text == (num * 100000).toString()) {
-            valueFromIndex = Random().nextInt(4);
-            valueToIndex = Random().nextInt(4);
-            numValue = Random().nextInt(5) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "kg" && controller.text == (num * 1000).toString()) {
-            valueFromIndex = Random().nextInt(4);
-            valueToIndex = Random().nextInt(4);
-            numValue = Random().nextInt(5) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;

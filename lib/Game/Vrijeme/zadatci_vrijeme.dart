@@ -13,8 +13,14 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
 
   int numValue = Random().nextInt(3) + 1;
   var values = ['ms', "s", "min", "h", "dan"];
-  var valueFromIndex = Random().nextInt(5);
-  var valueToIndex = Random().nextInt(5);
+  int valueFromIndex = 0;
+  int valueToIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    generateIndexAndNumber();
+  }
 
   @override
   void dispose() {
@@ -22,140 +28,106 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
     controller.dispose();
   }
 
+  void generateIndexAndNumber() {
+    valueFromIndex = Random().nextInt(5);
+    valueToIndex = Random().nextInt(5);
+    numValue = Random().nextInt(3) + 1;
+  }
+
   void checkAnswer(int num, String from, String to) {
     setState(() {
       switch (from) {
         case 'ms':
           if (to == "s" && controller.text == (num / 1000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "min" &&
               controller.text == ((num / 1000) / 60).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "h" &&
               controller.text == (((num / 1000) / 60) / 60).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dan" &&
               controller.text == ((((num / 1000) / 60) / 60) / 24).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 's':
           if (to == "ms" && controller.text == (num * 1000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "min" && controller.text == (num / 60).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "h" && controller.text == ((num / 60) / 60).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dan" &&
               controller.text == (((num / 60) / 60) / 24).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'min':
           if (to == "ms" && controller.text == (num * 60000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "s" && controller.text == (num * 60).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "h" && controller.text == (num / 60).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dan" && controller.text == ((num / 60) / 24).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'h':
           if (to == "ms" && controller.text == (num * 3600000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "s" && controller.text == (num * 3600).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "min" && controller.text == (num * 60).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dan" && controller.text == (num / 24).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'dan':
           if (to == "ms" && controller.text == (num * 86400000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "s" && controller.text == (num * 86400).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "min" && controller.text == (num * 1440).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "h" && controller.text == (num * 24).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(3) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;

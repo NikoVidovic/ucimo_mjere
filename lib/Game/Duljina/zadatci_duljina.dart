@@ -13,8 +13,14 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
 
   int numValue = Random().nextInt(10) + 1;
   var values = ['mm', "cm", "dm", "m", "km"];
-  var valueFromIndex = 0;
-  var valueToIndex = 4;
+  int valueFromIndex = 0;
+  int valueToIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    generateIndexAndNumber();
+  }
 
   @override
   void dispose() {
@@ -22,136 +28,101 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
     controller.dispose();
   }
 
+  void generateIndexAndNumber() {
+    valueFromIndex = Random().nextInt(5);
+    valueToIndex = Random().nextInt(5);
+    numValue = Random().nextInt(10) + 1;
+  }
+
   void checkAnswer(int num, String from, String to) {
     setState(() {
       switch (from) {
         case 'mm':
           if (to == "km" && controller.text == (num / 1000000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "m" && controller.text == (num / 1000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
-            controller.clear();
+            generateIndexAndNumber();
           }
           if (to == "dm" && controller.text == (num / 100).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "cm" && controller.text == (num / 10).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'cm':
           if (to == "km" && controller.text == (num / 100000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "m" && controller.text == (num / 100).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dm" && controller.text == (num / 10).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "mm" && controller.text == (num * 10).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'dm':
           if (to == "km" && controller.text == (num / 10000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "m" && controller.text == (num / 10).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "cm" && controller.text == (num * 10).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "mm" && controller.text == (num * 100).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'm':
           if (to == "km" && controller.text == (num / 1000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dm" && controller.text == (num * 10).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "cm" && controller.text == (num * 100).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "mm" && controller.text == (num * 1000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'km':
           if (to == "m" && controller.text == (num * 1000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dm" && controller.text == (num * 10000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "cm" && controller.text == (num * 100000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "mm" && controller.text == (num * 100000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;

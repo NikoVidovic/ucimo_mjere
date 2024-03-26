@@ -13,8 +13,14 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
 
   int numValue = Random().nextInt(10) + 1;
   var values = ['B', "KB", "MB", "GB", "TB"];
-  var valueFromIndex = Random().nextInt(5);
-  var valueToIndex = Random().nextInt(5);
+  int valueFromIndex = 0;
+  int valueToIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    generateIndexAndNumber();
+  }
 
   @override
   void dispose() {
@@ -22,14 +28,18 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
     controller.dispose();
   }
 
+  void generateIndexAndNumber() {
+    valueFromIndex = Random().nextInt(5);
+    valueToIndex = Random().nextInt(5);
+    numValue = Random().nextInt(10) + 1;
+  }
+
   void checkAnswer(int num, String from, String to) {
     setState(() {
       switch (from) {
         case 'B':
           if (to == "KB" && controller.text == (num / 100).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "MB" && controller.text == (num / 1000000).toString()) {
@@ -39,121 +49,85 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
             controller.clear();
           }
           if (to == "GB" && controller.text == (num / 1000000000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "TB" &&
               controller.text == (num / 1000000000000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'KB':
           if (to == "B" && controller.text == (num * 100).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "MB" && controller.text == (num / 100).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "GB" && controller.text == (num / 1000000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "TB" && controller.text == (num * 1000000000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'MB':
           if (to == "B" && controller.text == (num * 1000000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "KB" && controller.text == (num * 1000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "GB" && controller.text == (num / 1000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "TB" && controller.text == (num / 1000000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'GB':
           if (to == "B" && controller.text == (num * 1000000000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "KB" && controller.text == (num * 1000000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "MB" && controller.text == (num * 1000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "TB" && controller.text == (num / 1000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'TB':
           if (to == "B" &&
               controller.text == (num / 1000000000000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "KB" && controller.text == (num / 1000000000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "MB" && controller.text == (num / 1000000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           if (to == "GB" && controller.text == (num / 1000).toString()) {
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;

@@ -13,8 +13,14 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
 
   int numValue = Random().nextInt(200) + 1;
   var values = ['C', "K"];
-  var valueFromIndex = Random().nextInt(2);
-  var valueToIndex = Random().nextInt(2);
+  int valueFromIndex = 0;
+  int valueToIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    generateIndexAndNumber();
+  }
 
   @override
   void dispose() {
@@ -22,22 +28,24 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
     controller.dispose();
   }
 
+  void generateIndexAndNumber() {
+    valueFromIndex = Random().nextInt(2);
+    valueToIndex = Random().nextInt(2);
+    numValue = Random().nextInt(200) + 1;
+  }
+
   void checkAnswer(int num, String from, String to) {
     setState(() {
       switch (from) {
         case 'K':
           if (to == "C" && controller.text == (num - 273.15).toString()) {
-            valueFromIndex = Random().nextInt(2);
-            valueToIndex = Random().nextInt(2);
-            numValue = Random().nextInt(200) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'C':
           if (to == "K" && controller.text == (num + 273.15).toString()) {
-            valueFromIndex = Random().nextInt(2);
-            valueToIndex = Random().nextInt(2);
-            numValue = Random().nextInt(200) + 1;
+            generateIndexAndNumber();
             controller.clear();
           }
           break;
