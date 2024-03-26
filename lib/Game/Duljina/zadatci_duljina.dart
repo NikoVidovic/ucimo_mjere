@@ -26,6 +26,14 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
     controller.dispose();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    appState =
+        Provider.of<AppState>(context, listen: false); // Initialize appState
+    generateIndexAndNumber(); // Call generateIndexAndNumber once
+  }
+
   void generateIndexAndNumber() {
     valueFromIndex = Random().nextInt(5);
     valueToIndex = 0;
@@ -161,8 +169,6 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
 
   @override
   Widget build(BuildContext context) {
-    appState = Provider.of<AppState>(context);
-    generateIndexAndNumber();
     return Column(children: [
       const Padding(
         padding: EdgeInsets.only(top: 25, left: 10, right: 10),
