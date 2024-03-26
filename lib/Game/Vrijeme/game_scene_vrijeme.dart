@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'postavke_nav_bar_item.dart';
-import '../app_bar.dart';
-import 'zadatci_nav_bar_item.dart';
+import '../postavke_nav_bar_item.dart';
+import '../../app_bar.dart';
+import 'zadatci_vrijeme.dart';
 
-class Game extends StatefulWidget {
+class GameVrijeme extends StatefulWidget {
   final String title;
   final bool allSettingsVisible;
-  const Game(
+  const GameVrijeme(
       {super.key, required this.title, required this.allSettingsVisible});
 
   @override
-  State<Game> createState() => _GameState();
+  State<GameVrijeme> createState() => _GameVrijemeState();
 }
 
-class _GameState extends State<Game> {
+class _GameVrijemeState extends State<GameVrijeme> {
   int selectedIndex = 0;
 
   late List<Widget> pages;
@@ -22,12 +22,7 @@ class _GameState extends State<Game> {
   @override
   void initState() {
     super.initState();
-    pages = [
-      const AnswerInput(),
-      Postavke(
-        allSettingsVisible: widget.allSettingsVisible,
-      )
-    ];
+    pages = [const ZadatciVrijeme(), const Postavke()];
   }
 
   void navigateBottomBar(int index) {

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'zadatci_button.dart';
 
 class Postavke extends StatefulWidget {
-  final bool allSettingsVisible;
-  const Postavke({super.key, required this.allSettingsVisible});
+  const Postavke({super.key});
 
   @override
   State<Postavke> createState() => _PostavkeState();
