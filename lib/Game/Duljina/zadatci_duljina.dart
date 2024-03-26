@@ -1,5 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../app_state.dart';
 
 class ZadatciDuljina extends StatefulWidget {
   const ZadatciDuljina({super.key});
@@ -10,17 +13,12 @@ class ZadatciDuljina extends StatefulWidget {
 
 class _ZadatciDuljinaState extends State<ZadatciDuljina> {
   final controller = TextEditingController();
+  late AppState appState;
 
   int numValue = Random().nextInt(10) + 1;
   var values = ['mm', "cm", "dm", "m", "km"];
-  int valueFromIndex = 0;
+  int valueFromIndex = Random().nextInt(5);
   int valueToIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    generateIndexAndNumber();
-  }
 
   @override
   void dispose() {
@@ -30,8 +28,37 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
 
   void generateIndexAndNumber() {
     valueFromIndex = Random().nextInt(5);
-    valueToIndex = Random().nextInt(5);
+    valueToIndex = 0;
     numValue = Random().nextInt(10) + 1;
+    switch (appState.currentSliderValue.round()) {
+      case 1:
+        if (valueFromIndex == 0) {
+          valueFromIndex++;
+        }
+        valueToIndex = valueFromIndex - 1;
+        break;
+      case 2:
+        if (valueFromIndex == 0 || valueFromIndex == 1) {
+          valueFromIndex += 2;
+        }
+        valueToIndex = valueFromIndex - 2;
+        break;
+      case 3:
+        if (valueFromIndex == values.length - 1) {
+          valueFromIndex--;
+        }
+        if (valueFromIndex == 0) {
+          valueFromIndex++;
+        }
+        valueToIndex =
+            (Random().nextBool()) ? valueFromIndex + 1 : valueFromIndex - 1;
+        break;
+      case 4:
+      default:
+        while (valueFromIndex == valueToIndex) {
+          valueToIndex = Random().nextInt(5);
+        }
+    }
   }
 
   void checkAnswer(int num, String from, String to) {
@@ -44,6 +71,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
           }
           if (to == "m" && controller.text == (num / 1000).toString()) {
             generateIndexAndNumber();
+            controller.clear();
           }
           if (to == "dm" && controller.text == (num / 100).toString()) {
             generateIndexAndNumber();
@@ -133,6 +161,8 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
 
   @override
   Widget build(BuildContext context) {
+    appState = Provider.of<AppState>(context);
+    generateIndexAndNumber();
     return Column(children: [
       const Padding(
         padding: EdgeInsets.only(top: 25, left: 10, right: 10),

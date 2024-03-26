@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../app_state.dart';
 import 'zadatci_button.dart';
 
 class Postavke extends StatefulWidget {
@@ -12,7 +14,7 @@ class Postavke extends StatefulWidget {
 class _PostavkeState extends State<Postavke> {
   bool switchPostupak = false;
   bool switchRjesenje = false;
-  double currentSliderValue = 1;
+  late AppState appState;
 
   onSwitchMethodPostupak(bool newValue) {
     setState(() {
@@ -28,6 +30,7 @@ class _PostavkeState extends State<Postavke> {
 
   @override
   Widget build(BuildContext context) {
+    appState = Provider.of<AppState>(context);
     return Padding(
       padding: const EdgeInsets.only(left: 70.0),
       child: ListView(
@@ -64,7 +67,7 @@ class _PostavkeState extends State<Postavke> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
             child: Text(
-              'Težina zadatka: ${currentSliderValue.round()}',
+              'Težina zadatka: ${appState.currentSliderValue.round()}',
               style: const TextStyle(fontSize: 25),
             ),
           ),
@@ -97,12 +100,12 @@ class _PostavkeState extends State<Postavke> {
               child: Slider(
                 min: 1,
                 max: 4,
-                value: currentSliderValue,
+                value: appState.currentSliderValue,
                 divisions: 3,
-                label: '${currentSliderValue.round()}',
+                label: '${appState.currentSliderValue.round()}',
                 onChanged: (value) {
                   setState(() {
-                    currentSliderValue = value;
+                    appState.currentSliderValue = value;
                   });
                 },
               ),
