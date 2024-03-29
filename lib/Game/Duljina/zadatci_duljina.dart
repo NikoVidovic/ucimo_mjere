@@ -68,6 +68,83 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
     }
   }
 
+  double setUnitTo(String from, String to) {
+    switch (from) {
+      case 'mm':
+        if (to == "km") {
+          return 0.000001;
+        }
+        if (to == "m") {
+          return 0.001;
+        }
+        if (to == "dm") {
+          return 1 / 100;
+        }
+        if (to == "cm") {
+          return 1 / 10;
+        }
+        break;
+      case 'cm':
+        if (to == "km") {
+          return 1 / 100000;
+        }
+        if (to == "m") {
+          return 1 / 100;
+        }
+        if (to == "dm") {
+          return 1 / 10;
+        }
+        if (to == "mm") {
+          return 10;
+        }
+        break;
+      case 'dm':
+        if (to == "km") {
+          return 1 / 10000;
+        }
+        if (to == "m") {
+          return 1 / 10;
+        }
+        if (to == "cm") {
+          return 10;
+        }
+        if (to == "mm") {
+          return 100;
+        }
+        break;
+      case 'm':
+        if (to == "km") {
+          return 1 / 1000;
+        }
+        if (to == "dm") {
+          return 10;
+        }
+        if (to == "cm") {
+          return 100;
+        }
+        if (to == "mm") {
+          return 1000;
+        }
+        break;
+      case 'km':
+        if (to == "m") {
+          return 1000;
+        }
+        if (to == "dm") {
+          return 10000;
+        }
+        if (to == "cm") {
+          return 100000;
+        }
+        if (to == "mm") {
+          return 100000;
+        }
+        break;
+      default:
+    }
+    return 1;
+  }
+
   void checkAnswer(int num, String from, String to) {
     setState(() {
       switch (from) {
@@ -224,11 +301,14 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
             checkAnswer(numValue, values[valueFromIndex], values[valueToIndex]);
           },
           child: const Text('PROVJERI')),
+      const SizedBox(
+        height: 50,
+      ),
       Visibility(
           visible: appState.postupakShown,
-          child: const Text(
-            'Ovo je postupak',
-            style: TextStyle(fontSize: 30),
+          child: Text(
+            '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
+            style: const TextStyle(fontSize: 30),
           ))
     ]);
   }
