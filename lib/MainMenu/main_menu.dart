@@ -15,7 +15,13 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        appBar: AppBarCustom(title: 'Učimo mjere', height: 65.0),
+        appBar: AppBarCustom(
+          title: 'Učimo mjere',
+          height: 85.0,
+          imageShown: false,
+          imagePath: '',
+          imageWidth: 0,
+        ),
         drawer: SizedBox(
           width: 500,
           child: Drawer(

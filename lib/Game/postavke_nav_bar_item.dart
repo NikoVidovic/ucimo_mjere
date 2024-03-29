@@ -56,7 +56,7 @@ class _PostavkeState extends State<Postavke> {
           ),
           const Padding(
             padding: EdgeInsets.only(left: 30.0),
-            child: Text('Prikaz opcije rješenja zadtaka',
+            child: Text('Prikaz opcije rješenja zadataka',
                 style: TextStyle(fontSize: 25)),
           ),
           buildSwitchOption('Rješenje', switchRjesenje, onSwitchMethodRjesenje),

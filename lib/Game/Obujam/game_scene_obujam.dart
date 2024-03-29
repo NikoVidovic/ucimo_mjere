@@ -35,7 +35,13 @@ class _GameObujamState extends State<GameObujam> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[selectedIndex],
-      appBar: AppBarCustom(title: widget.title, height: 100.0),
+      appBar: AppBarCustom(
+        title: widget.title,
+        height: 100.0,
+        imageShown: true,
+        imagePath: 'assets/kategorija3.png',
+        imageWidth: 90,
+      ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),
         child: Padding(

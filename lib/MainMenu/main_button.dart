@@ -21,7 +21,7 @@ class MainButton extends StatelessWidget {
       margin: const EdgeInsets.all(10.0),
       child: SizedBox(
         width: 620, // Adjust the width here
-        height: 148, // Adjust the height here
+        height: 144, // Adjust the height here
         child: ElevatedButton(
           onPressed: () {
             Navigator.push(

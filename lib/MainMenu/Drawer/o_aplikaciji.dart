@@ -8,7 +8,13 @@ class OAplikaciji extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (Scaffold(
-        appBar: const AppBarCustom(title: 'O aplikaciji', height: 65.5),
+        appBar: const AppBarCustom(
+          title: 'O aplikaciji',
+          height: 65.5,
+          imageShown: false,
+          imagePath: '',
+          imageWidth: 0,
+        ),
         drawer: const SizedBox(
           width: 500,
           child: Drawer(

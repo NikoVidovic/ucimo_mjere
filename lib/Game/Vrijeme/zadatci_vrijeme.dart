@@ -190,11 +190,13 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
           ),
           Expanded(
               child: TextField(
+            style: const TextStyle(fontSize: 30),
             textAlign: TextAlign.center,
             controller: controller,
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               hintText: 'Unesite rješenje',
+              hintStyle: TextStyle(fontSize: 15),
               alignLabelWithHint: true,
             ),
           )),

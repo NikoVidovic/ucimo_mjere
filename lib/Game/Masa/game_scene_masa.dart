@@ -35,7 +35,13 @@ class _GameMasaState extends State<GameMasa> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[selectedIndex],
-      appBar: AppBarCustom(title: widget.title, height: 100.0),
+      appBar: AppBarCustom(
+        title: widget.title,
+        height: 100.0,
+        imageShown: true,
+        imagePath: 'assets/vaga.png',
+        imageWidth: 100,
+      ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),
         child: Padding(
