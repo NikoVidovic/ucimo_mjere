@@ -34,6 +34,7 @@ class _GameMasaState extends State<GameMasa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: pages[selectedIndex],
       appBar: AppBarCustom(
         title: widget.title,

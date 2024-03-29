@@ -34,6 +34,7 @@ class _GamePovrsinaState extends State<GamePovrsina> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: pages[selectedIndex],
       appBar: AppBarCustom(
         title: widget.title,

@@ -12,13 +12,16 @@ class Postavke extends StatefulWidget {
 }
 
 class _PostavkeState extends State<Postavke> {
-  bool switchPostupak = false;
   bool switchRjesenje = false;
   late AppState appState;
 
   onSwitchMethodPostupak(bool newValue) {
     setState(() {
-      switchPostupak = newValue;
+      if (newValue == true) {
+        appState.postupakShown = true;
+      } else {
+        appState.postupakShown = false;
+      }
     });
   }
 
@@ -50,7 +53,8 @@ class _PostavkeState extends State<Postavke> {
             child: Text('Prikaz postupka rješavanja zadataka',
                 style: TextStyle(fontSize: 25)),
           ),
-          buildSwitchOption('Postupak', switchPostupak, onSwitchMethodPostupak),
+          buildSwitchOption(
+              'Postupak', appState.postupakShown, onSwitchMethodPostupak),
           const SizedBox(
             height: 25,
           ),

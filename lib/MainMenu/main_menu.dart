@@ -15,6 +15,7 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBarCustom(
           title: 'Učimo mjere',
           height: 85.0,

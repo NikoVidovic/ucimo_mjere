@@ -17,7 +17,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
         titleTextStyle: const TextStyle(fontSize: 30),
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white, size: 40),
         title: Row(
           children: [
             Visibility(

@@ -223,7 +223,13 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
           onPressed: () {
             checkAnswer(numValue, values[valueFromIndex], values[valueToIndex]);
           },
-          child: const Text('PROVJERI'))
+          child: const Text('PROVJERI')),
+      Visibility(
+          visible: appState.postupakShown,
+          child: const Text(
+            'Ovo je postupak',
+            style: TextStyle(fontSize: 30),
+          ))
     ]);
   }
 }
