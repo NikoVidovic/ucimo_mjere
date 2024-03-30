@@ -257,6 +257,10 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
       Padding(
         padding: const EdgeInsets.only(top: 50, left: 390, right: 390),
         child: Row(children: [
+          Visibility(
+              visible: true,
+              child: ElevatedButton(
+                  onPressed: () {}, child: const Text('Trebaš pomoć?'))),
           Text(
             numValue.toString(),
             style: const TextStyle(fontSize: 50),
@@ -304,12 +308,20 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
       const SizedBox(
         height: 50,
       ),
-      Visibility(
-          visible: appState.postupakShown,
-          child: Text(
-            '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
-            style: const TextStyle(fontSize: 30),
-          ))
+      Padding(
+        padding: const EdgeInsets.only(right: 900.0, left: 10),
+        child: Visibility(
+            visible: appState.postupakShown,
+            child: Container(
+              width: double.maxFinite,
+              color: const Color.fromARGB(255, 232, 196, 80),
+              child: Text(
+                '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
+                style: const TextStyle(fontSize: 30),
+                textAlign: TextAlign.center,
+              ),
+            )),
+      )
     ]);
   }
 }
