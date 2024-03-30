@@ -262,9 +262,10 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
         default:
       }
 
-      if (isCorrect) {
+      if (isCorrect && appState.helpButtonShown == true) {
         appState.helpButtonShown = false;
-      } else {
+        appState.postupakShown = false;
+      } else if (!isCorrect && appState.postupakShown == false) {
         appState.helpButtonShown = true;
       }
     });
@@ -295,7 +296,11 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
                       const EdgeInsets.all(10),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      appState.postupakShown = true;
+                    });
+                  },
                   child: const Text(
                     'Trebaš pomoć?',
                     style: TextStyle(fontSize: 25),
