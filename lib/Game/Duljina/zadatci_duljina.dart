@@ -146,99 +146,126 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
   }
 
   void checkAnswer(int num, String from, String to) {
+    bool isCorrect = false;
     setState(() {
       switch (from) {
         case 'mm':
           if (to == "km" && controller.text == (num / 1000000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "m" && controller.text == (num / 1000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dm" && controller.text == (num / 100).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "cm" && controller.text == (num / 10).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'cm':
           if (to == "km" && controller.text == (num / 100000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "m" && controller.text == (num / 100).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dm" && controller.text == (num / 10).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "mm" && controller.text == (num * 10).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'dm':
           if (to == "km" && controller.text == (num / 10000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "m" && controller.text == (num / 10).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "cm" && controller.text == (num * 10).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "mm" && controller.text == (num * 100).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'm':
           if (to == "km" && controller.text == (num / 1000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dm" && controller.text == (num * 10).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "cm" && controller.text == (num * 100).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "mm" && controller.text == (num * 1000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'km':
           if (to == "m" && controller.text == (num * 1000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dm" && controller.text == (num * 10000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "cm" && controller.text == (num * 100000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "mm" && controller.text == (num * 100000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         default:
+      }
+
+      if (isCorrect) {
+        appState.helpButtonShown = false;
+      } else {
+        appState.helpButtonShown = true;
       }
     });
   }
@@ -255,12 +282,27 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 50, left: 390, right: 390),
-        child: Row(children: [
+        padding: const EdgeInsets.only(top: 50, left: 90, right: 390),
+        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Visibility(
-              visible: true,
+              visible: appState.helpButtonShown,
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
               child: ElevatedButton(
-                  onPressed: () {}, child: const Text('Trebaš pomoć?'))),
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                      const EdgeInsets.all(10),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: const Text(
+                    'Trebaš pomoć?',
+                    style: TextStyle(fontSize: 25),
+                  ))),
+          const SizedBox(
+            width: 140,
+          ),
           Text(
             numValue.toString(),
             style: const TextStyle(fontSize: 50),

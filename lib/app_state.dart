@@ -19,8 +19,8 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  set helpButtonShown(bool shown) {
-    _helpButtonShown = shown;
+  set helpButtonShown(bool buttonShown) {
+    _helpButtonShown = buttonShown;
     notifyListeners();
   }
 }
