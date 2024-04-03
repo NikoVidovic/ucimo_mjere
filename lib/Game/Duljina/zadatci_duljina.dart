@@ -137,7 +137,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
           return 100000;
         }
         if (to == "mm") {
-          return 100000;
+          return 1000000;
         }
         break;
       default:
@@ -254,7 +254,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
             generateIndexAndNumber();
             controller.clear();
           }
-          if (to == "mm" && controller.text == (num * 100000).toString()) {
+          if (to == "mm" && controller.text == (num * 1000000).toString()) {
             isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
@@ -268,6 +268,104 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
         appState.postupakShown = false;
       } else if (!isCorrect && appState.postupakShown == false) {
         appState.helpButtonShown = true;
+      }
+    });
+  }
+
+  completeSolution(int num, String from, String to) {
+    setState(() {
+      switch (from) {
+        case 'mm':
+          if (to == "km") {
+            controller.text = (num / 1000000).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "m") {
+            controller.text = (num / 1000).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "dm") {
+            controller.text = (num / 100).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "cm") {
+            controller.text = (num / 10).toString();
+            //checkAnswer(num, from, to);
+          }
+          break;
+        case 'cm':
+          if (to == "km") {
+            controller.text = (num / 100000).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "m") {
+            controller.text = (num / 100).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "dm") {
+            controller.text = (num / 10).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "mm") {
+            controller.text = (num * 10).toString();
+            //checkAnswer(num, from, to);
+          }
+          break;
+        case 'dm':
+          if (to == "km") {
+            controller.text = (num / 10000).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "m") {
+            controller.text = (num / 10).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "cm") {
+            controller.text = (num * 10).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "mm") {
+            controller.text = (num * 100).toString();
+            //checkAnswer(num, from, to);
+          }
+          break;
+        case 'm':
+          if (to == "km") {
+            controller.text = (num / 1000).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "dm") {
+            controller.text = (num * 10).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "cm") {
+            controller.text = (num * 100).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "mm") {
+            controller.text = (num * 1000).toString();
+            //checkAnswer(num, from, to);
+          }
+          break;
+        case 'km':
+          if (to == "m") {
+            controller.text = (num * 1000).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "dm") {
+            controller.text = (num * 10000).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "cm") {
+            controller.text = (num * 100000).toString();
+            //checkAnswer(num, from, to);
+          }
+          if (to == "mm") {
+            controller.text = (num * 1000000).toString();
+            //checkAnswer(num, from, to);
+          }
+          break;
+        default:
       }
     });
   }
@@ -344,17 +442,42 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
           ),
         ]),
       ),
-      OutlinedButton(
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromARGB(255, 22, 56, 74)),
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.white)),
-          onPressed: () {
-            checkAnswer(numValue, values[valueFromIndex], values[valueToIndex]);
-          },
-          child: const Text('PROVJERI')),
-      const SizedBox(
-        height: 50,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Visibility(
+              visible: appState.rjesenjeShown,
+              child: OutlinedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color.fromARGB(255, 212, 171, 36)),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white)),
+                  onPressed: () {
+                    setState(() {
+                      completeSolution(numValue, values[valueFromIndex],
+                          values[valueToIndex]);
+                    });
+                  },
+                  child: const Text('RJEŠENJE'))),
+          const SizedBox(
+            width: 10,
+          ),
+          OutlinedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromARGB(255, 22, 56, 74)),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white)),
+              onPressed: () {
+                checkAnswer(
+                    numValue, values[valueFromIndex], values[valueToIndex]);
+              },
+              child: const Text('PROVJERI')),
+          const SizedBox(
+            height: 50,
+          ),
+        ],
       ),
       Padding(
         padding: const EdgeInsets.only(right: 900.0, left: 10),

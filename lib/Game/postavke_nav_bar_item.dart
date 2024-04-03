@@ -12,7 +12,6 @@ class Postavke extends StatefulWidget {
 }
 
 class _PostavkeState extends State<Postavke> {
-  bool switchRjesenje = false;
   late AppState appState;
 
   onSwitchMethodPostupak(bool newValue) {
@@ -27,7 +26,11 @@ class _PostavkeState extends State<Postavke> {
 
   onSwitchMethodRjesenje(bool newValue) {
     setState(() {
-      switchRjesenje = newValue;
+      if (newValue == true) {
+        appState.rjesenjeShown = true;
+      } else {
+        appState.rjesenjeShown = false;
+      }
     });
   }
 
@@ -63,7 +66,8 @@ class _PostavkeState extends State<Postavke> {
             child: Text('Prikaz opcije rješenja zadataka',
                 style: TextStyle(fontSize: 25)),
           ),
-          buildSwitchOption('Rješenje', switchRjesenje, onSwitchMethodRjesenje),
+          buildSwitchOption(
+              'Rješenje', appState.rjesenjeShown, onSwitchMethodRjesenje),
           const SizedBox(height: 5),
           const SizedBox(
             height: 25,
