@@ -42,6 +42,7 @@ class _GameMasaState extends State<GameMasa> {
         imageShown: true,
         imagePath: 'assets/vaga.png',
         imageWidth: 100,
+        sizedBoxWidth: 660,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),

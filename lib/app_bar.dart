@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'accessability.dart';
 
 class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -6,13 +7,15 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   final bool imageShown;
   final String imagePath;
   final double imageWidth;
+  final double sizedBoxWidth;
   const AppBarCustom(
       {super.key,
       required this.title,
       required this.height,
       required this.imageShown,
       required this.imagePath,
-      required this.imageWidth});
+      required this.imageWidth,
+      required this.sizedBoxWidth});
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -31,6 +34,17 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
               width: 20,
             ),
             Text(title, style: const TextStyle(color: Colors.white)),
+            SizedBox(
+              width: sizedBoxWidth,
+            ),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AccessSettings()));
+                },
+                icon: const Icon(Icons.settings))
           ],
         ),
         toolbarHeight: height,

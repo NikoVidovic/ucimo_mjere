@@ -42,6 +42,7 @@ class _GameDuljinaState extends State<GameDuljina> {
         imageShown: true,
         imagePath: 'assets/kategorija1.png',
         imageWidth: 120,
+        sizedBoxWidth: 600,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),

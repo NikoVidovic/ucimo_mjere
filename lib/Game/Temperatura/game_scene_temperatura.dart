@@ -42,6 +42,7 @@ class _GameTemperaturaState extends State<GameTemperatura> {
         imageShown: true,
         imagePath: 'assets/kategorija4.png',
         imageWidth: 60,
+        sizedBoxWidth: 600,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),

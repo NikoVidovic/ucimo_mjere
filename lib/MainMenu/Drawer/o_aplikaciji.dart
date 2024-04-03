@@ -14,6 +14,7 @@ class OAplikaciji extends StatelessWidget {
           imageShown: false,
           imagePath: '',
           imageWidth: 0,
+          sizedBoxWidth: 900,
         ),
         drawer: const SizedBox(
           width: 500,

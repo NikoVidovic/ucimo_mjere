@@ -42,6 +42,7 @@ class _GameVrijemeState extends State<GameVrijeme> {
         imageShown: true,
         imagePath: 'assets/sat.png',
         imageWidth: 90,
+        sizedBoxWidth: 640,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),

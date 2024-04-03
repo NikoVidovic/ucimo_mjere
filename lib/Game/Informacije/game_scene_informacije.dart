@@ -42,6 +42,7 @@ class _GameInformacijeState extends State<GameInformacije> {
         imageShown: true,
         imagePath: 'assets/kategorija5.png',
         imageWidth: 90,
+        sizedBoxWidth: 500,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),

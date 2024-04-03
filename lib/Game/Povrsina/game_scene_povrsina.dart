@@ -42,6 +42,7 @@ class _GamePovrsinaState extends State<GamePovrsina> {
         imageShown: true,
         imagePath: 'assets/kategorija2.png',
         imageWidth: 90,
+        sizedBoxWidth: 640,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),
