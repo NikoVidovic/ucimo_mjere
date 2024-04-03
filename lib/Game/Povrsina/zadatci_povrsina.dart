@@ -273,6 +273,84 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina> {
     });
   }
 
+  completeSolution(int num, String from, String to) {
+    setState(() {
+      switch (from) {
+        case 'mm':
+          if (to == "cm") {
+            controller.text = (num / 100).toString();
+          }
+          if (to == "dm") {
+            controller.text = (num / 10000).toString();
+          }
+          if (to == "m") {
+            controller.text = (num / 1000000).toString();
+          }
+          if (to == "km") {
+            controller.text = (num / 1000000000000).toString();
+          }
+          break;
+        case 'cm':
+          if (to == "mm") {
+            controller.text = (num * 100).toString();
+          }
+          if (to == "dm") {
+            controller.text = (num / 100).toString();
+          }
+          if (to == "m") {
+            controller.text = (num / 10000).toString();
+          }
+          if (to == "km") {
+            controller.text = (num / 10000000000).toString();
+          }
+          break;
+        case 'dm':
+          if (to == "mm") {
+            controller.text = (num * 10000).toString();
+          }
+          if (to == "cm") {
+            controller.text = (num * 100).toString();
+          }
+          if (to == "m") {
+            controller.text = (num / 100).toString();
+          }
+          if (to == "km") {
+            controller.text = (num / 100000000).toString();
+          }
+          break;
+        case 'm':
+          if (to == "mm") {
+            controller.text = (num * 1000000).toString();
+          }
+          if (to == "cm") {
+            controller.text = (num * 10000).toString();
+          }
+          if (to == "dm") {
+            controller.text = (num * 100).toString();
+          }
+          if (to == "km") {
+            controller.text = (num / 1000000).toString();
+          }
+          break;
+        case 'km':
+          if (to == "mm") {
+            controller.text = (num * 1000000000000).toString();
+          }
+          if (to == "cm") {
+            controller.text = (num * 10000000000).toString();
+          }
+          if (to == "dm") {
+            controller.text = (num * 100000000).toString();
+          }
+          if (to == "m") {
+            controller.text = (num * 1000000).toString();
+          }
+          break;
+        default:
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -285,7 +363,7 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina> {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 50, left: 90, right: 390),
+        padding: const EdgeInsets.only(top: 50, left: 70, right: 390),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Visibility(
               visible: appState.helpButtonShown,
@@ -357,15 +435,40 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina> {
               ))
         ]),
       ),
-      OutlinedButton(
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromARGB(255, 22, 56, 74)),
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.white)),
-          onPressed: () {
-            checkAnswer(numValue, values[valueFromIndex], values[valueToIndex]);
-          },
-          child: const Text('PROVJERI')),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Visibility(
+              visible: appState.rjesenjeShown,
+              child: OutlinedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color.fromARGB(255, 212, 171, 36)),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white)),
+                  onPressed: () {
+                    setState(() {
+                      completeSolution(numValue, values[valueFromIndex],
+                          values[valueToIndex]);
+                    });
+                  },
+                  child: const Text('RJEŠENJE'))),
+          const SizedBox(
+            width: 10,
+          ),
+          OutlinedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromARGB(255, 22, 56, 74)),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white)),
+              onPressed: () {
+                checkAnswer(
+                    numValue, values[valueFromIndex], values[valueToIndex]);
+              },
+              child: const Text('PROVJERI')),
+        ],
+      ),
       const SizedBox(
         height: 50,
       ),

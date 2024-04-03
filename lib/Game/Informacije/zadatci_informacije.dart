@@ -275,6 +275,84 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
     });
   }
 
+  completeSolution(int num, String from, String to) {
+    setState(() {
+      switch (from) {
+        case 'B':
+          if (to == "KB") {
+            controller.text = (num / 100).toString();
+          }
+          if (to == "MB") {
+            controller.text = (num / 1000000).toString();
+          }
+          if (to == "GB") {
+            controller.text = (num / 1000000000).toString();
+          }
+          if (to == "TB") {
+            controller.text = (num / 1000000000000).toString();
+          }
+          break;
+        case 'KB':
+          if (to == "B") {
+            controller.text = (num * 100).toString();
+          }
+          if (to == "MB") {
+            controller.text = (num / 100).toString();
+          }
+          if (to == "GB") {
+            controller.text = (num / 1000000).toString();
+          }
+          if (to == "TB") {
+            controller.text = (num / 1000000000).toString();
+          }
+          break;
+        case 'MB':
+          if (to == "B") {
+            controller.text = (num * 1000000).toString();
+          }
+          if (to == "KB") {
+            controller.text = (num * 1000).toString();
+          }
+          if (to == "GB") {
+            controller.text = (num / 1000).toString();
+          }
+          if (to == "TB") {
+            controller.text = (num / 1000000).toString();
+          }
+          break;
+        case 'GB':
+          if (to == "B") {
+            controller.text = (num * 1000000000).toString();
+          }
+          if (to == "KB") {
+            controller.text = (num * 1000000).toString();
+          }
+          if (to == "MB") {
+            controller.text = (num * 1000).toString();
+          }
+          if (to == "TB") {
+            controller.text = (num / 1000).toString();
+          }
+          break;
+        case 'TB':
+          if (to == "B") {
+            controller.text = (num * 1000000000000).toString();
+          }
+          if (to == "KB") {
+            controller.text = (num * 1000000000).toString();
+          }
+          if (to == "MB") {
+            controller.text = (num * 1000000).toString();
+          }
+          if (to == "GB") {
+            controller.text = (num * 1000).toString();
+          }
+          break;
+        default:
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -347,15 +425,40 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
           )
         ]),
       ),
-      OutlinedButton(
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromARGB(255, 22, 56, 74)),
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.white)),
-          onPressed: () {
-            checkAnswer(numValue, values[valueFromIndex], values[valueToIndex]);
-          },
-          child: const Text('PROVJERI')),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Visibility(
+              visible: appState.rjesenjeShown,
+              child: OutlinedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color.fromARGB(255, 212, 171, 36)),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white)),
+                  onPressed: () {
+                    setState(() {
+                      completeSolution(numValue, values[valueFromIndex],
+                          values[valueToIndex]);
+                    });
+                  },
+                  child: const Text('RJEŠENJE'))),
+          const SizedBox(
+            width: 10,
+          ),
+          OutlinedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromARGB(255, 22, 56, 74)),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white)),
+              onPressed: () {
+                checkAnswer(
+                    numValue, values[valueFromIndex], values[valueToIndex]);
+              },
+              child: const Text('PROVJERI')),
+        ],
+      ),
       const SizedBox(
         height: 50,
       ),

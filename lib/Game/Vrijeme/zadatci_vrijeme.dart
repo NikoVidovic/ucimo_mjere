@@ -265,6 +265,84 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
     });
   }
 
+  completeSolution(int num, String from, String to) {
+    setState(() {
+      switch (from) {
+        case 'ms':
+          if (to == "s") {
+            controller.text = (num / 1000).toString();
+          }
+          if (to == "min") {
+            controller.text = ((num / 1000) / 60).toString();
+          }
+          if (to == "h") {
+            controller.text = (((num / 1000) / 60) / 60).toString();
+          }
+          if (to == "dan") {
+            controller.text = ((((num / 1000) / 60) / 60) / 24).toString();
+          }
+          break;
+        case 's':
+          if (to == "ms") {
+            controller.text = (num * 1000).toString();
+          }
+          if (to == "min") {
+            controller.text = (num / 60).toString();
+          }
+          if (to == "h") {
+            controller.text = ((num / 60) / 60).toString();
+          }
+          if (to == "dan") {
+            controller.text = (((num / 60) / 60) / 24).toString();
+          }
+          break;
+        case 'min':
+          if (to == "ms") {
+            controller.text = (num * 60000).toString();
+          }
+          if (to == "s") {
+            controller.text = (num * 60).toString();
+          }
+          if (to == "h") {
+            controller.text = (num / 60).toString();
+          }
+          if (to == "dan") {
+            controller.text = ((num / 60) / 24).toString();
+          }
+          break;
+        case 'h':
+          if (to == "ms") {
+            controller.text = (num * 3600000).toString();
+          }
+          if (to == "s") {
+            controller.text = (num * 3600).toString();
+          }
+          if (to == "min") {
+            controller.text = (num * 60).toString();
+          }
+          if (to == "dan") {
+            controller.text = (num / 24).toString();
+          }
+          break;
+        case 'dan':
+          if (to == "ms") {
+            controller.text = (num * 86400000).toString();
+          }
+          if (to == "s") {
+            controller.text = (num * 86400).toString();
+          }
+          if (to == "min") {
+            controller.text = (num * 1440).toString();
+          }
+          if (to == "h") {
+            controller.text = (num * 24).toString();
+          }
+          break;
+        default:
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -337,15 +415,40 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
           ),
         ]),
       ),
-      OutlinedButton(
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromARGB(255, 22, 56, 74)),
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.white)),
-          onPressed: () {
-            checkAnswer(numValue, values[valueFromIndex], values[valueToIndex]);
-          },
-          child: const Text('PROVJERI')),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Visibility(
+              visible: appState.rjesenjeShown,
+              child: OutlinedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color.fromARGB(255, 212, 171, 36)),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white)),
+                  onPressed: () {
+                    setState(() {
+                      completeSolution(numValue, values[valueFromIndex],
+                          values[valueToIndex]);
+                    });
+                  },
+                  child: const Text('RJEŠENJE'))),
+          const SizedBox(
+            width: 10,
+          ),
+          OutlinedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromARGB(255, 22, 56, 74)),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white)),
+              onPressed: () {
+                checkAnswer(
+                    numValue, values[valueFromIndex], values[valueToIndex]);
+              },
+              child: const Text('PROVJERI')),
+        ],
+      ),
       const SizedBox(
         height: 50,
       ),

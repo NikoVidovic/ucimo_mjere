@@ -107,6 +107,24 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
     });
   }
 
+  completeSolution(int num, String from, String to) {
+    setState(() {
+      switch (from) {
+        case 'K':
+          if (to == "C") {
+            controller.text = (num - 273.15).toString();
+          }
+          break;
+        case 'C':
+          if (to == "K") {
+            controller.text = (num + 273.15).toString();
+          }
+          break;
+        default:
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -179,17 +197,42 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
           ),
         ]),
       ),
-      OutlinedButton(
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromARGB(255, 22, 56, 74)),
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.white)),
-          onPressed: () {
-            checkAnswer(numValue, values[valueFromIndex], values[valueToIndex]);
-          },
-          child: const Text('PROVJERI')),
-      const SizedBox(
-        height: 50,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Visibility(
+              visible: appState.rjesenjeShown,
+              child: OutlinedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color.fromARGB(255, 212, 171, 36)),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white)),
+                  onPressed: () {
+                    setState(() {
+                      completeSolution(numValue, values[valueFromIndex],
+                          values[valueToIndex]);
+                    });
+                  },
+                  child: const Text('RJEŠENJE'))),
+          const SizedBox(
+            width: 10,
+          ),
+          OutlinedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromARGB(255, 22, 56, 74)),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white)),
+              onPressed: () {
+                checkAnswer(
+                    numValue, values[valueFromIndex], values[valueToIndex]);
+              },
+              child: const Text('PROVJERI')),
+          const SizedBox(
+            height: 50,
+          ),
+        ],
       ),
       Padding(
         padding: const EdgeInsets.only(right: 900.0, left: 10),

@@ -203,6 +203,58 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
     });
   }
 
+  completeSolution(int num, String from, String to) {
+    setState(() {
+      switch (from) {
+        case 'g':
+          if (to == "t") {
+            controller.text = (num / 1000000).toString();
+          }
+          if (to == "kg") {
+            controller.text = (num / 1000).toString();
+          }
+          if (to == "dg") {
+            controller.text = (num / 10).toString();
+          }
+          break;
+        case 'dg':
+          if (to == "t") {
+            controller.text = (num / 100000).toString();
+          }
+          if (to == "kg") {
+            controller.text = (num / 100).toString();
+          }
+          if (to == "g") {
+            controller.text = (num * 10).toString();
+          }
+          break;
+        case 'kg':
+          if (to == "t") {
+            controller.text = (num / 1000).toString();
+          }
+          if (to == "dg") {
+            controller.text = (num * 100).toString();
+          }
+          if (to == "g") {
+            controller.text = (num * 10000).toString();
+          }
+          break;
+        case 't':
+          if (to == "g") {
+            controller.text = (num * 1000000).toString();
+          }
+          if (to == "dg") {
+            controller.text = (num * 100000).toString();
+          }
+          if (to == "kg" && controller.text == (num * 1000).toString()) {
+            controller.text = (num * 1000).toString();
+          }
+          break;
+        default:
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -275,15 +327,40 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
           )
         ]),
       ),
-      OutlinedButton(
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromARGB(255, 22, 56, 74)),
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.white)),
-          onPressed: () {
-            checkAnswer(numValue, values[valueFromIndex], values[valueToIndex]);
-          },
-          child: const Text('PROVJERI')),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Visibility(
+              visible: appState.rjesenjeShown,
+              child: OutlinedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color.fromARGB(255, 212, 171, 36)),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white)),
+                  onPressed: () {
+                    setState(() {
+                      completeSolution(numValue, values[valueFromIndex],
+                          values[valueToIndex]);
+                    });
+                  },
+                  child: const Text('RJEŠENJE'))),
+          const SizedBox(
+            width: 10,
+          ),
+          OutlinedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromARGB(255, 22, 56, 74)),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white)),
+              onPressed: () {
+                checkAnswer(
+                    numValue, values[valueFromIndex], values[valueToIndex]);
+              },
+              child: const Text('PROVJERI')),
+        ],
+      ),
       const SizedBox(
         height: 50,
       ),
