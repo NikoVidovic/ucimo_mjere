@@ -58,104 +58,209 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
     }
   }
 
+  double setUnitTo(String from, String to) {
+    switch (from) {
+      case 'ms':
+        if (to == "s") {
+          return 1 / 1000;
+        }
+        if (to == "min") {
+          return (1 / 1000) / 60;
+        }
+        if (to == "h") {
+          return ((1 / 1000) / 60) / 60;
+        }
+        if (to == "dan") {
+          return (((1 / 1000) / 60) / 60) / 24;
+        }
+        break;
+      case 's':
+        if (to == "ms") {
+          return 1000;
+        }
+        if (to == "min") {
+          return 1 / 60;
+        }
+        if (to == "h") {
+          return (1 / 60) / 60;
+        }
+        if (to == "dan") {
+          return ((1 / 60) / 60) / 24;
+        }
+        break;
+      case 'min':
+        if (to == "ms") {
+          return 60000;
+        }
+        if (to == "s") {
+          return 60;
+        }
+        if (to == "h") {
+          return 1 / 60;
+        }
+        if (to == "dan") {
+          return (1 / 60) / 24;
+        }
+        break;
+      case 'h':
+        if (to == "ms") {
+          return 3600000;
+        }
+        if (to == "s") {
+          return 3600;
+        }
+        if (to == "min") {
+          return 60;
+        }
+        if (to == "dan") {
+          return 1 / 24;
+        }
+        break;
+      case 'dan':
+        if (to == "ms") {
+          return 86400000;
+        }
+        if (to == "s") {
+          return 86400;
+        }
+        if (to == "min") {
+          return 1440;
+        }
+        if (to == "h") {
+          return 24;
+        }
+        break;
+      default:
+    }
+    return 1;
+  }
+
   void checkAnswer(int num, String from, String to) {
+    bool isCorrect = false;
     setState(() {
+      FocusManager.instance.primaryFocus?.unfocus();
       switch (from) {
         case 'ms':
           if (to == "s" && controller.text == (num / 1000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "min" &&
               controller.text == ((num / 1000) / 60).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "h" &&
               controller.text == (((num / 1000) / 60) / 60).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dan" &&
               controller.text == ((((num / 1000) / 60) / 60) / 24).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 's':
           if (to == "ms" && controller.text == (num * 1000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "min" && controller.text == (num / 60).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "h" && controller.text == ((num / 60) / 60).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dan" &&
               controller.text == (((num / 60) / 60) / 24).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'min':
           if (to == "ms" && controller.text == (num * 60000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "s" && controller.text == (num * 60).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "h" && controller.text == (num / 60).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dan" && controller.text == ((num / 60) / 24).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'h':
           if (to == "ms" && controller.text == (num * 3600000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "s" && controller.text == (num * 3600).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "min" && controller.text == (num * 60).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dan" && controller.text == (num / 24).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'dan':
           if (to == "ms" && controller.text == (num * 86400000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "s" && controller.text == (num * 86400).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "min" && controller.text == (num * 1440).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "h" && controller.text == (num * 24).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         default:
+      }
+      if (isCorrect && appState.helpButtonShown == true) {
+        appState.helpButtonShown = false;
+        appState.postupakShown = false;
+      } else if (!isCorrect && appState.postupakShown == false) {
+        appState.helpButtonShown = true;
       }
     });
   }
@@ -172,8 +277,31 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 50, left: 390, right: 390),
-        child: Row(children: [
+        padding: const EdgeInsets.only(top: 50, left: 90, right: 390),
+        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Visibility(
+              visible: appState.helpButtonShown,
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                      const EdgeInsets.all(10),
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      appState.postupakShown = true;
+                    });
+                  },
+                  child: const Text(
+                    'Trebaš pomoć?',
+                    style: TextStyle(fontSize: 25),
+                  ))),
+          const SizedBox(
+            width: 140,
+          ),
           Text(
             numValue.toString(),
             style: const TextStyle(fontSize: 50),
@@ -206,7 +334,7 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
           Text(
             values[valueToIndex],
             style: const TextStyle(fontSize: 50),
-          )
+          ),
         ]),
       ),
       OutlinedButton(
@@ -218,12 +346,23 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
             checkAnswer(numValue, values[valueFromIndex], values[valueToIndex]);
           },
           child: const Text('PROVJERI')),
-      Visibility(
-          visible: appState.postupakShown,
-          child: const Text(
-            'Ovo je postupak',
-            style: TextStyle(fontSize: 30),
-          ))
+      const SizedBox(
+        height: 50,
+      ),
+      Padding(
+        padding: const EdgeInsets.only(right: 900.0, left: 10),
+        child: Visibility(
+            visible: appState.postupakShown,
+            child: Container(
+              width: double.maxFinite,
+              color: const Color.fromARGB(255, 232, 196, 80),
+              child: Text(
+                '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
+                style: const TextStyle(fontSize: 30),
+                textAlign: TextAlign.center,
+              ),
+            )),
+      )
     ]);
   }
 }

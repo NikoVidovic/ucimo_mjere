@@ -59,22 +59,50 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
     }
   }
 
+  double setUnitTo(String from, String to) {
+    switch (from) {
+      case 'K':
+        if (to == "C") {
+          return -273.15;
+        }
+        break;
+      case 'C':
+        if (to == "K") {
+          //plus
+          return 273.15;
+        }
+        break;
+      default:
+    }
+    return 1;
+  }
+
   void checkAnswer(int num, String from, String to) {
+    bool isCorrect = false;
     setState(() {
+      FocusManager.instance.primaryFocus?.unfocus();
       switch (from) {
         case 'K':
           if (to == "C" && controller.text == (num - 273.15).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'C':
           if (to == "K" && controller.text == (num + 273.15).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         default:
+      }
+      if (isCorrect && appState.helpButtonShown == true) {
+        appState.helpButtonShown = false;
+        appState.postupakShown = false;
+      } else if (!isCorrect && appState.postupakShown == false) {
+        appState.helpButtonShown = true;
       }
     });
   }
@@ -91,8 +119,31 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 50, left: 390, right: 390),
-        child: Row(children: [
+        padding: const EdgeInsets.only(top: 50, left: 90, right: 390),
+        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Visibility(
+              visible: appState.helpButtonShown,
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                      const EdgeInsets.all(10),
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      appState.postupakShown = true;
+                    });
+                  },
+                  child: const Text(
+                    'Trebaš pomoć?',
+                    style: TextStyle(fontSize: 25),
+                  ))),
+          const SizedBox(
+            width: 140,
+          ),
           Text(
             numValue.toString(),
             style: const TextStyle(fontSize: 50),
@@ -125,7 +176,7 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
           Text(
             values[valueToIndex],
             style: const TextStyle(fontSize: 50),
-          )
+          ),
         ]),
       ),
       OutlinedButton(
@@ -137,12 +188,23 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
             checkAnswer(numValue, values[valueFromIndex], values[valueToIndex]);
           },
           child: const Text('PROVJERI')),
-      Visibility(
-          visible: appState.postupakShown,
-          child: const Text(
-            'Ovo je postupak',
-            style: TextStyle(fontSize: 30),
-          ))
+      const SizedBox(
+        height: 50,
+      ),
+      Padding(
+        padding: const EdgeInsets.only(right: 900.0, left: 10),
+        child: Visibility(
+            visible: appState.postupakShown,
+            child: Container(
+              width: double.maxFinite,
+              color: const Color.fromARGB(255, 232, 196, 80),
+              child: Text(
+                '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue + ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
+                style: const TextStyle(fontSize: 30),
+                textAlign: TextAlign.center,
+              ),
+            )),
+      )
     ]);
   }
 }

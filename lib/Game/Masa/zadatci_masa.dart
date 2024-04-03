@@ -68,66 +68,137 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
     }
   }
 
+  double setUnitTo(String from, String to) {
+    switch (from) {
+      case 'g':
+        if (to == "t") {
+          return 1 / 1000000;
+        }
+        if (to == "kg") {
+          return 1 / 1000;
+        }
+        if (to == "dg") {
+          return 1 / 10;
+        }
+        break;
+      case 'dg':
+        if (to == "t") {
+          return 1 / 100000;
+        }
+        if (to == "kg") {
+          return 1 / 100;
+        }
+        if (to == "g") {
+          return 10;
+        }
+        break;
+      case 'kg':
+        if (to == "t") {
+          return 1 / 1000;
+        }
+        if (to == "dg") {
+          return 100;
+        }
+        if (to == "g") {
+          return 10000;
+        }
+        break;
+      case 't':
+        if (to == "g") {
+          return 1000000;
+        }
+        if (to == "dg") {
+          return 100000;
+        }
+        if (to == "kg") {
+          return 1000;
+        }
+        break;
+      default:
+    }
+    return 1;
+  }
+
   void checkAnswer(int num, String from, String to) {
+    bool isCorrect = false;
     setState(() {
+      FocusManager.instance.primaryFocus?.unfocus();
       switch (from) {
         case 'g':
           if (to == "t" && controller.text == (num / 1000000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "kg" && controller.text == (num / 1000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dg" && controller.text == (num / 10).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'dg':
           if (to == "t" && controller.text == (num / 100000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "kg" && controller.text == (num / 100).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "g" && controller.text == (num * 10).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 'kg':
           if (to == "t" && controller.text == (num / 1000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dg" && controller.text == (num * 100).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "g" && controller.text == (num * 10000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         case 't':
           if (to == "g" && controller.text == (num * 1000000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dg" && controller.text == (num * 100000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "kg" && controller.text == (num * 1000).toString()) {
+            isCorrect = true;
             generateIndexAndNumber();
             controller.clear();
           }
           break;
         default:
+      }
+      if (isCorrect && appState.helpButtonShown == true) {
+        appState.helpButtonShown = false;
+        appState.postupakShown = false;
+      } else if (!isCorrect && appState.postupakShown == false) {
+        appState.helpButtonShown = true;
       }
     });
   }
@@ -144,8 +215,31 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 50, left: 390, right: 390),
-        child: Row(children: [
+        padding: const EdgeInsets.only(top: 50, left: 90, right: 390),
+        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Visibility(
+              visible: appState.helpButtonShown,
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                      const EdgeInsets.all(10),
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      appState.postupakShown = true;
+                    });
+                  },
+                  child: const Text(
+                    'Trebaš pomoć?',
+                    style: TextStyle(fontSize: 25),
+                  ))),
+          const SizedBox(
+            width: 140,
+          ),
           Text(
             numValue.toString(),
             style: const TextStyle(fontSize: 50),
@@ -190,12 +284,23 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
             checkAnswer(numValue, values[valueFromIndex], values[valueToIndex]);
           },
           child: const Text('PROVJERI')),
-      Visibility(
-          visible: appState.postupakShown,
-          child: const Text(
-            'Ovo je postupak',
-            style: TextStyle(fontSize: 30),
-          ))
+      const SizedBox(
+        height: 50,
+      ),
+      Padding(
+        padding: const EdgeInsets.only(right: 900.0, left: 10),
+        child: Visibility(
+            visible: appState.postupakShown,
+            child: Container(
+              width: double.maxFinite,
+              color: const Color.fromARGB(255, 232, 196, 80),
+              child: Text(
+                '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
+                style: const TextStyle(fontSize: 30),
+                textAlign: TextAlign.center,
+              ),
+            )),
+      )
     ]);
   }
 }

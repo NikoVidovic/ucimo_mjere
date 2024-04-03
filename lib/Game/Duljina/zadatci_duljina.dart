@@ -148,6 +148,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
   void checkAnswer(int num, String from, String to) {
     bool isCorrect = false;
     setState(() {
+      FocusManager.instance.primaryFocus?.unfocus();
       switch (from) {
         case 'mm':
           if (to == "km" && controller.text == (num / 1000000).toString()) {
@@ -340,7 +341,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
           Text(
             values[valueToIndex],
             style: const TextStyle(fontSize: 50),
-          )
+          ),
         ]),
       ),
       OutlinedButton(
