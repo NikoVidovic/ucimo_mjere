@@ -42,29 +42,29 @@ class _PostavkeState extends State<Postavke> {
       child: ListView(
         children: [
           const SizedBox(height: 40),
-          const Text(
+          Text(
             'Prilagodba zadataka',
-            style: TextStyle(fontSize: 40),
+            style: TextStyle(fontSize: 40, color: appState.fontColor),
           ),
           const Divider(
             thickness: 2,
             color: Colors.black,
           ),
           const SizedBox(height: 10),
-          const Padding(
-            padding: EdgeInsets.only(left: 30.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 30.0),
             child: Text('Prikaz postupka rješavanja zadataka',
-                style: TextStyle(fontSize: 25)),
+                style: TextStyle(fontSize: 25, color: appState.fontColor)),
           ),
           buildSwitchOption(
               'Postupak', appState.postupakShown, onSwitchMethodPostupak),
           const SizedBox(
             height: 25,
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 30.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 30.0),
             child: Text('Prikaz opcije rješenja zadataka',
-                style: TextStyle(fontSize: 25)),
+                style: TextStyle(fontSize: 25, color: appState.fontColor)),
           ),
           buildSwitchOption(
               'Rješenje', appState.rjesenjeShown, onSwitchMethodRjesenje),
@@ -76,7 +76,7 @@ class _PostavkeState extends State<Postavke> {
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
             child: Text(
               'Težina zadatka: ${appState.currentSliderValue.round()}',
-              style: const TextStyle(fontSize: 25),
+              style: TextStyle(fontSize: 25, color: appState.fontColor),
             ),
           ),
           Padding(
@@ -135,7 +135,7 @@ class _PostavkeState extends State<Postavke> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(title,
-                style: const TextStyle(fontSize: 35),
+                style: TextStyle(fontSize: 35, color: appState.fontColor),
                 textAlign: TextAlign.left),
             Transform.scale(
                 scale: 1.0,

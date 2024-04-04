@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/Game/Duljina/game_scene_duljina.dart';
+import 'package:provider/provider.dart';
 import '../Game/Informacije/game_scene_informacije.dart';
 import '../Game/Masa/game_scene_masa.dart';
 import '../Game/Obujam/game_scene_obujam.dart';
@@ -7,16 +8,26 @@ import '../Game/Povrsina/game_scene_povrsina.dart';
 import '../Game/Temperatura/game_scene_temperatura.dart';
 import '../Game/Vrijeme/game_scene_vrijeme.dart';
 import '../app_bar.dart';
+import '../app_state.dart';
 import './Drawer/opening_drawer.dart';
 import 'main_button.dart';
 
-class MainMenu extends StatelessWidget {
+class MainMenu extends StatefulWidget {
   const MainMenu({super.key});
+
+  @override
+  State<MainMenu> createState() => _MainMenuState();
+}
+
+class _MainMenuState extends State<MainMenu> {
+  late AppState appState;
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    appState = Provider.of<AppState>(context);
+    return Scaffold(
+        backgroundColor: appState.backgroundColor,
         resizeToAvoidBottomInset: false,
-        appBar: AppBarCustom(
+        appBar: const AppBarCustom(
           title: 'Učimo mjere',
           height: 85.0,
           imageShown: false,
@@ -24,13 +35,13 @@ class MainMenu extends StatelessWidget {
           imageWidth: 0,
           sizedBoxWidth: 900,
         ),
-        drawer: SizedBox(
+        drawer: const SizedBox(
           width: 500,
           child: Drawer(
             child: Izbornik(),
           ),
         ),
-        body: Row(children: [
+        body: const Row(children: [
           Column(
             children: [
               MainButton(

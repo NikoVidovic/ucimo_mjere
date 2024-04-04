@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:hello_world/app_state.dart';
+import 'package:provider/provider.dart';
 import '../postavke_nav_bar_item.dart';
 import '../../app_bar.dart';
 import 'zadatci_duljina.dart';
@@ -16,6 +18,7 @@ class GameDuljina extends StatefulWidget {
 
 class _GameDuljinaState extends State<GameDuljina> {
   int selectedIndex = 0;
+  late AppState appState;
 
   late List<Widget> pages;
 
@@ -33,7 +36,9 @@ class _GameDuljinaState extends State<GameDuljina> {
 
   @override
   Widget build(BuildContext context) {
+    appState = Provider.of<AppState>(context);
     return Scaffold(
+      backgroundColor: appState.backgroundColor,
       resizeToAvoidBottomInset: false,
       body: pages[selectedIndex],
       appBar: AppBarCustom(

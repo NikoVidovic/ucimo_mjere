@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../app_state.dart';
 import '../main_menu.dart';
 import '/MainMenu/Drawer/o_aplikaciji.dart';
 import 'drawer_button.dart';
 
-class Izbornik extends StatelessWidget {
+class Izbornik extends StatefulWidget {
   const Izbornik({super.key});
+
+  @override
+  State<Izbornik> createState() => _IzbornikState();
+}
+
+class _IzbornikState extends State<Izbornik> {
+  late AppState appState;
   @override
   Widget build(BuildContext context) {
+    appState = Provider.of<AppState>(context);
     return (Scaffold(
+        backgroundColor: appState.backgroundColor,
         appBar: AppBar(
             title: Row(
               children: [
@@ -33,23 +44,23 @@ class Izbornik extends StatelessWidget {
             ),
             toolbarHeight: 200,
             backgroundColor: const Color.fromARGB(255, 244, 188, 66)),
-        body: const Column(
+        body: Column(
           children: [
             IzbornikButton(
-                ikona: Icon(Icons.apps),
+                ikona: const Icon(Icons.apps),
                 title: 'Izbornik',
-                route: MainMenu(),
-                boja: Colors.black),
+                route: const MainMenu(),
+                boja: appState.fontColor),
             IzbornikButton(
-                ikona: Icon(Icons.error),
+                ikona: const Icon(Icons.error),
                 title: 'O aplikaciji',
-                route: OAplikaciji(),
-                boja: Colors.black),
+                route: const OAplikaciji(),
+                boja: appState.fontColor),
             IzbornikButton(
-                ikona: Icon(Icons.email),
+                ikona: const Icon(Icons.email),
                 title: 'Prijavi problem',
-                route: MainMenu(),
-                boja: Colors.black)
+                route: const MainMenu(),
+                boja: appState.fontColor)
           ],
         )));
   }

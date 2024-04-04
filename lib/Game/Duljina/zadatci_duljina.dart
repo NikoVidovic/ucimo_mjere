@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../app_state.dart';
+import '/../app_state.dart';
 
 class ZadatciDuljina extends StatefulWidget {
   const ZadatciDuljina({super.key});
@@ -372,12 +372,13 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
 
   @override
   Widget build(BuildContext context) {
+    appState = Provider.of<AppState>(context);
     return Column(children: [
-      const Padding(
-        padding: EdgeInsets.only(top: 25, left: 10, right: 10),
+      Padding(
+        padding: const EdgeInsets.only(top: 25, left: 10, right: 10),
         child: Text(
           "Preračunaj mjeru s lijeve strane crte u mjeru s desne strane crte. Zatim odgovor upiši na crtu 'Unesite rješenje'! Zatim svoj odgovor provjeri klikom na gumb 'PROVJERI'!",
-          style: TextStyle(fontSize: 30),
+          style: TextStyle(fontSize: 30, color: appState.fontColor),
           textAlign: TextAlign.left,
         ),
       ),
@@ -409,27 +410,27 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
           ),
           Text(
             numValue.toString(),
-            style: const TextStyle(fontSize: 50),
+            style: TextStyle(fontSize: 50, color: appState.fontColor),
           ),
           const SizedBox(
             width: 10,
           ),
           Text(
             values[valueFromIndex],
-            style: const TextStyle(fontSize: 50),
+            style: TextStyle(fontSize: 50, color: appState.fontColor),
           ),
           const SizedBox(
             width: 10,
           ),
           Expanded(
               child: TextField(
-            style: const TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 30, color: appState.fontColor),
             textAlign: TextAlign.center,
             controller: controller,
             keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: 'Unesite rješenje',
-              hintStyle: TextStyle(fontSize: 15),
+              hintStyle: TextStyle(fontSize: 15, color: appState.fontColor),
               alignLabelWithHint: true,
             ),
           )),
@@ -438,7 +439,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
           ),
           Text(
             values[valueToIndex],
-            style: const TextStyle(fontSize: 50),
+            style: TextStyle(fontSize: 50, color: appState.fontColor),
           ),
         ]),
       ),

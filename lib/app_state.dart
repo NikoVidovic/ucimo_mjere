@@ -5,11 +5,15 @@ class AppState extends ChangeNotifier {
   bool _postupakShown = false;
   bool _helpButtonShown = false;
   bool _rjesenjeShown = false;
+  Color _backgroundColor = Colors.white;
+  Color _fontColor = Colors.black;
 
   double get currentSliderValue => _currentSliderValue;
   bool get postupakShown => _postupakShown;
   bool get helpButtonShown => _helpButtonShown;
   bool get rjesenjeShown => _rjesenjeShown;
+  Color get backgroundColor => _backgroundColor;
+  Color get fontColor => _fontColor;
 
   set currentSliderValue(double value) {
     _currentSliderValue = value;
@@ -28,6 +32,16 @@ class AppState extends ChangeNotifier {
 
   set rjesenjeShown(bool newValue) {
     _rjesenjeShown = newValue;
+    notifyListeners();
+  }
+
+  set backgroundColor(Color newColor) {
+    _backgroundColor = newColor;
+    notifyListeners();
+  }
+
+  set fontColor(Color newFontColor) {
+    _fontColor = newFontColor;
     notifyListeners();
   }
 }
