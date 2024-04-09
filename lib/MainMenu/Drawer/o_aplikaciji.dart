@@ -27,7 +27,7 @@ class _OAplikacijiState extends State<OAplikaciji> {
           imageShown: false,
           imagePath: '',
           imageWidth: 0,
-          sizedBoxWidth: screenWidth / 1.4,
+          sizedBoxWidth: screenWidth / 1.55,
         ),
         drawer: SizedBox(
           width: screenWidth / 2.5,

@@ -354,17 +354,26 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina> {
   @override
   Widget build(BuildContext context) {
     appState = Provider.of<AppState>(context);
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Column(children: [
       Padding(
-        padding: const EdgeInsets.only(top: 25, left: 10, right: 10),
+        padding: EdgeInsets.only(
+            top: screenHeight / 100,
+            left: screenWidth / 200,
+            right: screenWidth / 200),
         child: Text(
           "Preračunaj mjeru s lijeve strane crte u mjeru s desne strane crte. Zatim odgovor upiši na crtu 'Unesite rješenje'! Zatim svoj odgovor provjeri klikom na gumb 'PROVJERI'!",
-          style: TextStyle(fontSize: 30, color: appState.fontColor),
+          style:
+              TextStyle(fontSize: screenHeight / 30, color: appState.fontColor),
           textAlign: TextAlign.left,
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 50, left: 70, right: 390),
+        padding: EdgeInsets.only(
+            top: screenHeight / 500,
+            left: screenWidth / 43,
+            right: screenWidth / 3.35),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Visibility(
               visible: appState.helpButtonShown,
@@ -374,7 +383,7 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina> {
               child: ElevatedButton(
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                      const EdgeInsets.all(10),
+                      EdgeInsets.all(screenWidth / 120),
                     ),
                   ),
                   onPressed: () {
@@ -382,57 +391,64 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina> {
                       appState.postupakShown = true;
                     });
                   },
-                  child: const Text(
+                  child: Text(
                     'Trebaš pomoć?',
-                    style: TextStyle(fontSize: 25),
+                    style: TextStyle(fontSize: screenHeight / 31),
                   ))),
-          const SizedBox(
-            width: 140,
+          SizedBox(
+            width: screenWidth / 8,
           ),
           Text(
             numValue.toString(),
-            style: TextStyle(fontSize: 50, color: appState.fontColor),
+            style: TextStyle(
+                fontSize: screenHeight / 18, color: appState.fontColor),
           ),
-          const SizedBox(
-            width: 10,
+          SizedBox(
+            width: screenWidth / 150,
           ),
           Text(
             values[valueFromIndex],
-            style: TextStyle(fontSize: 50, color: appState.fontColor),
+            style: TextStyle(
+                fontSize: screenHeight / 18, color: appState.fontColor),
           ),
           Padding(
-              padding: const EdgeInsets.only(bottom: 32.0),
+              padding: EdgeInsets.only(bottom: screenHeight / 25),
               child: Text(
                 '2',
-                style: TextStyle(fontSize: 30, color: appState.fontColor),
+                style: TextStyle(
+                    fontSize: screenHeight / 25, color: appState.fontColor),
               )),
-          const SizedBox(
-            width: 10,
+          SizedBox(
+            width: screenWidth / 150,
           ),
           Expanded(
               child: TextField(
-            style: TextStyle(fontSize: 30, color: appState.fontColor),
+            style: TextStyle(
+                fontSize: screenHeight / 25, color: appState.fontColor),
             textAlign: TextAlign.center,
             controller: controller,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               hintText: 'Unesite rješenje',
-              hintStyle: TextStyle(fontSize: 15, color: appState.fontColor),
+              hintStyle: TextStyle(
+                  fontSize: screenHeight / 50, color: appState.fontColor),
               alignLabelWithHint: true,
             ),
           )),
-          const SizedBox(
-            width: 10,
+          SizedBox(
+            width: screenWidth / 150,
           ),
           Text(
             values[valueToIndex],
-            style: TextStyle(fontSize: 50, color: appState.fontColor),
+            style: TextStyle(
+                fontSize: screenHeight / 18, color: appState.fontColor),
           ),
           Padding(
-              padding: const EdgeInsets.only(bottom: 32.0),
+              padding: EdgeInsets.only(bottom: screenHeight / 25),
               child: Text(
                 '2',
-                style: TextStyle(fontSize: 30, color: appState.fontColor),
+                style: TextStyle(
+                    fontSize: screenHeight / 25, color: appState.fontColor),
               ))
         ]),
       ),
@@ -446,44 +462,53 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina> {
                       backgroundColor: MaterialStateProperty.all<Color>(
                           const Color.fromARGB(255, 212, 171, 36)),
                       foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white)),
+                          MaterialStateProperty.all<Color>(Colors.white),
+                      minimumSize: MaterialStateProperty.all<Size>(
+                          Size.square(screenWidth / 35))),
                   onPressed: () {
                     setState(() {
                       completeSolution(numValue, values[valueFromIndex],
                           values[valueToIndex]);
                     });
                   },
-                  child: const Text('RJEŠENJE'))),
-          const SizedBox(
-            width: 10,
+                  child: Text('RJEŠENJE',
+                      style: TextStyle(fontSize: screenHeight / 35)))),
+          SizedBox(
+            width: screenWidth / 150,
           ),
           OutlinedButton(
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                       const Color.fromARGB(255, 22, 56, 74)),
                   foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white)),
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  minimumSize: MaterialStateProperty.all<Size>(
+                      Size.square(screenWidth / 35))),
               onPressed: () {
                 checkAnswer(
                     numValue, values[valueFromIndex], values[valueToIndex]);
               },
-              child: const Text('PROVJERI')),
+              child: Text('PROVJERI',
+                  style: TextStyle(fontSize: screenHeight / 35))),
         ],
       ),
-      const SizedBox(
-        height: 50,
+      SizedBox(
+        height: screenHeight / 52,
       ),
       Padding(
-        padding: const EdgeInsets.only(right: 900.0, left: 10),
+        padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
         child: Visibility(
             visible: appState.postupakShown,
             child: Container(
               width: double.maxFinite,
               color: const Color.fromARGB(255, 232, 196, 80),
-              child: Text(
-                '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
-                style: const TextStyle(fontSize: 30),
-                textAlign: TextAlign.center,
+              child: Padding(
+                padding: EdgeInsets.only(left: screenWidth / 200),
+                child: Text(
+                  '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
+                  style: TextStyle(fontSize: screenHeight / 25),
+                  textAlign: TextAlign.left,
+                ),
               ),
             )),
       )

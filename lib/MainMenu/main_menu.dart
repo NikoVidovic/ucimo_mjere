@@ -35,7 +35,7 @@ class _MainMenuState extends State<MainMenu> {
           imageShown: false,
           imagePath: '',
           imageWidth: 0,
-          sizedBoxWidth: screenWidth / 1.4,
+          sizedBoxWidth: screenWidth / 1.55,
         ),
         drawer: SizedBox(
           width: screenWidth / 2.5,
@@ -96,7 +96,7 @@ class _MainMenuState extends State<MainMenu> {
                 ),
               ),
               MainButton(
-                naziv: 'Mjerne jedinice za temperaturu',
+                naziv: 'Mjerne jedinice za\ntemperaturu',
                 boja: Color.fromARGB(255, 246, 78, 81),
                 imagePath: 'assets/kategorija4.png',
                 route: GameTemperatura(

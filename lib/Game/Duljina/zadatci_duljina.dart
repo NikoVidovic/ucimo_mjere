@@ -436,7 +436,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
           Expanded(
               child: TextField(
             style: TextStyle(
-                fontSize: screenHeight / 24, color: appState.fontColor),
+                fontSize: screenHeight / 25, color: appState.fontColor),
             textAlign: TextAlign.center,
             controller: controller,
             keyboardType: TextInputType.number,
@@ -503,17 +503,19 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
         ],
       ),
       Padding(
-        padding:
-            EdgeInsets.only(right: screenWidth / 1.5, left: screenWidth / 100),
+        padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
         child: Visibility(
             visible: appState.postupakShown,
             child: Container(
               width: double.maxFinite,
               color: const Color.fromARGB(255, 232, 196, 80),
-              child: Text(
-                '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
-                style: TextStyle(fontSize: screenHeight / 25),
-                textAlign: TextAlign.center,
+              child: Padding(
+                padding: EdgeInsets.only(left: screenWidth / 200),
+                child: Text(
+                  '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
+                  style: TextStyle(fontSize: screenHeight / 25),
+                  textAlign: TextAlign.left,
+                ),
               ),
             )),
       )

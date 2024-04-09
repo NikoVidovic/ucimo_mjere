@@ -26,7 +26,7 @@ class _AccessSettingsState extends State<AccessSettings> {
             imageShown: false,
             imagePath: '',
             imageWidth: 0,
-            sizedBoxWidth: screenWidth / 1.4),
+            sizedBoxWidth: screenWidth / 1.55),
         body: ListView(
           children: [
             Padding(
