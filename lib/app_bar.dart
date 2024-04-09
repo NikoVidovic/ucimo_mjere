@@ -18,9 +18,11 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
       required this.sizedBoxWidth});
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return AppBar(
-        titleTextStyle: const TextStyle(fontSize: 30),
-        iconTheme: const IconThemeData(color: Colors.white, size: 40),
+        titleTextStyle: TextStyle(fontSize: screenHeight / 25),
+        iconTheme: IconThemeData(color: Colors.white, size: screenWidth / 35),
         title: Row(
           children: [
             Visibility(
@@ -30,8 +32,8 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
                 width: imageWidth,
               ),
             ),
-            const SizedBox(
-              width: 20,
+            SizedBox(
+              width: screenWidth / 100,
             ),
             Text(title, style: const TextStyle(color: Colors.white)),
             SizedBox(

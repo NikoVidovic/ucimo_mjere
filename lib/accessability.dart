@@ -15,32 +15,37 @@ class _AccessSettingsState extends State<AccessSettings> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     appState = Provider.of<AppState>(context);
     return Scaffold(
         backgroundColor: appState.backgroundColor,
-        appBar: const AppBarCustom(
+        appBar: AppBarCustom(
             title: 'Pristupačnost',
-            height: 100,
+            height: screenHeight / 8,
             imageShown: false,
             imagePath: '',
             imageWidth: 0,
-            sizedBoxWidth: 900),
+            sizedBoxWidth: screenWidth / 1.4),
         body: ListView(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 30, top: 15),
+              padding: EdgeInsets.only(
+                  left: screenWidth / 43, top: screenHeight / 40),
               child: Text(
                 'Promjeni pozadinu aplikacije',
-                style: TextStyle(fontSize: 20, color: appState.fontColor),
+                style: TextStyle(
+                    fontSize: screenHeight / 35, color: appState.fontColor),
               ),
             ),
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 30.0),
+                  padding: EdgeInsets.only(left: screenWidth / 43),
                   child: Text(
                     'Pozadina',
-                    style: TextStyle(fontSize: 30, color: appState.fontColor),
+                    style: TextStyle(
+                        fontSize: screenHeight / 20, color: appState.fontColor),
                   ),
                 ),
                 Expanded(
@@ -58,7 +63,7 @@ class _AccessSettingsState extends State<AccessSettings> {
                           backgroundColor: MaterialStateProperty.all<Color>(
                               const Color.fromARGB(255, 255, 255, 255)),
                           minimumSize: MaterialStateProperty.all<Size>(
-                              const Size(150, 145)),
+                              Size(screenWidth / 8.3, screenHeight / 5.4)),
                           shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
@@ -72,13 +77,14 @@ class _AccessSettingsState extends State<AccessSettings> {
                             ),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Dan',
-                          style: TextStyle(color: Colors.black, fontSize: 30),
+                          style: TextStyle(
+                              color: Colors.black, fontSize: screenHeight / 25),
                         ),
                       ),
-                      const SizedBox(
-                        width: 10,
+                      SizedBox(
+                        width: screenWidth / 100,
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -91,7 +97,7 @@ class _AccessSettingsState extends State<AccessSettings> {
                           backgroundColor: MaterialStateProperty.all<Color>(
                               const Color.fromARGB(255, 0, 0, 0)),
                           minimumSize: MaterialStateProperty.all<Size>(
-                              const Size(150, 145)),
+                              Size(screenWidth / 8.3, screenHeight / 5.4)),
                           shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
@@ -105,13 +111,15 @@ class _AccessSettingsState extends State<AccessSettings> {
                             ),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Noć',
-                          style: TextStyle(color: Colors.yellow, fontSize: 30),
+                          style: TextStyle(
+                              color: Colors.yellow,
+                              fontSize: screenHeight / 25),
                         ),
                       ),
-                      const SizedBox(
-                        width: 30,
+                      SizedBox(
+                        width: screenWidth / 50,
                       )
                     ],
                   ),

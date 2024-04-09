@@ -16,6 +16,8 @@ class _IzbornikState extends State<Izbornik> {
   late AppState appState;
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     appState = Provider.of<AppState>(context);
     return (Scaffold(
         backgroundColor: appState.backgroundColor,
@@ -24,25 +26,28 @@ class _IzbornikState extends State<Izbornik> {
               children: [
                 Image.asset(
                   'assets/ic_launcher.png',
-                  height: 60,
-                  width: 60,
+                  height: screenHeight / 5,
+                  width: screenWidth / 17,
                 ),
                 Container(
-                    margin: const EdgeInsets.only(left: 35.0),
-                    child: const Column(
+                    margin: EdgeInsets.only(left: screenWidth / 30),
+                    child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Učimo mjere',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 30)),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: screenHeight / 25)),
                           Text(
                             'pretvaranje mjernih jedinica',
-                            style: TextStyle(color: Colors.black, fontSize: 17),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: screenHeight / 45),
                           )
                         ]))
               ],
             ),
-            toolbarHeight: 200,
+            toolbarHeight: screenHeight / 3.7,
             backgroundColor: const Color.fromARGB(255, 244, 188, 66)),
         body: Column(
           children: [

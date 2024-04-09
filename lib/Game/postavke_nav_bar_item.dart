@@ -37,72 +37,78 @@ class _PostavkeState extends State<Postavke> {
   @override
   Widget build(BuildContext context) {
     appState = Provider.of<AppState>(context);
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
-      padding: const EdgeInsets.only(left: 70.0),
+      padding: EdgeInsets.only(left: screenWidth / 20),
       child: ListView(
         children: [
-          const SizedBox(height: 40),
+          SizedBox(height: screenHeight / 20),
           Text(
             'Prilagodba zadataka',
-            style: TextStyle(fontSize: 40, color: appState.fontColor),
+            style: TextStyle(
+                fontSize: screenHeight / 18, color: appState.fontColor),
           ),
           const Divider(
             thickness: 2,
             color: Colors.black,
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: screenHeight / 50),
           Padding(
-            padding: const EdgeInsets.only(left: 30.0),
+            padding: EdgeInsets.only(left: screenWidth / 43),
             child: Text('Prikaz postupka rješavanja zadataka',
-                style: TextStyle(fontSize: 25, color: appState.fontColor)),
+                style: TextStyle(
+                    fontSize: screenHeight / 31, color: appState.fontColor)),
           ),
           buildSwitchOption(
               'Postupak', appState.postupakShown, onSwitchMethodPostupak),
-          const SizedBox(
-            height: 25,
+          SizedBox(
+            height: screenHeight / 30,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 30.0),
+            padding: EdgeInsets.only(left: screenWidth / 43),
             child: Text('Prikaz opcije rješenja zadataka',
-                style: TextStyle(fontSize: 25, color: appState.fontColor)),
+                style: TextStyle(
+                    fontSize: screenHeight / 31, color: appState.fontColor)),
           ),
           buildSwitchOption(
               'Rješenje', appState.rjesenjeShown, onSwitchMethodRjesenje),
-          const SizedBox(height: 5),
-          const SizedBox(
-            height: 25,
+          SizedBox(
+            height: screenHeight / 30,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
+            padding: EdgeInsets.symmetric(
+                horizontal: screenWidth / 43, vertical: screenHeight / 300),
             child: Text(
               'Težina zadatka: ${appState.currentSliderValue.round()}',
-              style: TextStyle(fontSize: 25, color: appState.fontColor),
+              style: TextStyle(
+                  fontSize: screenHeight / 31, color: appState.fontColor),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
+            padding: EdgeInsets.symmetric(
+                horizontal: screenWidth / 43, vertical: screenHeight / 300),
             child: SliderTheme(
               data: SliderTheme.of(context).copyWith(
-                trackHeight: 20.0,
+                trackHeight: screenHeight / 40,
                 activeTrackColor: const Color.fromARGB(255, 22, 56, 74),
                 inactiveTrackColor:
                     const Color.fromARGB(255, 22, 56, 74).withOpacity(0.4),
-                thumbShape: const RoundSliderThumbShape(
-                  enabledThumbRadius: 14.0,
-                  pressedElevation: 8.0,
+                thumbShape: RoundSliderThumbShape(
+                  enabledThumbRadius: screenHeight / 50,
                 ),
                 thumbColor: Colors.pinkAccent,
                 overlayColor: Colors.pink.withOpacity(0.2),
                 overlayShape:
-                    const RoundSliderOverlayShape(overlayRadius: 32.0),
+                    RoundSliderOverlayShape(overlayRadius: screenHeight / 50),
                 tickMarkShape: const RoundSliderTickMarkShape(),
                 activeTickMarkColor: Colors.pinkAccent,
                 inactiveTickMarkColor: Colors.white,
                 valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
                 valueIndicatorColor: Colors.black,
-                valueIndicatorTextStyle: const TextStyle(
+                valueIndicatorTextStyle: TextStyle(
                   color: Colors.white,
-                  fontSize: 20.0,
+                  fontSize: screenHeight / 30,
                 ),
               ),
               child: Slider(
@@ -119,9 +125,10 @@ class _PostavkeState extends State<Postavke> {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 3),
-            child: ZadatciButton(),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: screenWidth / 43, vertical: screenHeight / 300),
+            child: const ZadatciButton(),
           )
         ],
       ),
@@ -129,16 +136,20 @@ class _PostavkeState extends State<Postavke> {
   }
 
   Padding buildSwitchOption(String title, bool value, Function onSwitchMethod) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 3),
+        padding: EdgeInsets.symmetric(
+            horizontal: screenWidth / 43, vertical: screenHeight / 300),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(title,
-                style: TextStyle(fontSize: 35, color: appState.fontColor),
+                style: TextStyle(
+                    fontSize: screenHeight / 23, color: appState.fontColor),
                 textAlign: TextAlign.left),
             Transform.scale(
-                scale: 1.0,
+                scale: screenHeight / 500,
                 child: CupertinoSwitch(
                   activeColor: Colors.orange,
                   trackColor: Colors.grey,

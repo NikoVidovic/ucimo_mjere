@@ -16,43 +16,50 @@ class _OAplikacijiState extends State<OAplikaciji> {
   late AppState appState;
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     appState = Provider.of<AppState>(context);
     return (Scaffold(
         backgroundColor: appState.backgroundColor,
-        appBar: const AppBarCustom(
+        appBar: AppBarCustom(
           title: 'O aplikaciji',
-          height: 65.5,
+          height: screenHeight / 9,
           imageShown: false,
           imagePath: '',
           imageWidth: 0,
-          sizedBoxWidth: 900,
+          sizedBoxWidth: screenWidth / 1.4,
         ),
-        drawer: const SizedBox(
-          width: 500,
-          child: Drawer(
+        drawer: SizedBox(
+          width: screenWidth / 2.5,
+          child: const Drawer(
             child: Izbornik(),
           ),
         ),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(children: [
             Container(
-                margin: const EdgeInsets.only(left: 60.0, top: 60.0),
+                margin: EdgeInsets.only(
+                    left: screenWidth / 20, top: screenHeight / 18),
                 child: Image.asset(
                   'assets/ic_launcher.png',
-                  height: 60,
-                  width: 60,
+                  height: screenHeight / 11,
+                  width: screenWidth / 20,
                 )),
             Container(
-                margin: const EdgeInsets.only(top: 60.0, left: 10.0),
+                margin: EdgeInsets.only(
+                    top: screenHeight / 15, left: screenWidth / 70),
                 child: Text(
                   'Učimo mjere',
-                  style: TextStyle(fontSize: 40, color: appState.fontColor),
+                  style: TextStyle(
+                      fontSize: screenWidth / 30, color: appState.fontColor),
                 ))
           ]),
           Container(
-            margin: const EdgeInsets.only(top: 10.0, left: 60.0),
+            margin:
+                EdgeInsets.only(top: screenHeight / 75, left: screenWidth / 20),
             child: Text('Ovo je tekst o aplikaciji',
-                style: TextStyle(fontSize: 20, color: appState.fontColor)),
+                style: TextStyle(
+                    fontSize: screenHeight / 38, color: appState.fontColor)),
           )
         ])));
   }

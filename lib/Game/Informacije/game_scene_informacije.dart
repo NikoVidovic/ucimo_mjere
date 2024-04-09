@@ -37,29 +37,32 @@ class _GameInformacijeState extends State<GameInformacije> {
   @override
   Widget build(BuildContext context) {
     appState = Provider.of<AppState>(context);
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: appState.backgroundColor,
       resizeToAvoidBottomInset: false,
       body: pages[selectedIndex],
       appBar: AppBarCustom(
         title: widget.title,
-        height: 100.0,
+        height: screenHeight / 8,
         imageShown: true,
         imagePath: 'assets/kategorija5.png',
-        imageWidth: 90,
-        sizedBoxWidth: 500,
+        imageWidth: screenWidth / 15,
+        sizedBoxWidth: screenHeight / 1.6,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 400.0, vertical: 10),
+          padding: EdgeInsets.symmetric(
+              horizontal: screenWidth / 3.5, vertical: screenHeight / 57),
           child: GNav(
               backgroundColor: const Color.fromARGB(255, 22, 56, 74),
               color: Colors.white,
               activeColor: Colors.white,
               tabBackgroundColor: const Color.fromARGB(255, 77, 134, 165),
               gap: 8,
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(screenHeight / 50),
               onTabChange: (index) {
                 navigateBottomBar(index);
               },

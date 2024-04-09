@@ -32,22 +32,25 @@ class PocetnaScena extends StatelessWidget {
   const PocetnaScena({super.key});
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage('assets/pocetnaScena.png'), fit: BoxFit.cover)),
       child: Padding(
-        padding: const EdgeInsets.only(top: 320.0, right: 50.0),
+        padding:
+            EdgeInsets.only(top: screenHeight / 2.5, right: screenWidth / 20),
         child: Align(
             alignment: Alignment.centerRight,
             child: Column(children: [
-              const Text(
+              Text(
                 "Učimo mjere",
-                style: TextStyle(fontSize: 55),
+                style: TextStyle(fontSize: screenWidth / 25),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 15.0),
+                padding: EdgeInsets.only(top: screenHeight / 50),
                 child: OutlinedButton(
                   onPressed: () {
                     Navigator.push(
@@ -56,13 +59,14 @@ class PocetnaScena extends StatelessWidget {
                             builder: (context) => const MainMenu()));
                   },
                   style: ButtonStyle(
-                      minimumSize:
-                          MaterialStateProperty.all(const Size(220, 50)),
+                      minimumSize: MaterialStateProperty.all(
+                          Size(screenWidth / 7, screenHeight / 15)),
                       backgroundColor: MaterialStateProperty.all(
                           const Color.fromARGB(255, 22, 56, 74))),
-                  child: const Text(
+                  child: Text(
                     "Kreni",
-                    style: TextStyle(fontSize: 25, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: screenWidth / 47, color: Colors.white),
                   ),
                 ),
               ),

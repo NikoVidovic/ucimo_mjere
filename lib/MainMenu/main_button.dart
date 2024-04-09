@@ -17,11 +17,13 @@ class MainButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Container(
-      margin: const EdgeInsets.all(10.0),
+      margin: EdgeInsets.all(screenWidth / 200),
       child: SizedBox(
-        width: 620, // Adjust the width here
-        height: 144, // Adjust the height here
+        width: screenWidth / 2.1, // Adjust the width here
+        height: screenHeight / 5.5, // Adjust the height here
         child: ElevatedButton(
           onPressed: () {
             Navigator.push(
@@ -40,12 +42,13 @@ class MainButton extends StatelessWidget {
               MainImage(
                 path: imagePath,
               ),
-              const SizedBox(
-                width: 30,
+              SizedBox(
+                width: screenWidth / 50,
               ),
               Text(
                 naziv,
-                style: const TextStyle(color: Colors.white, fontSize: 23),
+                style:
+                    TextStyle(color: Colors.white, fontSize: screenHeight / 28),
               ),
             ],
           ),

@@ -5,10 +5,12 @@ class MainImage extends StatelessWidget {
   const MainImage({super.key, required this.path});
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Image.asset(
       path,
-      width: 130, // Adjust the width as needed
-      height: 200, // Adjust the height as needed
+      width: screenWidth / 10, // Adjust the width as needed
+      height: screenHeight / 7, // Adjust the height as needed
     );
   }
 }

@@ -24,20 +24,22 @@ class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     appState = Provider.of<AppState>(context);
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: appState.backgroundColor,
         resizeToAvoidBottomInset: false,
-        appBar: const AppBarCustom(
+        appBar: AppBarCustom(
           title: 'Učimo mjere',
-          height: 85.0,
+          height: screenHeight / 9,
           imageShown: false,
           imagePath: '',
           imageWidth: 0,
-          sizedBoxWidth: 900,
+          sizedBoxWidth: screenWidth / 1.4,
         ),
-        drawer: const SizedBox(
-          width: 500,
-          child: Drawer(
+        drawer: SizedBox(
+          width: screenWidth / 2.5,
+          child: const Drawer(
             child: Izbornik(),
           ),
         ),
@@ -103,7 +105,7 @@ class _MainMenuState extends State<MainMenu> {
                 ),
               ),
               MainButton(
-                naziv: 'Mjerne jedinice za količinu informacija',
+                naziv: 'Mjerne jedinice za\nkoličinu informacija',
                 boja: Color.fromARGB(255, 17, 134, 209),
                 imagePath: 'assets/kategorija5.png',
                 route: GameInformacije(

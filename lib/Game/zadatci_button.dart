@@ -5,17 +5,19 @@ class ZadatciButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return OutlinedButton(
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(
                 const Color.fromARGB(255, 22, 56, 74)),
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
             minimumSize: MaterialStateProperty.all<Size>(
-                const Size.square(50))), // Adjust the size as needed
+                Size.square(screenWidth / 25))), // Adjust the size as needed
         onPressed: () {},
-        child: const Text(
+        child: Text(
           'UNESITE VLASTITI ZADATAK',
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: screenHeight / 38),
         ));
   }
 }

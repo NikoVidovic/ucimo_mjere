@@ -13,10 +13,12 @@ class IzbornikButton extends StatelessWidget {
       required this.boja});
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return (Row(children: [
       IconButton(
           icon: ikona,
-          iconSize: 30,
+          iconSize: screenWidth / 40,
           color: boja,
           onPressed: () {
             Navigator.push(
@@ -29,7 +31,8 @@ class IzbornikButton extends StatelessWidget {
               MaterialPageRoute(builder: (context) => route),
             );
           },
-          child: Text(title, style: TextStyle(fontSize: 20, color: boja)))
+          child: Text(title,
+              style: TextStyle(fontSize: screenHeight / 35, color: boja)))
     ]));
   }
 }
