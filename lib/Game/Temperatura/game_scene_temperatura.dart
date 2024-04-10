@@ -49,7 +49,7 @@ class _GameTemperaturaState extends State<GameTemperatura> {
         imageShown: true,
         imagePath: 'assets/kategorija4.png',
         imageWidth: screenWidth / 28,
-        sizedBoxWidth: screenWidth / 2.25,
+        sizedBoxWidth: screenWidth / 2.22,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),
@@ -66,9 +66,18 @@ class _GameTemperaturaState extends State<GameTemperatura> {
               onTabChange: (index) {
                 navigateBottomBar(index);
               },
-              tabs: const [
-                GButton(icon: Icons.videogame_asset, text: 'Zadatci'),
-                GButton(icon: Icons.settings, text: 'Prilagodba zadataka')
+              tabs: [
+                GButton(
+                    icon: Icons.videogame_asset,
+                    iconSize: screenWidth / 45,
+                    textSize: screenHeight / 30,
+                    text: 'Zadatci'),
+                GButton(
+                  icon: Icons.key_outlined,
+                  iconSize: screenWidth / 45,
+                  text: 'Prilagodba zadataka',
+                  textSize: screenHeight / 30,
+                )
               ]),
         ),
       ),

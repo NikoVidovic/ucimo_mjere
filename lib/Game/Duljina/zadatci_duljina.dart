@@ -426,7 +426,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
             width: screenWidth / 150,
           ),
           Text(
-            values[valueFromIndex],
+            "${values[valueFromIndex]} = ",
             style: TextStyle(
                 fontSize: screenHeight / 18, color: appState.fontColor),
           ),
@@ -469,7 +469,9 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
                       minimumSize: MaterialStateProperty.all<Size>(
-                          Size.square(screenWidth / 35))),
+                          Size.square(screenWidth / 35)),
+                      side: MaterialStateProperty.all<BorderSide>(
+                          BorderSide(color: appState.fontColor, width: 1.5))),
                   onPressed: () {
                     setState(() {
                       completeSolution(numValue, values[valueFromIndex],
@@ -477,7 +479,8 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
                     });
                   },
                   child: Text('RJEŠENJE',
-                      style: TextStyle(fontSize: screenHeight / 35)))),
+                      style: TextStyle(
+                          fontSize: screenHeight / 35, color: Colors.black)))),
           SizedBox(
             width: screenWidth / 150,
           ),

@@ -49,7 +49,7 @@ class _GameObujamState extends State<GameObujam> {
         imageShown: true,
         imagePath: 'assets/kategorija3.png',
         imageWidth: screenWidth / 20,
-        sizedBoxWidth: screenWidth / 2.2,
+        sizedBoxWidth: screenWidth / 2.1,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),
@@ -66,9 +66,18 @@ class _GameObujamState extends State<GameObujam> {
               onTabChange: (index) {
                 navigateBottomBar(index);
               },
-              tabs: const [
-                GButton(icon: Icons.videogame_asset, text: 'Zadatci'),
-                GButton(icon: Icons.settings, text: 'Prilagodba zadataka')
+              tabs: [
+                GButton(
+                    icon: Icons.videogame_asset,
+                    iconSize: screenWidth / 45,
+                    textSize: screenHeight / 30,
+                    text: 'Zadatci'),
+                GButton(
+                  icon: Icons.key_outlined,
+                  iconSize: screenWidth / 45,
+                  text: 'Prilagodba zadataka',
+                  textSize: screenHeight / 30,
+                )
               ]),
         ),
       ),

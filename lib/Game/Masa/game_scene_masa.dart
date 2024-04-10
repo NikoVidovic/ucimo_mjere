@@ -48,8 +48,8 @@ class _GameMasaState extends State<GameMasa> {
         height: screenHeight / 8,
         imageShown: true,
         imagePath: 'assets/vaga.png',
-        imageWidth: screenWidth / 13,
-        sizedBoxWidth: screenWidth / 2.25,
+        imageWidth: screenWidth / 23,
+        sizedBoxWidth: screenWidth / 1.97,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),
@@ -66,9 +66,18 @@ class _GameMasaState extends State<GameMasa> {
               onTabChange: (index) {
                 navigateBottomBar(index);
               },
-              tabs: const [
-                GButton(icon: Icons.videogame_asset, text: 'Zadatci'),
-                GButton(icon: Icons.settings, text: 'Prilagodba zadataka')
+              tabs: [
+                GButton(
+                    icon: Icons.videogame_asset,
+                    iconSize: screenWidth / 45,
+                    textSize: screenHeight / 30,
+                    text: 'Zadatci'),
+                GButton(
+                  icon: Icons.key_outlined,
+                  iconSize: screenWidth / 45,
+                  text: 'Prilagodba zadataka',
+                  textSize: screenHeight / 30,
+                )
               ]),
         ),
       ),

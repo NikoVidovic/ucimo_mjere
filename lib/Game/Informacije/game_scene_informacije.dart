@@ -49,7 +49,7 @@ class _GameInformacijeState extends State<GameInformacije> {
         imageShown: true,
         imagePath: 'assets/kategorija5.png',
         imageWidth: screenWidth / 17,
-        sizedBoxWidth: screenHeight / 1.8,
+        sizedBoxWidth: screenHeight / 1.75,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),
@@ -66,9 +66,19 @@ class _GameInformacijeState extends State<GameInformacije> {
               onTabChange: (index) {
                 navigateBottomBar(index);
               },
-              tabs: const [
-                GButton(icon: Icons.videogame_asset, text: 'Zadatci'),
-                GButton(icon: Icons.settings, text: 'Prilagodba zadataka')
+              tabs: [
+                GButton(
+                  icon: Icons.videogame_asset,
+                  iconSize: screenWidth / 45,
+                  text: 'Zadatci',
+                  textSize: screenHeight / 30,
+                ),
+                GButton(
+                  icon: Icons.key_outlined,
+                  iconSize: screenWidth / 45,
+                  text: 'Prilagodba zadataka',
+                  textSize: screenHeight / 30,
+                )
               ]),
         ),
       ),

@@ -422,6 +422,11 @@ class _ZadatciObujamState extends State<ZadatciObujam> {
                 style: TextStyle(
                     fontSize: screenHeight / 25, color: appState.fontColor),
               )),
+          Text(
+            " = ",
+            style: TextStyle(
+                fontSize: screenHeight / 18, color: appState.fontColor),
+          ),
           SizedBox(
             width: screenWidth / 150,
           ),
@@ -468,7 +473,9 @@ class _ZadatciObujamState extends State<ZadatciObujam> {
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
                       minimumSize: MaterialStateProperty.all<Size>(
-                          Size.square(screenWidth / 35))),
+                          Size.square(screenWidth / 35)),
+                      side: MaterialStateProperty.all<BorderSide>(
+                          BorderSide(color: appState.fontColor, width: 1.5))),
                   onPressed: () {
                     setState(() {
                       completeSolution(numValue, values[valueFromIndex],
@@ -476,7 +483,8 @@ class _ZadatciObujamState extends State<ZadatciObujam> {
                     });
                   },
                   child: Text('RJEŠENJE',
-                      style: TextStyle(fontSize: screenHeight / 35)))),
+                      style: TextStyle(
+                          fontSize: screenHeight / 35, color: Colors.black)))),
           SizedBox(
             width: screenWidth / 150,
           ),

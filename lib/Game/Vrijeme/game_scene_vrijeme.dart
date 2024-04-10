@@ -48,8 +48,8 @@ class _GameVrijemeState extends State<GameVrijeme> {
         height: screenHeight / 8,
         imageShown: true,
         imagePath: 'assets/sat.png',
-        imageWidth: screenWidth / 20,
-        sizedBoxWidth: screenWidth / 2.2,
+        imageWidth: screenWidth / 22,
+        sizedBoxWidth: screenWidth / 2.05,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),
@@ -66,9 +66,18 @@ class _GameVrijemeState extends State<GameVrijeme> {
               onTabChange: (index) {
                 navigateBottomBar(index);
               },
-              tabs: const [
-                GButton(icon: Icons.videogame_asset, text: 'Zadatci'),
-                GButton(icon: Icons.settings, text: 'Prilagodba zadataka')
+              tabs: [
+                GButton(
+                    icon: Icons.videogame_asset,
+                    iconSize: screenWidth / 45,
+                    textSize: screenHeight / 30,
+                    text: 'Zadatci'),
+                GButton(
+                  icon: Icons.key_outlined,
+                  iconSize: screenWidth / 45,
+                  text: 'Prilagodba zadataka',
+                  textSize: screenHeight / 30,
+                )
               ]),
         ),
       ),

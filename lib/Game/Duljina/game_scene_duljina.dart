@@ -66,9 +66,19 @@ class _GameDuljinaState extends State<GameDuljina> {
               onTabChange: (index) {
                 navigateBottomBar(index);
               },
-              tabs: const [
-                GButton(icon: Icons.videogame_asset, text: 'Zadatci'),
-                GButton(icon: Icons.settings, text: 'Prilagodba zadataka')
+              tabs: [
+                GButton(
+                  icon: Icons.videogame_asset,
+                  iconSize: screenWidth / 45,
+                  text: 'Zadatci',
+                  textSize: screenHeight / 30,
+                ),
+                GButton(
+                  icon: Icons.key_outlined,
+                  iconSize: screenWidth / 45,
+                  text: 'Prilagodba zadataka',
+                  textSize: screenHeight / 30,
+                )
               ]),
         ),
       ),

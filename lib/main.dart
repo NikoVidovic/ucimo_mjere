@@ -49,6 +49,10 @@ class PocetnaScena extends StatelessWidget {
                 "Učimo mjere",
                 style: TextStyle(fontSize: screenWidth / 25),
               ),
+              Text(
+                "pretvaranje mjernih jedinica",
+                style: TextStyle(fontSize: screenWidth / 70),
+              ),
               Padding(
                 padding: EdgeInsets.only(top: screenHeight / 50),
                 child: OutlinedButton(
