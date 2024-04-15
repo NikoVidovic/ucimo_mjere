@@ -37,12 +37,14 @@ class _IzbornikState extends State<Izbornik> {
                           Text('Učimo mjere',
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: screenHeight / 25)),
+                                  fontSize:
+                                      screenHeight / 25 * appState.fontSize)),
                           Text(
                             'pretvaranje mjernih jedinica',
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: screenHeight / 45),
+                                fontSize:
+                                    screenHeight / 45 * appState.fontSize),
                           )
                         ]))
               ],

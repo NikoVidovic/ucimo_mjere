@@ -68,17 +68,13 @@ class _GameDuljinaState extends State<GameDuljina> {
               },
               tabs: [
                 GButton(
-                  icon: Icons.videogame_asset,
-                  iconSize: screenWidth / 45,
-                  text: 'Zadatci',
-                  textSize: screenHeight / 30,
-                ),
+                    icon: Icons.videogame_asset,
+                    iconSize: screenWidth / 45,
+                    text: 'Zadatci'),
                 GButton(
-                  icon: Icons.key_outlined,
-                  iconSize: screenWidth / 45,
-                  text: 'Prilagodba zadataka',
-                  textSize: screenHeight / 30,
-                )
+                    icon: Icons.key_outlined,
+                    iconSize: screenWidth / 45,
+                    text: 'Prilagodba zadataka')
               ]),
         ),
       ),

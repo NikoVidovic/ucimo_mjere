@@ -38,46 +38,54 @@ class _MainMenuState extends State<MainMenu> {
           sizedBoxWidth: screenWidth / 1.55,
         ),
         drawer: SizedBox(
-          width: screenWidth / 2.5,
+          width: appState.fontSize == 1 ? screenWidth / 2.5 : screenWidth / 2.3,
           child: const Drawer(
             child: Izbornik(),
           ),
         ),
-        body: const Row(children: [
+        body: Row(children: [
           Column(
             children: [
               MainButton(
-                naziv: 'Mjerne jedinice za duljinu',
-                boja: Color.fromARGB(255, 232, 196, 80),
+                naziv: appState.fontSize == 1.5
+                    ? 'Mjerne jedinice\nza duljinu'
+                    : 'Mjerne jedinice za duljinu',
+                boja: const Color.fromARGB(255, 232, 196, 80),
                 imagePath: 'assets/kategorija1.png',
-                route: GameDuljina(
+                route: const GameDuljina(
                   title: 'Mjerne jedinice za duljinu',
                   allSettingsVisible: true,
                 ),
               ),
               MainButton(
-                naziv: 'Mjerne jedinice za masu',
+                naziv: appState.fontSize == 1.5
+                    ? 'Mjerne jedinice\nza masu'
+                    : 'Mjerne jedinice za masu',
                 boja: Colors.green,
                 imagePath: 'assets/vaga.png',
-                route: GameMasa(
+                route: const GameMasa(
                   title: 'Mjerne jedinice za masu',
                   allSettingsVisible: false,
                 ),
               ),
               MainButton(
-                naziv: 'Mjerne jedinice za vrijeme',
+                naziv: appState.fontSize == 1.5
+                    ? 'Mjerne jedinice\nza vrijeme'
+                    : 'Mjerne jedinice za vrijeme',
                 boja: Colors.teal,
                 imagePath: 'assets/sat.png',
-                route: GameVrijeme(
+                route: const GameVrijeme(
                   title: 'Mjerne jedinice za vrijeme',
                   allSettingsVisible: false,
                 ),
               ),
               MainButton(
-                naziv: 'Mjerne jedinice za površinu',
-                boja: Color.fromARGB(255, 126, 55, 108),
+                naziv: appState.fontSize == 1.5
+                    ? 'Mjerne jedinice\nza površinu'
+                    : 'Mjerne jedinice za površinu',
+                boja: const Color.fromARGB(255, 126, 55, 108),
                 imagePath: 'assets/kategorija2.png',
-                route: GamePovrsina(
+                route: const GamePovrsina(
                   title: 'Mjerne jedinice za površinu',
                   allSettingsVisible: false,
                 ),
@@ -87,15 +95,17 @@ class _MainMenuState extends State<MainMenu> {
           Column(
             children: [
               MainButton(
-                naziv: 'Mjerne jedinice za obujam',
-                boja: Color.fromARGB(255, 34, 194, 190),
+                naziv: appState.fontSize == 1.5
+                    ? 'Mjerne jedinice\nza obujam'
+                    : 'Mjerne jedinice za obujam',
+                boja: const Color.fromARGB(255, 34, 194, 190),
                 imagePath: 'assets/kategorija3.png',
-                route: GameObujam(
+                route: const GameObujam(
                   title: 'Mjerne jedinice za obujam',
                   allSettingsVisible: false,
                 ),
               ),
-              MainButton(
+              const MainButton(
                 naziv: 'Mjerne jedinice za\ntemperaturu',
                 boja: Color.fromARGB(255, 246, 78, 81),
                 imagePath: 'assets/kategorija4.png',
@@ -104,7 +114,7 @@ class _MainMenuState extends State<MainMenu> {
                   allSettingsVisible: false,
                 ),
               ),
-              MainButton(
+              const MainButton(
                 naziv: 'Mjerne jedinice za\nkoličinu informacija',
                 boja: Color.fromARGB(255, 17, 134, 209),
                 imagePath: 'assets/kategorija5.png',

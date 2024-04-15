@@ -35,7 +35,8 @@ class _AccessSettingsState extends State<AccessSettings> {
               child: Text(
                 'Promjeni pozadinu aplikacije',
                 style: TextStyle(
-                    fontSize: screenHeight / 35, color: appState.fontColor),
+                    fontSize: screenHeight / 35 * appState.fontSize,
+                    color: appState.fontColor),
               ),
             ),
             Row(
@@ -45,7 +46,8 @@ class _AccessSettingsState extends State<AccessSettings> {
                   child: Text(
                     'Pozadina',
                     style: TextStyle(
-                        fontSize: screenHeight / 20, color: appState.fontColor),
+                        fontSize: screenHeight / 20 * appState.fontSize,
+                        color: appState.fontColor),
                   ),
                 ),
                 Expanded(
@@ -80,7 +82,8 @@ class _AccessSettingsState extends State<AccessSettings> {
                         child: Text(
                           'Dan',
                           style: TextStyle(
-                              color: Colors.black, fontSize: screenHeight / 25),
+                              color: Colors.black,
+                              fontSize: screenHeight / 25 * appState.fontSize),
                         ),
                       ),
                       SizedBox(
@@ -115,7 +118,7 @@ class _AccessSettingsState extends State<AccessSettings> {
                           'Noć',
                           style: TextStyle(
                               color: Colors.yellow,
-                              fontSize: screenHeight / 25),
+                              fontSize: screenHeight / 25 * appState.fontSize),
                         ),
                       ),
                       SizedBox(
@@ -125,7 +128,98 @@ class _AccessSettingsState extends State<AccessSettings> {
                   ),
                 )
               ],
-            )
+            ),
+            SizedBox(
+              height: screenHeight / 20,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: screenWidth / 43),
+                  child: Text(
+                    'Veličina fonta',
+                    style: TextStyle(
+                        fontSize: screenHeight / 20 * appState.fontSize,
+                        color: appState.fontColor),
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            appState.fontSize = 1;
+                          });
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              appState.backgroundColor),
+                          minimumSize: MaterialStateProperty.all<Size>(
+                              Size(screenWidth / 8.3, screenHeight / 5.4)),
+                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                          side: MaterialStateProperty.all<BorderSide>(
+                            const BorderSide(
+                              color: Colors
+                                  .pinkAccent, // Define the color of the border
+                              width: 2, // Define the width of the border
+                            ),
+                          ),
+                        ),
+                        child: Text(
+                          'Normalna',
+                          style: TextStyle(
+                              color: appState.fontColor,
+                              fontSize: screenHeight / 25),
+                        ),
+                      ),
+                      SizedBox(
+                        width: screenWidth / 100,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            appState.fontSize = 1.5;
+                          });
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              appState.backgroundColor),
+                          minimumSize: MaterialStateProperty.all<Size>(
+                              Size(screenWidth / 8.3, screenHeight / 5.4)),
+                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                          side: MaterialStateProperty.all<BorderSide>(
+                            const BorderSide(
+                              color: Colors
+                                  .pinkAccent, // Define the color of the border
+                              width: 2, // Define the width of the border
+                            ),
+                          ),
+                        ),
+                        child: Text(
+                          'Velika',
+                          style: TextStyle(
+                              color: appState.fontColor,
+                              fontSize: screenHeight / 14),
+                        ),
+                      ),
+                      SizedBox(
+                        width: screenWidth / 50,
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ],
         ));
   }

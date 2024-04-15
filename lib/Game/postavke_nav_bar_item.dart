@@ -58,7 +58,10 @@ class _PostavkeState extends State<Postavke> {
             padding: EdgeInsets.only(left: screenWidth / 43),
             child: Text('Prikaz postupka rješavanja zadataka',
                 style: TextStyle(
-                    fontSize: screenHeight / 31, color: appState.fontColor)),
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 31
+                        : screenHeight / 31 * (appState.fontSize - 0.3),
+                    color: appState.fontColor)),
           ),
           buildSwitchOption(
               'Postupak', appState.postupakShown, onSwitchMethodPostupak),
@@ -69,7 +72,10 @@ class _PostavkeState extends State<Postavke> {
             padding: EdgeInsets.only(left: screenWidth / 43),
             child: Text('Prikaz opcije rješenja zadataka',
                 style: TextStyle(
-                    fontSize: screenHeight / 31, color: appState.fontColor)),
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 31
+                        : screenHeight / 31 * (appState.fontSize - 0.3),
+                    color: appState.fontColor)),
           ),
           buildSwitchOption(
               'Rješenje', appState.rjesenjeShown, onSwitchMethodRjesenje),
@@ -146,7 +152,10 @@ class _PostavkeState extends State<Postavke> {
           children: [
             Text(title,
                 style: TextStyle(
-                    fontSize: screenHeight / 23, color: appState.fontColor),
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 23
+                        : screenHeight / 23 * (appState.fontSize - 0.3),
+                    color: appState.fontColor),
                 textAlign: TextAlign.left),
             Transform.scale(
                 scale: screenHeight / 500,
