@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:async';
 
 import '../../app_state.dart';
 
@@ -14,6 +15,7 @@ class ZadatciTemperatura extends StatefulWidget {
 class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
   final controller = TextEditingController();
   late AppState appState;
+  late Timer flickerTimer;
 
   int numValue = Random().nextInt(200) + 1;
   var values = ['C', "K"];
@@ -21,6 +23,7 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
   int valueToIndex = 1;
   int kelvin = 300;
   int celsius = 100;
+  double opacity = 1;
 
   @override
   void initState() {
@@ -85,15 +88,11 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
         case 'K':
           if (to == "C" && controller.text == (num - 273.15).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'C':
           if (to == "K" && controller.text == (num + 273.15).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         default:
@@ -103,6 +102,25 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
         appState.postupakShown = false;
       } else if (!isCorrect && appState.postupakShown == false) {
         appState.helpButtonShown = true;
+      }
+
+      if (isCorrect) {
+        opacity = 0;
+        flickerTimer =
+            Timer.periodic(const Duration(milliseconds: 300), (timer) {
+          setState(() {
+            opacity = opacity == 0 ? 1 : 0;
+          });
+        });
+
+        Future.delayed(const Duration(milliseconds: 1500), () {
+          setState(() {
+            generateIndexAndNumber();
+            controller.clear();
+            opacity = 1;
+            flickerTimer.cancel();
+          });
+        });
       }
     });
   }
@@ -204,25 +222,30 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
                 appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 800,
           ),
           Expanded(
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              opacity: opacity,
               child: TextField(
-            style: TextStyle(
-                fontSize: appState.fontSize == 1
-                    ? screenHeight / 25
-                    : screenHeight / 25 * (appState.fontSize),
-                color: appState.fontColor),
-            textAlign: TextAlign.center,
-            controller: controller,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintText: 'Unesite rješenje',
-              hintStyle: TextStyle(
-                  fontSize: appState.fontSize == 1
-                      ? screenHeight / 50
-                      : screenHeight / 50 * (appState.fontSize - 0.3),
-                  color: appState.fontColor),
-              alignLabelWithHint: true,
+                style: TextStyle(
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 25
+                        : screenHeight / 25 * (appState.fontSize),
+                    color: appState.fontColor),
+                textAlign: TextAlign.center,
+                controller: controller,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: 'Unesite rješenje',
+                  hintStyle: TextStyle(
+                      fontSize: appState.fontSize == 1
+                          ? screenHeight / 50
+                          : screenHeight / 50 * (appState.fontSize - 0.3),
+                      color: appState.fontColor),
+                  alignLabelWithHint: true,
+                ),
+              ),
             ),
-          )),
+          ),
           SizedBox(
             width: screenWidth / 150,
           ),

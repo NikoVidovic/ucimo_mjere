@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:async';
 
 import '../../app_state.dart';
 
@@ -14,11 +15,13 @@ class ZadatciObujam extends StatefulWidget {
 class _ZadatciObujamState extends State<ZadatciObujam> {
   final controller = TextEditingController();
   late AppState appState;
+  late Timer flickerTimer;
 
   int numValue = Random().nextInt(10) + 1;
   var values = ['mm', "cm", "dm", "m", "km"];
   int valueFromIndex = Random().nextInt(5);
   int valueToIndex = 0;
+  double opacity = 1;
 
   @override
   void initState() {
@@ -153,117 +156,77 @@ class _ZadatciObujamState extends State<ZadatciObujam> {
         case 'mm':
           if (to == "cm" && controller.text == (num / 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dm" && controller.text == (num / 1000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "m" && controller.text == (num / 1000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "km" &&
               controller.text == (num / 1000000000000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'cm':
           if (to == "mm" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dm" && controller.text == (num / 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "m" && controller.text == (num / 1000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "km" &&
               controller.text == (num / 1000000000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'dm':
           if (to == "mm" && controller.text == (num * 1000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "cm" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "m" && controller.text == (num / 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "km" &&
               controller.text == (num / 1000000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'm':
           if (to == "mm" && controller.text == (num * 1000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "cm" && controller.text == (num * 1000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dm" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "km" && controller.text == (num / 1000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'km':
           if (to == "mm" &&
               controller.text == (num * 1000000000000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "cm" &&
               controller.text == (num * 1000000000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dm" &&
               controller.text == (num * 1000000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "m" && controller.text == (num * 1000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         default:
@@ -273,6 +236,25 @@ class _ZadatciObujamState extends State<ZadatciObujam> {
         appState.postupakShown = false;
       } else if (!isCorrect && appState.postupakShown == false) {
         appState.helpButtonShown = true;
+      }
+
+      if (isCorrect) {
+        opacity = 0;
+        flickerTimer =
+            Timer.periodic(const Duration(milliseconds: 300), (timer) {
+          setState(() {
+            opacity = opacity == 0 ? 1 : 0;
+          });
+        });
+
+        Future.delayed(const Duration(milliseconds: 1500), () {
+          setState(() {
+            generateIndexAndNumber();
+            controller.clear();
+            opacity = 1;
+            flickerTimer.cancel();
+          });
+        });
       }
     });
   }
@@ -452,25 +434,30 @@ class _ZadatciObujamState extends State<ZadatciObujam> {
                 appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 800,
           ),
           Expanded(
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              opacity: opacity,
               child: TextField(
-            style: TextStyle(
-                fontSize: appState.fontSize == 1
-                    ? screenHeight / 25
-                    : screenHeight / 25 * (appState.fontSize),
-                color: appState.fontColor),
-            textAlign: TextAlign.center,
-            controller: controller,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintText: 'Unesite rješenje',
-              hintStyle: TextStyle(
-                  fontSize: appState.fontSize == 1
-                      ? screenHeight / 50
-                      : screenHeight / 50 * (appState.fontSize - 0.3),
-                  color: appState.fontColor),
-              alignLabelWithHint: true,
+                style: TextStyle(
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 25
+                        : screenHeight / 25 * (appState.fontSize),
+                    color: appState.fontColor),
+                textAlign: TextAlign.center,
+                controller: controller,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: 'Unesite rješenje',
+                  hintStyle: TextStyle(
+                      fontSize: appState.fontSize == 1
+                          ? screenHeight / 50
+                          : screenHeight / 50 * (appState.fontSize - 0.3),
+                      color: appState.fontColor),
+                  alignLabelWithHint: true,
+                ),
+              ),
             ),
-          )),
+          ),
           SizedBox(
             width: screenWidth / 150,
           ),

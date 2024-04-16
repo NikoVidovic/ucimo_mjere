@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:async';
 
 import '/../app_state.dart';
 
@@ -14,6 +15,7 @@ class ZadatciDuljina extends StatefulWidget {
 class _ZadatciDuljinaState extends State<ZadatciDuljina> {
   final controller = TextEditingController();
   late AppState appState;
+  late Timer flickerTimer;
 
   int numValue = Random().nextInt(10) + 1;
   var values = ['mm', "cm", "dm", "m", "km"];
@@ -154,131 +156,71 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
         case 'mm':
           if (to == "km" && controller.text == (num / 1000000).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "m" && controller.text == (num / 1000).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dm" && controller.text == (num / 100).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "cm" && controller.text == (num / 10).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'cm':
           if (to == "km" && controller.text == (num / 100000).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "m" && controller.text == (num / 100).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dm" && controller.text == (num / 10).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "mm" && controller.text == (num * 10).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'dm':
           if (to == "km" && controller.text == (num / 10000).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "m" && controller.text == (num / 10).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "cm" && controller.text == (num * 10).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "mm" && controller.text == (num * 100).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'm':
           if (to == "km" && controller.text == (num / 1000).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dm" && controller.text == (num * 10).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "cm" && controller.text == (num * 100).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "mm" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'km':
           if (to == "m" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dm" && controller.text == (num * 10000).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "cm" && controller.text == (num * 100000).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "mm" && controller.text == (num * 1000000).toString()) {
             isCorrect = true;
-            opacity = 0;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         default:
@@ -289,6 +231,25 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
         appState.postupakShown = false;
       } else if (!isCorrect && appState.postupakShown == false) {
         appState.helpButtonShown = true;
+      }
+
+      if (isCorrect) {
+        opacity = 0;
+        flickerTimer =
+            Timer.periodic(const Duration(milliseconds: 300), (timer) {
+          setState(() {
+            opacity = opacity == 0 ? 1 : 0;
+          });
+        });
+
+        Future.delayed(const Duration(milliseconds: 1500), () {
+          setState(() {
+            generateIndexAndNumber();
+            controller.clear();
+            opacity = 1;
+            flickerTimer.cancel();
+          });
+        });
       }
     });
   }
@@ -471,7 +432,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
           ),
           Expanded(
             child: AnimatedOpacity(
-              duration: const Duration(seconds: 2),
+              duration: const Duration(milliseconds: 300),
               opacity: opacity,
               child: TextField(
                 style: TextStyle(

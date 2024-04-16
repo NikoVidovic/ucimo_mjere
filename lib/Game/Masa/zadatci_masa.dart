@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:async';
 
 import '../../app_state.dart';
 
@@ -14,11 +15,13 @@ class ZadatciMasa extends StatefulWidget {
 class _ZadatciMasaState extends State<ZadatciMasa> {
   final controller = TextEditingController();
   late AppState appState;
+  late Timer flickerTimer;
 
   int numValue = Random().nextInt(5) + 1;
   var values = ['g', "dg", "kg", "t"];
   int valueFromIndex = Random().nextInt(4);
   int valueToIndex = 0;
+  double opacity = 1;
 
   @override
   void initState() {
@@ -127,69 +130,45 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
         case 'g':
           if (to == "t" && controller.text == (num / 1000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "kg" && controller.text == (num / 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dg" && controller.text == (num / 10).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'dg':
           if (to == "t" && controller.text == (num / 100000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "kg" && controller.text == (num / 100).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "g" && controller.text == (num * 10).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'kg':
           if (to == "t" && controller.text == (num / 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dg" && controller.text == (num * 100).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "g" && controller.text == (num * 10000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 't':
           if (to == "g" && controller.text == (num * 1000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dg" && controller.text == (num * 100000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "kg" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         default:
@@ -199,6 +178,25 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
         appState.postupakShown = false;
       } else if (!isCorrect && appState.postupakShown == false) {
         appState.helpButtonShown = true;
+      }
+
+      if (isCorrect) {
+        opacity = 0;
+        flickerTimer =
+            Timer.periodic(const Duration(milliseconds: 300), (timer) {
+          setState(() {
+            opacity = opacity == 0 ? 1 : 0;
+          });
+        });
+
+        Future.delayed(const Duration(milliseconds: 1500), () {
+          setState(() {
+            generateIndexAndNumber();
+            controller.clear();
+            opacity = 1;
+            flickerTimer.cancel();
+          });
+        });
       }
     });
   }
@@ -334,25 +332,30 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
                 appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 800,
           ),
           Expanded(
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              opacity: opacity,
               child: TextField(
-            style: TextStyle(
-                fontSize: appState.fontSize == 1
-                    ? screenHeight / 25
-                    : screenHeight / 25 * (appState.fontSize),
-                color: appState.fontColor),
-            textAlign: TextAlign.center,
-            controller: controller,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintText: 'Unesite rješenje',
-              hintStyle: TextStyle(
-                  fontSize: appState.fontSize == 1
-                      ? screenHeight / 50
-                      : screenHeight / 50 * (appState.fontSize - 0.3),
-                  color: appState.fontColor),
-              alignLabelWithHint: true,
+                style: TextStyle(
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 25
+                        : screenHeight / 25 * (appState.fontSize),
+                    color: appState.fontColor),
+                textAlign: TextAlign.center,
+                controller: controller,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: 'Unesite rješenje',
+                  hintStyle: TextStyle(
+                      fontSize: appState.fontSize == 1
+                          ? screenHeight / 50
+                          : screenHeight / 50 * (appState.fontSize - 0.3),
+                      color: appState.fontColor),
+                  alignLabelWithHint: true,
+                ),
+              ),
             ),
-          )),
+          ),
           SizedBox(
             width: screenWidth / 150,
           ),

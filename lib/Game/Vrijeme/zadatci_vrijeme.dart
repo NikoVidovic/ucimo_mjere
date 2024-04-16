@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:async';
 
 import '../../app_state.dart';
 
@@ -14,11 +15,13 @@ class ZadatciVrijeme extends StatefulWidget {
 class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
   final controller = TextEditingController();
   late AppState appState;
+  late Timer flickerTimer;
 
   int numValue = Random().nextInt(3) + 1;
   var values = ['ms', "s", "min", "h", "dan"];
   int valueFromIndex = Random().nextInt(5);
   int valueToIndex = 0;
+  double opacity = 1;
 
   @override
   void initState() {
@@ -143,115 +146,75 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
         case 'ms':
           if (to == "s" && controller.text == (num / 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "min" &&
               controller.text == ((num / 1000) / 60).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "h" &&
               controller.text == (((num / 1000) / 60) / 60).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dan" &&
               controller.text == ((((num / 1000) / 60) / 60) / 24).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 's':
           if (to == "ms" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "min" && controller.text == (num / 60).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "h" && controller.text == ((num / 60) / 60).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dan" &&
               controller.text == (((num / 60) / 60) / 24).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'min':
           if (to == "ms" && controller.text == (num * 60000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "s" && controller.text == (num * 60).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "h" && controller.text == (num / 60).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dan" && controller.text == ((num / 60) / 24).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'h':
           if (to == "ms" && controller.text == (num * 3600000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "s" && controller.text == (num * 3600).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "min" && controller.text == (num * 60).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "dan" && controller.text == (num / 24).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'dan':
           if (to == "ms" && controller.text == (num * 86400000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "s" && controller.text == (num * 86400).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "min" && controller.text == (num * 1440).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "h" && controller.text == (num * 24).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         default:
@@ -261,6 +224,25 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
         appState.postupakShown = false;
       } else if (!isCorrect && appState.postupakShown == false) {
         appState.helpButtonShown = true;
+      }
+
+      if (isCorrect) {
+        opacity = 0;
+        flickerTimer =
+            Timer.periodic(const Duration(milliseconds: 300), (timer) {
+          setState(() {
+            opacity = opacity == 0 ? 1 : 0;
+          });
+        });
+
+        Future.delayed(const Duration(milliseconds: 1500), () {
+          setState(() {
+            generateIndexAndNumber();
+            controller.clear();
+            opacity = 1;
+            flickerTimer.cancel();
+          });
+        });
       }
     });
   }
@@ -422,22 +404,30 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme> {
                 appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 300,
           ),
           Expanded(
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              opacity: opacity,
               child: TextField(
-            style: TextStyle(
-                fontSize: screenHeight / 25, color: appState.fontColor),
-            textAlign: TextAlign.center,
-            controller: controller,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintText: 'Unesite rješenje',
-              hintStyle: TextStyle(
-                  fontSize: appState.fontSize == 1
-                      ? screenHeight / 50
-                      : screenHeight / 50 * (appState.fontSize - 0.3),
-                  color: appState.fontColor),
-              alignLabelWithHint: true,
+                style: TextStyle(
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 25
+                        : screenHeight / 25 * (appState.fontSize),
+                    color: appState.fontColor),
+                textAlign: TextAlign.center,
+                controller: controller,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: 'Unesite rješenje',
+                  hintStyle: TextStyle(
+                      fontSize: appState.fontSize == 1
+                          ? screenHeight / 50
+                          : screenHeight / 50 * (appState.fontSize - 0.3),
+                      color: appState.fontColor),
+                  alignLabelWithHint: true,
+                ),
+              ),
             ),
-          )),
+          ),
           SizedBox(
             width: screenWidth / 150,
           ),

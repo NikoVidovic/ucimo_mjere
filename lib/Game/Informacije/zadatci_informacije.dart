@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,11 +15,13 @@ class ZadatciInformacije extends StatefulWidget {
 class _ZadatciInformacijeState extends State<ZadatciInformacije> {
   final controller = TextEditingController();
   late AppState appState;
+  late Timer flickerTimer;
 
   int numValue = Random().nextInt(10) + 1;
   var values = ['B', "KB", "MB", "GB", "TB"];
   int valueFromIndex = Random().nextInt(5);
   int valueToIndex = 0;
+  double opacity = 1;
 
   @override
   void initState() {
@@ -153,115 +156,73 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
         case 'B':
           if (to == "KB" && controller.text == (num / 100).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "MB" && controller.text == (num / 1000000).toString()) {
             isCorrect = true;
-            valueFromIndex = Random().nextInt(5);
-            valueToIndex = Random().nextInt(5);
-            numValue = Random().nextInt(10) + 1;
-            controller.clear();
           }
           if (to == "GB" && controller.text == (num / 1000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "TB" &&
               controller.text == (num / 1000000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'KB':
           if (to == "B" && controller.text == (num * 100).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "MB" && controller.text == (num / 100).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "GB" && controller.text == (num / 1000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "TB" && controller.text == (num / 1000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'MB':
           if (to == "B" && controller.text == (num * 1000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "KB" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "GB" && controller.text == (num / 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "TB" && controller.text == (num / 1000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'GB':
           if (to == "B" && controller.text == (num * 1000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "KB" && controller.text == (num * 1000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "MB" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "TB" && controller.text == (num / 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         case 'TB':
           if (to == "B" &&
               controller.text == (num * 1000000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "KB" && controller.text == (num * 1000000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "MB" && controller.text == (num * 1000000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           if (to == "GB" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
-            generateIndexAndNumber();
-            controller.clear();
           }
           break;
         default:
@@ -271,6 +232,27 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
         appState.postupakShown = false;
       } else if (!isCorrect && appState.postupakShown == false) {
         appState.helpButtonShown = true;
+      }
+
+      if (isCorrect) {
+        opacity = 0; // Initially set opacity to 0
+        flickerTimer =
+            Timer.periodic(const Duration(milliseconds: 300), (timer) {
+          // Toggle opacity between 0 and 1 every 500 milliseconds
+          setState(() {
+            opacity = opacity == 0 ? 1 : 0;
+          });
+        });
+        // Delay clearing the text field after the animation duration
+        Future.delayed(const Duration(milliseconds: 1500), () {
+          setState(() {
+            generateIndexAndNumber();
+            controller.clear();
+            opacity =
+                1; // Ensure opacity is set to 1 after clearing the text field
+            flickerTimer.cancel(); // Stop the flickering effect
+          });
+        });
       }
     });
   }
@@ -432,25 +414,30 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
                 appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 800,
           ),
           Expanded(
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              opacity: opacity,
               child: TextField(
-            style: TextStyle(
-                fontSize: appState.fontSize == 1
-                    ? screenHeight / 18
-                    : screenHeight / 18 * (appState.fontSize - 0.25),
-                color: appState.fontColor),
-            textAlign: TextAlign.center,
-            controller: controller,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintText: 'Unesite rješenje',
-              hintStyle: TextStyle(
-                  fontSize: appState.fontSize == 1
-                      ? screenHeight / 50
-                      : screenHeight / 50 * (appState.fontSize - 0.3),
-                  color: appState.fontColor),
-              alignLabelWithHint: true,
+                style: TextStyle(
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 25
+                        : screenHeight / 25 * (appState.fontSize),
+                    color: appState.fontColor),
+                textAlign: TextAlign.center,
+                controller: controller,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: 'Unesite rješenje',
+                  hintStyle: TextStyle(
+                      fontSize: appState.fontSize == 1
+                          ? screenHeight / 50
+                          : screenHeight / 50 * (appState.fontSize - 0.3),
+                      color: appState.fontColor),
+                  alignLabelWithHint: true,
+                ),
+              ),
             ),
-          )),
+          ),
           SizedBox(
             width: screenWidth / 150,
           ),
