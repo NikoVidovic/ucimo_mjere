@@ -366,8 +366,11 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
             right: screenWidth / 200),
         child: Text(
           "Preračunaj mjeru s lijeve strane crte u mjeru s desne strane crte. Zatim odgovor upiši na crtu 'Unesite rješenje'! Zatim svoj odgovor provjeri klikom na gumb 'PROVJERI'!",
-          style:
-              TextStyle(fontSize: screenHeight / 30, color: appState.fontColor),
+          style: TextStyle(
+              fontSize: appState.fontSize == 1
+                  ? screenHeight / 30
+                  : screenHeight / 30 * (appState.fontSize - 0.2),
+              color: appState.fontColor),
           textAlign: TextAlign.left,
         ),
       ),
@@ -375,7 +378,8 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
         padding: EdgeInsets.only(
             top: screenHeight / 500,
             left: screenWidth / 43,
-            right: screenWidth / 3.35),
+            right:
+                appState.fontSize == 1 ? screenWidth / 3.35 : screenWidth / 4),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Visibility(
               visible: appState.helpButtonShown,
@@ -395,38 +399,55 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
                   },
                   child: Text(
                     'Trebaš pomoć?',
-                    style: TextStyle(fontSize: screenHeight / 31),
+                    style: TextStyle(
+                        fontSize: appState.fontSize == 1
+                            ? screenHeight / 31
+                            : screenHeight / 31 * (appState.fontSize - 0.35)),
                   ))),
           SizedBox(
-            width: screenWidth / 8,
+            width: appState.fontSize == 1 ? screenWidth / 8 : screenWidth / 16,
           ),
           Text(
             numValue.toString(),
             style: TextStyle(
-                fontSize: screenHeight / 18, color: appState.fontColor),
+                fontSize: appState.fontSize == 1
+                    ? screenHeight / 18
+                    : screenHeight / 18 * (appState.fontSize - 0.25),
+                color: appState.fontColor),
           ),
           SizedBox(
-            width: screenWidth / 150,
+            width:
+                appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 300,
           ),
           Text(
             "${values[valueFromIndex]} = ",
             style: TextStyle(
-                fontSize: screenHeight / 18, color: appState.fontColor),
+                fontSize: appState.fontSize == 1
+                    ? screenHeight / 18
+                    : screenHeight / 18 * (appState.fontSize - 0.25),
+                color: appState.fontColor),
           ),
           SizedBox(
-            width: screenWidth / 150,
+            width:
+                appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 800,
           ),
           Expanded(
               child: TextField(
             style: TextStyle(
-                fontSize: screenHeight / 25, color: appState.fontColor),
+                fontSize: appState.fontSize == 1
+                    ? screenHeight / 18
+                    : screenHeight / 18 * (appState.fontSize - 0.25),
+                color: appState.fontColor),
             textAlign: TextAlign.center,
             controller: controller,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               hintText: 'Unesite rješenje',
               hintStyle: TextStyle(
-                  fontSize: screenHeight / 50, color: appState.fontColor),
+                  fontSize: appState.fontSize == 1
+                      ? screenHeight / 50
+                      : screenHeight / 50 * (appState.fontSize - 0.3),
+                  color: appState.fontColor),
               alignLabelWithHint: true,
             ),
           )),
@@ -436,9 +457,15 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
           Text(
             values[valueToIndex],
             style: TextStyle(
-                fontSize: screenHeight / 18, color: appState.fontColor),
+                fontSize: appState.fontSize == 1
+                    ? screenHeight / 18
+                    : screenHeight / 18 * (appState.fontSize - 0.25),
+                color: appState.fontColor),
           )
         ]),
+      ),
+      SizedBox(
+        height: appState.fontSize == 1 ? 0 : screenHeight / 200,
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -461,7 +488,10 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
                   },
                   child: Text('RJEŠENJE',
                       style: TextStyle(
-                          fontSize: screenHeight / 35, color: Colors.black)))),
+                          fontSize: appState.fontSize == 1
+                              ? screenHeight / 35
+                              : screenHeight / 35 * (appState.fontSize - 0.25),
+                          color: Colors.black)))),
           SizedBox(
             width: screenWidth / 150,
           ),
@@ -478,11 +508,14 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije> {
                     numValue, values[valueFromIndex], values[valueToIndex]);
               },
               child: Text('PROVJERI',
-                  style: TextStyle(fontSize: screenHeight / 35))),
+                  style: TextStyle(
+                      fontSize: appState.fontSize == 1
+                          ? screenHeight / 35
+                          : screenHeight / 35 * (appState.fontSize - 0.25)))),
         ],
       ),
       SizedBox(
-        height: screenHeight / 52,
+        height: appState.fontSize == 1 ? 0 : screenHeight / 200,
       ),
       Padding(
         padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),

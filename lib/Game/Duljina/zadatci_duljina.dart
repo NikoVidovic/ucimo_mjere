@@ -395,7 +395,8 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
         padding: EdgeInsets.only(
             top: screenHeight / 500,
             left: screenWidth / 43,
-            right: screenWidth / 3.35),
+            right:
+                appState.fontSize == 1 ? screenWidth / 3.35 : screenWidth / 4),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Visibility(
               visible: appState.helpButtonShown,
@@ -421,7 +422,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
                             : screenHeight / 31 * (appState.fontSize - 0.35)),
                   ))),
           SizedBox(
-            width: screenWidth / 8,
+            width: appState.fontSize == 1 ? screenWidth / 8 : screenWidth / 16,
           ),
           Text(
             numValue.toString(),
@@ -432,7 +433,8 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
                 color: appState.fontColor),
           ),
           SizedBox(
-            width: screenWidth / 150,
+            width:
+                appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 300,
           ),
           Text(
             "${values[valueFromIndex]} = ",
@@ -443,7 +445,8 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
                 color: appState.fontColor),
           ),
           SizedBox(
-            width: screenWidth / 150,
+            width:
+                appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 800,
           ),
           Expanded(
               child: TextField(
@@ -478,6 +481,9 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
           ),
         ]),
       ),
+      SizedBox(
+        height: appState.fontSize == 1 ? 0 : screenHeight / 200,
+      ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -501,7 +507,10 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
                   },
                   child: Text('RJEŠENJE',
                       style: TextStyle(
-                          fontSize: screenHeight / 35, color: Colors.black)))),
+                          fontSize: appState.fontSize == 1
+                              ? screenHeight / 35
+                              : screenHeight / 35 * (appState.fontSize - 0.25),
+                          color: Colors.black)))),
           SizedBox(
             width: screenWidth / 150,
           ),
@@ -519,12 +528,18 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
               },
               child: Text(
                 'PROVJERI',
-                style: TextStyle(fontSize: screenHeight / 35),
+                style: TextStyle(
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 35
+                        : screenHeight / 35 * (appState.fontSize - 0.25)),
               )),
           SizedBox(
             height: screenHeight / 52,
           ),
         ],
+      ),
+      SizedBox(
+        height: appState.fontSize == 1 ? 0 : screenHeight / 200,
       ),
       Padding(
         padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
