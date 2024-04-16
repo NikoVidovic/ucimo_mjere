@@ -19,6 +19,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
   var values = ['mm', "cm", "dm", "m", "km"];
   int valueFromIndex = Random().nextInt(5);
   int valueToIndex = 0;
+  double opacity = 1;
 
   @override
   void dispose() {
@@ -153,21 +154,25 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
         case 'mm':
           if (to == "km" && controller.text == (num / 1000000).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "m" && controller.text == (num / 1000).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dm" && controller.text == (num / 100).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "cm" && controller.text == (num / 10).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
@@ -175,21 +180,25 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
         case 'cm':
           if (to == "km" && controller.text == (num / 100000).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "m" && controller.text == (num / 100).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dm" && controller.text == (num / 10).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "mm" && controller.text == (num * 10).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
@@ -197,21 +206,25 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
         case 'dm':
           if (to == "km" && controller.text == (num / 10000).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "m" && controller.text == (num / 10).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "cm" && controller.text == (num * 10).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "mm" && controller.text == (num * 100).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
@@ -219,21 +232,25 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
         case 'm':
           if (to == "km" && controller.text == (num / 1000).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dm" && controller.text == (num * 10).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "cm" && controller.text == (num * 100).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "mm" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
@@ -241,21 +258,25 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
         case 'km':
           if (to == "m" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "dm" && controller.text == (num * 10000).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "cm" && controller.text == (num * 100000).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
           if (to == "mm" && controller.text == (num * 1000000).toString()) {
             isCorrect = true;
+            opacity = 0;
             generateIndexAndNumber();
             controller.clear();
           }
@@ -449,25 +470,30 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
                 appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 800,
           ),
           Expanded(
+            child: AnimatedOpacity(
+              duration: const Duration(seconds: 2),
+              opacity: opacity,
               child: TextField(
-            style: TextStyle(
-                fontSize: appState.fontSize == 1
-                    ? screenHeight / 25
-                    : screenHeight / 25 * (appState.fontSize),
-                color: appState.fontColor),
-            textAlign: TextAlign.center,
-            controller: controller,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintText: 'Unesite rješenje',
-              hintStyle: TextStyle(
-                  fontSize: appState.fontSize == 1
-                      ? screenHeight / 50
-                      : screenHeight / 50 * (appState.fontSize - 0.3),
-                  color: appState.fontColor),
-              alignLabelWithHint: true,
+                style: TextStyle(
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 25
+                        : screenHeight / 25 * (appState.fontSize),
+                    color: appState.fontColor),
+                textAlign: TextAlign.center,
+                controller: controller,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: 'Unesite rješenje',
+                  hintStyle: TextStyle(
+                      fontSize: appState.fontSize == 1
+                          ? screenHeight / 50
+                          : screenHeight / 50 * (appState.fontSize - 0.3),
+                      color: appState.fontColor),
+                  alignLabelWithHint: true,
+                ),
+              ),
             ),
-          )),
+          ),
           SizedBox(
             width: screenWidth / 150,
           ),
