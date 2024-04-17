@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
-
+import 'package:audioplayers/audioplayers.dart';
 import '/../app_state.dart';
 
 class ZadatciDuljina extends StatefulWidget {
@@ -16,13 +16,13 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
   final controller = TextEditingController();
   late AppState appState;
   late Timer flickerTimer;
+  final player = AudioPlayer();
 
   int numValue = Random().nextInt(10) + 1;
   var values = ['mm', "cm", "dm", "m", "km"];
   int valueFromIndex = Random().nextInt(5);
   int valueToIndex = 0;
   double opacity = 1;
-
   @override
   void dispose() {
     super.dispose();
@@ -34,6 +34,10 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
     super.initState();
     appState = Provider.of<AppState>(context, listen: false);
     generateIndexAndNumber();
+  }
+
+  Future<void> playSound(String audioPath) async {
+    await player.play(AssetSource(audioPath));
   }
 
   void generateIndexAndNumber() {
@@ -234,7 +238,8 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
       }
 
       if (isCorrect) {
-        opacity = 0;
+        String audioPath = "yes.mp3";
+        playSound(audioPath);
         flickerTimer =
             Timer.periodic(const Duration(milliseconds: 300), (timer) {
           setState(() {
@@ -250,6 +255,9 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
             flickerTimer.cancel();
           });
         });
+      } else {
+        String audioPath = "no.mp3";
+        playSound(audioPath);
       }
     });
   }

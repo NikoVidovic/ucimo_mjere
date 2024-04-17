@@ -38,7 +38,7 @@ class _MainMenuState extends State<MainMenu> {
           sizedBoxWidth: screenWidth / 1.55,
         ),
         drawer: SizedBox(
-          width: appState.fontSize == 1 ? screenWidth / 2.5 : screenWidth / 2.3,
+          width: appState.fontSize == 1 ? screenWidth / 2.5 : screenWidth / 2.2,
           child: const Drawer(
             child: Izbornik(),
           ),
