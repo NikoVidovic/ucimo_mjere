@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
 
 import '../../app_state.dart';
 
@@ -16,6 +17,7 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
   final controller = TextEditingController();
   late AppState appState;
   late Timer flickerTimer;
+  final player = AudioPlayer();
 
   int numValue = Random().nextInt(200) + 1;
   var values = ['C', "K"];
@@ -36,6 +38,10 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
   void dispose() {
     super.dispose();
     controller.dispose();
+  }
+
+  Future<void> playSound(String audioPath) async {
+    await player.play(AssetSource(audioPath));
   }
 
   void generateIndexAndNumber() {
@@ -105,6 +111,8 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
       }
 
       if (isCorrect) {
+        String audioPath = "yes.mp3";
+        playSound(audioPath);
         opacity = 0;
         flickerTimer =
             Timer.periodic(const Duration(milliseconds: 300), (timer) {
@@ -121,6 +129,9 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura> {
             flickerTimer.cancel();
           });
         });
+      } else {
+        String audioPath = "no.mp3";
+        playSound(audioPath);
       }
     });
   }

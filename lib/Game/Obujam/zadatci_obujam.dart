@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
 
 import '../../app_state.dart';
 
@@ -16,6 +17,7 @@ class _ZadatciObujamState extends State<ZadatciObujam> {
   final controller = TextEditingController();
   late AppState appState;
   late Timer flickerTimer;
+  final player = AudioPlayer();
 
   int numValue = Random().nextInt(10) + 1;
   var values = ['mm', "cm", "dm", "m", "km"];
@@ -34,6 +36,10 @@ class _ZadatciObujamState extends State<ZadatciObujam> {
   void dispose() {
     super.dispose();
     controller.dispose();
+  }
+
+  Future<void> playSound(String audioPath) async {
+    await player.play(AssetSource(audioPath));
   }
 
   void generateIndexAndNumber() {
@@ -239,6 +245,8 @@ class _ZadatciObujamState extends State<ZadatciObujam> {
       }
 
       if (isCorrect) {
+        String audioPath = "yes.mp3";
+        playSound(audioPath);
         opacity = 0;
         flickerTimer =
             Timer.periodic(const Duration(milliseconds: 300), (timer) {
@@ -255,6 +263,9 @@ class _ZadatciObujamState extends State<ZadatciObujam> {
             flickerTimer.cancel();
           });
         });
+      } else {
+        String audioPath = "no.mp3";
+        playSound(audioPath);
       }
     });
   }
