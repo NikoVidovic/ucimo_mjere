@@ -12,17 +12,21 @@ class ZadatciDuljina extends StatefulWidget {
   State<ZadatciDuljina> createState() => _ZadatciDuljinaState();
 }
 
-class _ZadatciDuljinaState extends State<ZadatciDuljina> {
+class _ZadatciDuljinaState extends State<ZadatciDuljina>
+    with SingleTickerProviderStateMixin {
   final controller = TextEditingController();
   late AppState appState;
   late Timer flickerTimer;
   final player = AudioPlayer();
+  late AnimationController animationController;
+  late Animation<double> sizeAnimation;
 
   int numValue = Random().nextInt(10) + 1;
   var values = ['mm', "cm", "dm", "m", "km"];
   int valueFromIndex = Random().nextInt(5);
   int valueToIndex = 0;
   double opacity = 1;
+
   @override
   void dispose() {
     super.dispose();
@@ -34,6 +38,16 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
     super.initState();
     appState = Provider.of<AppState>(context, listen: false);
     generateIndexAndNumber();
+
+    animationController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1500));
+
+    sizeAnimation = TweenSequence(<TweenSequenceItem<double>>[
+      TweenSequenceItem<double>(
+          tween: Tween<double>(begin: 0, end: 15), weight: 50),
+      TweenSequenceItem<double>(
+          tween: Tween<double>(begin: 15, end: 0), weight: 50)
+    ]).animate(animationController);
   }
 
   Future<void> playSound(String audioPath) async {
@@ -260,6 +274,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
           });
         });
       } else {
+        animationController.forward();
         appState.netocno = true;
         appState.tocnoVisible = true;
         String audioPath = "no.mp3";
@@ -445,27 +460,31 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina> {
             width:
                 appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 800,
           ),
-          Expanded(
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 300),
-              opacity: opacity,
-              child: TextField(
-                style: TextStyle(
-                    fontSize: appState.fontSize == 1
-                        ? screenHeight / 25
-                        : screenHeight / 25 * (appState.fontSize),
-                    color: appState.fontColor),
-                textAlign: TextAlign.center,
-                controller: controller,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  hintText: 'Unesite rješenje',
-                  hintStyle: TextStyle(
+          Padding(
+            padding: EdgeInsets.only(
+                right: sizeAnimation.value, top: sizeAnimation.value),
+            child: Expanded(
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 300),
+                opacity: opacity,
+                child: TextField(
+                  style: TextStyle(
                       fontSize: appState.fontSize == 1
-                          ? screenHeight / 50
-                          : screenHeight / 50 * (appState.fontSize - 0.3),
+                          ? screenHeight / 25
+                          : screenHeight / 25 * (appState.fontSize),
                       color: appState.fontColor),
-                  alignLabelWithHint: true,
+                  textAlign: TextAlign.center,
+                  controller: controller,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: 'Unesite rješenje',
+                    hintStyle: TextStyle(
+                        fontSize: appState.fontSize == 1
+                            ? screenHeight / 50
+                            : screenHeight / 50 * (appState.fontSize - 0.3),
+                        color: appState.fontColor),
+                    alignLabelWithHint: true,
+                  ),
                 ),
               ),
             ),
