@@ -8,6 +8,8 @@ class AppState extends ChangeNotifier {
   Color _backgroundColor = Colors.white;
   Color _fontColor = Colors.black;
   double _fontSize = 1;
+  bool _tocnoVisible = false;
+  bool _netocno = false;
 
   double get currentSliderValue => _currentSliderValue;
   bool get postupakShown => _postupakShown;
@@ -16,6 +18,8 @@ class AppState extends ChangeNotifier {
   Color get backgroundColor => _backgroundColor;
   Color get fontColor => _fontColor;
   double get fontSize => _fontSize;
+  bool get tocnoVisible => _tocnoVisible;
+  bool get netocno => _netocno;
 
   set currentSliderValue(double value) {
     _currentSliderValue = value;
@@ -49,6 +53,16 @@ class AppState extends ChangeNotifier {
 
   set fontSize(double value) {
     _fontSize = value;
+    notifyListeners();
+  }
+
+  set tocnoVisible(bool newValue) {
+    _tocnoVisible = newValue;
+    notifyListeners();
+  }
+
+  set netocno(bool newValue) {
+    _netocno = newValue;
     notifyListeners();
   }
 }

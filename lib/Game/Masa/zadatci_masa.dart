@@ -40,6 +40,8 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
 
   Future<void> playSound(String audioPath) async {
     await player.play(AssetSource(audioPath));
+    await Future.delayed(const Duration(milliseconds: 1500));
+    appState.tocnoVisible = false;
   }
 
   void generateIndexAndNumber() {
@@ -187,6 +189,8 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
       }
 
       if (isCorrect) {
+        appState.netocno = false;
+        appState.tocnoVisible = true;
         String audioPath = "yes.mp3";
         playSound(audioPath);
         opacity = 0;
@@ -206,6 +210,8 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
           });
         });
       } else {
+        appState.netocno = true;
+        appState.tocnoVisible = true;
         String audioPath = "no.mp3";
         playSound(audioPath);
       }
@@ -289,8 +295,9 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
         padding: EdgeInsets.only(
             top: screenHeight / 500,
             left: screenWidth / 43,
-            right:
-                appState.fontSize == 1 ? screenWidth / 3.35 : screenWidth / 4),
+            right: appState.fontSize == 1
+                ? screenWidth / 5
+                : screenWidth / 4 * (appState.fontSize - 0.85)),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Visibility(
               visible: appState.helpButtonShown,
@@ -377,6 +384,22 @@ class _ZadatciMasaState extends State<ZadatciMasa> {
                     ? screenHeight / 18
                     : screenHeight / 18 * (appState.fontSize - 0.25),
                 color: appState.fontColor),
+          ),
+          SizedBox(
+            width: screenWidth / 30,
+          ),
+          Visibility(
+            maintainSize: true,
+            maintainAnimation: true,
+            maintainState: true,
+            visible: appState.tocnoVisible,
+            child: Image.asset(
+              appState.netocno == false
+                  ? 'assets/tocno.png'
+                  : 'assets/netocno.png',
+              width: screenWidth / 15,
+              height: screenHeight / 13,
+            ),
           )
         ]),
       ),
