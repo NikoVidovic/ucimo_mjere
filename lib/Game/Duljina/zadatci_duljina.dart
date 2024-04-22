@@ -31,6 +31,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
   void dispose() {
     super.dispose();
     controller.dispose();
+    animationController.dispose();
   }
 
   @override
@@ -40,13 +41,13 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
     generateIndexAndNumber();
 
     animationController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1500));
+        vsync: this, duration: const Duration(milliseconds: 200));
 
     sizeAnimation = TweenSequence(<TweenSequenceItem<double>>[
       TweenSequenceItem<double>(
-          tween: Tween<double>(begin: 0, end: 15), weight: 50),
+          tween: Tween<double>(begin: 0, end: 30), weight: 50),
       TweenSequenceItem<double>(
-          tween: Tween<double>(begin: 15, end: 0), weight: 50)
+          tween: Tween<double>(begin: 30, end: 0), weight: 50)
     ]).animate(animationController);
   }
 
@@ -261,7 +262,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
         flickerTimer =
             Timer.periodic(const Duration(milliseconds: 300), (timer) {
           setState(() {
-            opacity = opacity == 0 ? 1 : 0;
+            opacity = opacity == 0.1 ? 1 : 0.1;
           });
         });
 
@@ -279,6 +280,11 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
         appState.tocnoVisible = true;
         String audioPath = "no.mp3";
         playSound(audioPath);
+        Future.delayed(const Duration(milliseconds: 200), () {
+          setState(() {
+            animationController.reset();
+          });
+        });
       }
     });
   }
@@ -460,13 +466,14 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
             width:
                 appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 800,
           ),
-          Padding(
-            padding: EdgeInsets.only(
-                right: sizeAnimation.value, top: sizeAnimation.value),
-            child: Expanded(
-              child: AnimatedOpacity(
-                duration: const Duration(milliseconds: 300),
-                opacity: opacity,
+          Expanded(
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 100),
+              opacity: opacity,
+              child: AnimatedPadding(
+                duration: const Duration(milliseconds: 200),
+                padding: EdgeInsets.only(
+                    top: sizeAnimation.value, right: sizeAnimation.value),
                 child: TextField(
                   style: TextStyle(
                       fontSize: appState.fontSize == 1
