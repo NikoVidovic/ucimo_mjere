@@ -404,7 +404,11 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
                   ),
                   onPressed: () {
                     setState(() {
-                      appState.postupakShown = true;
+                      if (appState.postupakShown == false) {
+                        appState.postupakShown = true;
+                      } else if (appState.postupakShown == true) {
+                        appState.postupakShown = false;
+                      }
                     });
                   },
                   child: Text(
