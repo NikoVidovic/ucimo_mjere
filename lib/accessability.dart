@@ -21,12 +21,14 @@ class _AccessSettingsState extends State<AccessSettings> {
     return Scaffold(
         backgroundColor: appState.backgroundColor,
         appBar: AppBarCustom(
-            title: 'Pristupačnost',
-            height: screenHeight / 8,
-            imageShown: false,
-            imagePath: '',
-            imageWidth: 0,
-            sizedBoxWidth: screenWidth / 1.55),
+          title: 'Pristupačnost',
+          height: screenHeight / 8,
+          imageShown: false,
+          imagePath: '',
+          imageWidth: 0,
+          sizedBoxWidth: screenWidth / 1.55,
+          infoShown: false,
+        ),
         body: ListView(
           children: [
             Padding(

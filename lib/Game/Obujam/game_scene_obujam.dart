@@ -50,6 +50,7 @@ class _GameObujamState extends State<GameObujam> {
         imagePath: 'assets/kategorija3.png',
         imageWidth: screenWidth / 20,
         sizedBoxWidth: screenWidth / 2.1,
+        infoShown: false,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),

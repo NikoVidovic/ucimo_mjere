@@ -9,7 +9,6 @@ import '../Game/Temperatura/game_scene_temperatura.dart';
 import '../Game/Vrijeme/game_scene_vrijeme.dart';
 import '../app_bar.dart';
 import '../app_state.dart';
-import './Drawer/opening_drawer.dart';
 import 'main_button.dart';
 
 class MainMenu extends StatefulWidget {
@@ -35,13 +34,8 @@ class _MainMenuState extends State<MainMenu> {
           imageShown: false,
           imagePath: '',
           imageWidth: 0,
-          sizedBoxWidth: screenWidth / 1.55,
-        ),
-        drawer: SizedBox(
-          width: appState.fontSize == 1 ? screenWidth / 2.5 : screenWidth / 2.2,
-          child: const Drawer(
-            child: Izbornik(),
-          ),
+          sizedBoxWidth: screenWidth / 1.85,
+          infoShown: true,
         ),
         body: Row(children: [
           Column(

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/app_bar.dart';
 import 'package:provider/provider.dart';
 
-import '../../app_state.dart';
-import 'opening_drawer.dart';
+import '../app_state.dart';
 
 class OAplikaciji extends StatefulWidget {
   const OAplikaciji({super.key});
@@ -28,12 +27,7 @@ class _OAplikacijiState extends State<OAplikaciji> {
           imagePath: '',
           imageWidth: 0,
           sizedBoxWidth: screenWidth / 1.55,
-        ),
-        drawer: SizedBox(
-          width: screenWidth / 2.5,
-          child: const Drawer(
-            child: Izbornik(),
-          ),
+          infoShown: false,
         ),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(children: [
