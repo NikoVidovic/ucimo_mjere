@@ -36,9 +36,11 @@ class _ZadatciButtonState extends State<ZadatciButton> {
   Future openDialog(screenWidth, screenHeight, fontColor) => showDialog(
         context: context,
         builder: (context) => AlertDialog(
+          backgroundColor: appState.backgroundColor,
           title: Text(
             "Unesite vlastiti zadatak",
-            style: TextStyle(fontSize: screenWidth / 50),
+            style: TextStyle(
+                fontSize: screenWidth / 50, color: appState.fontColor),
           ),
           content: SizedBox(
             width: screenWidth / 1.2,
@@ -46,21 +48,23 @@ class _ZadatciButtonState extends State<ZadatciButton> {
               children: [
                 Expanded(
                   child: TextField(
+                    keyboardType: TextInputType.number,
                     style: TextStyle(
                         fontSize: screenHeight / 35, color: appState.fontColor),
                     textAlign: TextAlign.center,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: "Upišite broj",
+                      hintStyle: TextStyle(color: appState.fontColor),
                       alignLabelWithHint: true,
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: screenWidth / 200,
+                  width: screenWidth / 100,
                 ),
                 Flexible(
                   child: DropdownMenu(
-                      width: screenWidth / 5,
+                      width: screenWidth / 4,
                       label: Text(
                         'Odaberite mjernu jedinicu',
                         style: TextStyle(
@@ -68,37 +72,110 @@ class _ZadatciButtonState extends State<ZadatciButton> {
                             color: appState.fontColor),
                       ),
                       helperText: 'Mjerna jedinica iz koje se pretvara',
-                      dropdownMenuEntries: const [
-                        DropdownMenuEntry(value: "value1", label: 'value1'),
-                        DropdownMenuEntry(value: "value2", label: 'value2'),
-                        DropdownMenuEntry(value: "value3", label: 'value3'),
-                        DropdownMenuEntry(value: "value4", label: 'value4'),
-                        DropdownMenuEntry(value: "value5", label: 'value5'),
+                      menuStyle: MenuStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              appState.backgroundColor)),
+                      dropdownMenuEntries: [
+                        DropdownMenuEntry(
+                            value: "value1",
+                            label: 'value1',
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStatePropertyAll(
+                                    appState.fontColor))),
+                        DropdownMenuEntry(
+                            value: "value2",
+                            label: 'value2',
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStatePropertyAll(
+                                    appState.fontColor))),
+                        DropdownMenuEntry(
+                            value: "value3",
+                            label: 'value3',
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStatePropertyAll(
+                                    appState.fontColor))),
+                        DropdownMenuEntry(
+                            value: "value4",
+                            label: 'value4',
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStatePropertyAll(
+                                    appState.fontColor))),
+                        DropdownMenuEntry(
+                            value: "value5",
+                            label: 'value5',
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStatePropertyAll(
+                                    appState.fontColor))),
                       ]),
                 ),
                 SizedBox(
-                  width: screenWidth / 200,
+                  width: screenWidth / 100,
                 ),
-                const Text("="),
+                Text(
+                  "=",
+                  style: TextStyle(
+                      fontSize: screenWidth / 50, color: appState.fontColor),
+                ),
                 SizedBox(
-                  width: screenWidth / 200,
+                  width: screenWidth / 100,
                 ),
                 Flexible(
                   child: DropdownMenu(
-                      width: screenWidth / 5.5,
-                      label: const Text('Odaberite mjernu jedinicu'),
+                      width: screenWidth / 4,
+                      label: Text(
+                        'Odaberite mjernu jedinicu',
+                        style: TextStyle(
+                            fontSize: screenHeight / 35,
+                            color: appState.fontColor),
+                      ),
                       helperText: 'Mjerna jedinica iz koje se pretvara',
-                      dropdownMenuEntries: const [
-                        DropdownMenuEntry(value: "value1", label: 'value1'),
-                        DropdownMenuEntry(value: "value2", label: 'value2'),
-                        DropdownMenuEntry(value: "value3", label: 'value3'),
-                        DropdownMenuEntry(value: "value4", label: 'value4'),
-                        DropdownMenuEntry(value: "value5", label: 'value5'),
+                      menuStyle: MenuStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              appState.backgroundColor)),
+                      dropdownMenuEntries: [
+                        DropdownMenuEntry(
+                            value: "value1",
+                            label: 'value1',
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStatePropertyAll(
+                                    appState.fontColor))),
+                        DropdownMenuEntry(
+                            value: "value2",
+                            label: 'value2',
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStatePropertyAll(
+                                    appState.fontColor))),
+                        DropdownMenuEntry(
+                            value: "value3",
+                            label: 'value3',
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStatePropertyAll(
+                                    appState.fontColor))),
+                        DropdownMenuEntry(
+                            value: "value4",
+                            label: 'value4',
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStatePropertyAll(
+                                    appState.fontColor))),
+                        DropdownMenuEntry(
+                            value: "value5",
+                            label: 'value5',
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStatePropertyAll(
+                                    appState.fontColor))),
                       ]),
                 ),
               ],
             ),
           ),
+          actions: [
+            TextButton(
+                onPressed: () {},
+                child: Text("DODAJ ZADATAK",
+                    style: TextStyle(
+                        fontSize: screenHeight / 45,
+                        color: appState.fontColor)))
+          ],
         ),
       );
 }

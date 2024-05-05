@@ -111,9 +111,9 @@ class _PostavkeState extends State<Postavke> {
                 activeTickMarkColor: Colors.pinkAccent,
                 inactiveTickMarkColor: Colors.white,
                 valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
-                valueIndicatorColor: Colors.black,
+                valueIndicatorColor: appState.fontColor,
                 valueIndicatorTextStyle: TextStyle(
-                  color: Colors.white,
+                  color: appState.backgroundColor,
                   fontSize: screenHeight / 30,
                 ),
               ),
