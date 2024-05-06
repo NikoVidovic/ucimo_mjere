@@ -44,14 +44,33 @@ class _PostavkeState extends State<Postavke> {
       child: ListView(
         children: [
           SizedBox(height: screenHeight / 20),
-          Text(
-            'Prilagodba zadataka',
-            style: TextStyle(
-                fontSize: screenHeight / 18, color: appState.fontColor),
+          Row(
+            children: [
+              Text(
+                'Prilagodba zadataka',
+                style: TextStyle(
+                    fontSize: screenHeight / 18, color: appState.fontColor),
+              ),
+              SizedBox(
+                width: screenWidth / 3,
+              ),
+              ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: appState.backgroundColor == Colors.white
+                          ? MaterialStateProperty.all<Color>(
+                              const Color.fromARGB(255, 22, 56, 74))
+                          : MaterialStateProperty.all<Color>(
+                              appState.fontColor)),
+                  onPressed: () {},
+                  child: Text(
+                    "SPREMI",
+                    style: TextStyle(color: appState.backgroundColor),
+                  ))
+            ],
           ),
-          const Divider(
+          Divider(
             thickness: 2,
-            color: Colors.black,
+            color: appState.fontColor,
           ),
           SizedBox(height: screenHeight / 50),
           Padding(
