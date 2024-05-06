@@ -377,12 +377,10 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
     double screenHeight = MediaQuery.of(context).size.height;
     return Column(children: [
       Padding(
-        padding: EdgeInsets.only(
-            top: screenHeight / 100,
-            left: screenWidth / 200,
-            right: screenWidth / 200),
+        padding:
+            EdgeInsets.only(top: screenHeight / 100, right: screenWidth / 1.9),
         child: Text(
-          "Preračunaj mjeru s lijeve strane crte u mjeru s desne strane crte. Zatim odgovor upiši na crtu 'Unesite rješenje'! Zatim svoj odgovor provjeri klikom na gumb 'PROVJERI'!",
+          "Preračunaj mjeru!\nOdgovor upiši na crtu i klikni na gumb 'PROVJERI'!",
           style: TextStyle(
               fontSize: appState.fontSize == 1
                   ? screenHeight / 30
