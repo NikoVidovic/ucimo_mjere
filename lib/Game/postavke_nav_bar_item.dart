@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/Game/Duljina/game_scene_duljina.dart';
-import 'package:hello_world/Game/Duljina/zadatci_duljina.dart';
 import 'package:provider/provider.dart';
 import '../app_state.dart';
 import 'zadatci_button.dart';
