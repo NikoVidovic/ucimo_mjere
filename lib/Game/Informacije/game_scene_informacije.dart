@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
 import '../../app_state.dart';
-import '../postavke_nav_bar_item.dart';
 import '../../app_bar.dart';
+import 'postavke_informacije.dart';
 import 'zadatci_informacije.dart';
 
 class GameInformacije extends StatefulWidget {
@@ -27,7 +27,7 @@ class _GameInformacijeState extends State<GameInformacije> {
     super.initState();
     pages = [
       const ZadatciInformacije(),
-      Postavke(switchToTab: navigateBottomBar)
+      PostavkeInformacije(switchToTab: navigateBottomBar)
     ];
   }
 

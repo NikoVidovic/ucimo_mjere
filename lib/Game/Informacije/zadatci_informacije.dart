@@ -62,7 +62,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
     valueFromIndex = Random().nextInt(5);
     valueToIndex = 0;
     numValue = Random().nextInt(10) + 1;
-    switch (appState.currentSliderValue) {
+    switch (appState.currentSliderValueInformacije) {
       case 1:
         if (valueFromIndex == 0) {
           valueFromIndex++;
@@ -251,8 +251,8 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
       }
       if (isCorrect && appState.helpButtonShown == true) {
         appState.helpButtonShown = false;
-        appState.postupakShown = false;
-      } else if (!isCorrect && appState.postupakShown == false) {
+        appState.postupakShownInformacije = false;
+      } else if (!isCorrect && appState.postupakShownInformacije == false) {
         appState.helpButtonShown = true;
       }
 
@@ -412,10 +412,10 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
                   ),
                   onPressed: () {
                     setState(() {
-                      if (appState.postupakShown == false) {
-                        appState.postupakShown = true;
-                      } else if (appState.postupakShown == true) {
-                        appState.postupakShown = false;
+                      if (appState.postupakShownInformacije == false) {
+                        appState.postupakShownInformacije = true;
+                      } else if (appState.postupakShownInformacije == true) {
+                        appState.postupakShownInformacije = false;
                       }
                     });
                   },
@@ -519,7 +519,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Visibility(
-              visible: appState.rjesenjeShown,
+              visible: appState.rjesenjeShownInformacije,
               child: OutlinedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -568,7 +568,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
       Padding(
         padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
         child: Visibility(
-            visible: appState.postupakShown,
+            visible: appState.postupakShownInformacije,
             child: Container(
               width: double.maxFinite,
               color: const Color.fromARGB(255, 232, 196, 80),

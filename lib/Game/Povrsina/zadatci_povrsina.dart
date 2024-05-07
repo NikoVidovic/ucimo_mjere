@@ -62,7 +62,7 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
     valueFromIndex = Random().nextInt(5);
     valueToIndex = 0;
     numValue = Random().nextInt(10) + 1;
-    switch (appState.currentSliderValue.round()) {
+    switch (appState.currentSliderValuePovrsina.round()) {
       case 1:
         if (valueFromIndex == 0) {
           valueFromIndex++;
@@ -251,8 +251,8 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
       }
       if (isCorrect && appState.helpButtonShown == true) {
         appState.helpButtonShown = false;
-        appState.postupakShown = false;
-      } else if (!isCorrect && appState.postupakShown == false) {
+        appState.postupakShownPovrsina = false;
+      } else if (!isCorrect && appState.postupakShownPovrsina == false) {
         appState.helpButtonShown = true;
       }
 
@@ -410,10 +410,10 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
                   ),
                   onPressed: () {
                     setState(() {
-                      if (appState.postupakShown == false) {
-                        appState.postupakShown = true;
-                      } else if (appState.postupakShown == true) {
-                        appState.postupakShown = false;
+                      if (appState.postupakShownPovrsina == false) {
+                        appState.postupakShownPovrsina = true;
+                      } else if (appState.postupakShownPovrsina == true) {
+                        appState.postupakShownPovrsina = false;
                       }
                     });
                   },
@@ -545,7 +545,7 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Visibility(
-              visible: appState.rjesenjeShown,
+              visible: appState.rjesenjeShownPovrsina,
               child: OutlinedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -599,7 +599,7 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
       Padding(
         padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
         child: Visibility(
-            visible: appState.postupakShown,
+            visible: appState.postupakShownPovrsina,
             child: Container(
               width: double.maxFinite,
               color: const Color.fromARGB(255, 232, 196, 80),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:hello_world/Game/Temperatura/postavke_temperatura.dart';
 import 'package:provider/provider.dart';
 import '../../app_state.dart';
-import '../postavke_nav_bar_item.dart';
 import '../../app_bar.dart';
 import 'zadatci_temperatura.dart';
 
@@ -27,7 +27,7 @@ class _GameTemperaturaState extends State<GameTemperatura> {
     super.initState();
     pages = [
       const ZadatciTemperatura(),
-      Postavke(switchToTab: navigateBottomBar)
+      PostavkeTemeperatura(switchToTab: navigateBottomBar)
     ];
   }
 

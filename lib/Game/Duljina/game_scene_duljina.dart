@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hello_world/app_state.dart';
 import 'package:provider/provider.dart';
-import '../postavke_nav_bar_item.dart';
 import '../../app_bar.dart';
+import 'postavke_duljina.dart';
 import 'zadatci_duljina.dart';
 
 class GameDuljina extends StatefulWidget {
@@ -25,7 +25,10 @@ class _GameDuljinaState extends State<GameDuljina> {
   @override
   void initState() {
     super.initState();
-    pages = [const ZadatciDuljina(), Postavke(switchToTab: navigateBottomBar)];
+    pages = [
+      const ZadatciDuljina(),
+      PostavkeDuljina(switchToTab: navigateBottomBar)
+    ];
   }
 
   void navigateBottomBar(int index) {

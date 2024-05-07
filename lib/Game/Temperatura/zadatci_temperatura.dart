@@ -61,7 +61,7 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
   }
 
   void generateIndexAndNumber() {
-    switch (appState.currentSliderValue) {
+    switch (appState.currentSliderValueTemperatura) {
       case 1:
       case 2:
         celsius = 100;
@@ -121,8 +121,8 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
       }
       if (isCorrect && appState.helpButtonShown == true) {
         appState.helpButtonShown = false;
-        appState.postupakShown = false;
-      } else if (!isCorrect && appState.postupakShown == false) {
+        appState.postupakShownTemperatura = false;
+      } else if (!isCorrect && appState.postupakShownTemperatura == false) {
         appState.helpButtonShown = true;
       }
 
@@ -220,10 +220,10 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
                   ),
                   onPressed: () {
                     setState(() {
-                      if (appState.postupakShown == false) {
-                        appState.postupakShown = true;
-                      } else if (appState.postupakShown == true) {
-                        appState.postupakShown = false;
+                      if (appState.postupakShownTemperatura == false) {
+                        appState.postupakShownTemperatura = true;
+                      } else if (appState.postupakShownTemperatura == true) {
+                        appState.postupakShownTemperatura = false;
                       }
                     });
                   },
@@ -327,7 +327,7 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Visibility(
-              visible: appState.rjesenjeShown,
+              visible: appState.rjesenjeShownTemperatura,
               child: OutlinedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -381,7 +381,7 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
       Padding(
         padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
         child: Visibility(
-            visible: appState.postupakShown,
+            visible: appState.postupakShownTemperatura,
             child: Container(
               width: double.maxFinite,
               color: const Color.fromARGB(255, 232, 196, 80),

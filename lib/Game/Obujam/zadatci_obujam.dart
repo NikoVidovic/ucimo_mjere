@@ -62,7 +62,7 @@ class _ZadatciObujamState extends State<ZadatciObujam>
     valueFromIndex = Random().nextInt(5);
     valueToIndex = 0;
     numValue = Random().nextInt(10) + 1;
-    switch (appState.currentSliderValue.round()) {
+    switch (appState.currentSliderValueObujam.round()) {
       case 1:
         if (valueFromIndex == 0) {
           valueFromIndex++;
@@ -255,8 +255,8 @@ class _ZadatciObujamState extends State<ZadatciObujam>
       }
       if (isCorrect && appState.helpButtonShown == true) {
         appState.helpButtonShown = false;
-        appState.postupakShown = false;
-      } else if (!isCorrect && appState.postupakShown == false) {
+        appState.postupakShownObujam = false;
+      } else if (!isCorrect && appState.postupakShownObujam == false) {
         appState.helpButtonShown = true;
       }
 
@@ -414,10 +414,10 @@ class _ZadatciObujamState extends State<ZadatciObujam>
                   ),
                   onPressed: () {
                     setState(() {
-                      if (appState.postupakShown == false) {
-                        appState.postupakShown = true;
-                      } else if (appState.postupakShown == true) {
-                        appState.postupakShown = false;
+                      if (appState.postupakShownObujam == false) {
+                        appState.postupakShownObujam = true;
+                      } else if (appState.postupakShownObujam == true) {
+                        appState.postupakShownObujam = false;
                       }
                     });
                   },
@@ -549,7 +549,7 @@ class _ZadatciObujamState extends State<ZadatciObujam>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Visibility(
-              visible: appState.rjesenjeShown,
+              visible: appState.rjesenjeShownObujam,
               child: OutlinedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -603,7 +603,7 @@ class _ZadatciObujamState extends State<ZadatciObujam>
       Padding(
         padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
         child: Visibility(
-            visible: appState.postupakShown,
+            visible: appState.postupakShownObujam,
             child: Container(
               width: double.maxFinite,
               color: const Color.fromARGB(255, 232, 196, 80),

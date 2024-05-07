@@ -62,7 +62,7 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
     valueFromIndex = Random().nextInt(5);
     valueToIndex = 0;
     numValue = Random().nextInt(3) + 1;
-    switch (appState.currentSliderValue) {
+    switch (appState.currentSliderValueVrijeme) {
       case 1:
       case 2:
         if (valueFromIndex == 0) {
@@ -243,8 +243,8 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
       }
       if (isCorrect && appState.helpButtonShown == true) {
         appState.helpButtonShown = false;
-        appState.postupakShown = false;
-      } else if (!isCorrect && appState.postupakShown == false) {
+        appState.postupakShownVrijeme = false;
+      } else if (!isCorrect && appState.postupakShownVrijeme == false) {
         appState.helpButtonShown = true;
       }
 
@@ -402,10 +402,10 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
                   ),
                   onPressed: () {
                     setState(() {
-                      if (appState.postupakShown == false) {
-                        appState.postupakShown = true;
-                      } else if (appState.postupakShown == true) {
-                        appState.postupakShown = false;
+                      if (appState.postupakShownVrijeme == false) {
+                        appState.postupakShownVrijeme = true;
+                      } else if (appState.postupakShownVrijeme == true) {
+                        appState.postupakShownVrijeme = false;
                       }
                     });
                   },
@@ -509,7 +509,7 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Visibility(
-              visible: appState.rjesenjeShown,
+              visible: appState.rjesenjeShownVrijeme,
               child: OutlinedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -563,7 +563,7 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
       Padding(
         padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
         child: Visibility(
-            visible: appState.postupakShown,
+            visible: appState.postupakShownVrijeme,
             child: Container(
               width: double.maxFinite,
               color: const Color.fromARGB(255, 232, 196, 80),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:hello_world/Game/Obujam/postavke_obujam.dart';
 import 'package:provider/provider.dart';
 import '../../app_state.dart';
-import '../postavke_nav_bar_item.dart';
 import '../../app_bar.dart';
 import 'zadatci_obujam.dart';
 
@@ -25,7 +25,10 @@ class _GameObujamState extends State<GameObujam> {
   @override
   void initState() {
     super.initState();
-    pages = [const ZadatciObujam(), Postavke(switchToTab: navigateBottomBar)];
+    pages = [
+      const ZadatciObujam(),
+      PostavkeObujam(switchToTab: navigateBottomBar)
+    ];
   }
 
   void navigateBottomBar(int index) {

@@ -62,7 +62,7 @@ class _ZadatciMasaState extends State<ZadatciMasa>
     valueFromIndex = Random().nextInt(4);
     valueToIndex = 0;
     numValue = Random().nextInt(5) + 1;
-    switch (appState.currentSliderValue.round()) {
+    switch (appState.currentSliderValueMasa.round()) {
       case 1:
         if (valueFromIndex == 0) {
           valueFromIndex++;
@@ -197,8 +197,8 @@ class _ZadatciMasaState extends State<ZadatciMasa>
       }
       if (isCorrect && appState.helpButtonShown == true) {
         appState.helpButtonShown = false;
-        appState.postupakShown = false;
-      } else if (!isCorrect && appState.postupakShown == false) {
+        appState.postupakShownMasa = false;
+      } else if (!isCorrect && appState.postupakShownMasa == false) {
         appState.helpButtonShown = true;
       }
 
@@ -330,10 +330,10 @@ class _ZadatciMasaState extends State<ZadatciMasa>
                   ),
                   onPressed: () {
                     setState(() {
-                      if (appState.postupakShown == false) {
-                        appState.postupakShown = true;
-                      } else if (appState.postupakShown == true) {
-                        appState.postupakShown = false;
+                      if (appState.postupakShownMasa == false) {
+                        appState.postupakShownMasa = true;
+                      } else if (appState.postupakShownMasa == true) {
+                        appState.postupakShownMasa = false;
                       }
                     });
                   },
@@ -437,7 +437,7 @@ class _ZadatciMasaState extends State<ZadatciMasa>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Visibility(
-              visible: appState.rjesenjeShown,
+              visible: appState.rjesenjeShownMasa,
               child: OutlinedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -488,7 +488,7 @@ class _ZadatciMasaState extends State<ZadatciMasa>
       Padding(
         padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
         child: Visibility(
-            visible: appState.postupakShown,
+            visible: appState.postupakShownMasa,
             child: Container(
               width: double.maxFinite,
               color: const Color.fromARGB(255, 232, 196, 80),

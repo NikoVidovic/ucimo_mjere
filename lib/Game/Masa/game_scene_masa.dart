@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
 import '../../app_state.dart';
-import '../postavke_nav_bar_item.dart';
 import '../../app_bar.dart';
+import 'postavke_masa.dart';
 import 'zadatci_masa.dart';
 
 class GameMasa extends StatefulWidget {
@@ -25,7 +25,7 @@ class _GameMasaState extends State<GameMasa> {
   @override
   void initState() {
     super.initState();
-    pages = [const ZadatciMasa(), Postavke(switchToTab: navigateBottomBar)];
+    pages = [const ZadatciMasa(), PostavkeMasa(switchToTab: navigateBottomBar)];
   }
 
   void navigateBottomBar(int index) {

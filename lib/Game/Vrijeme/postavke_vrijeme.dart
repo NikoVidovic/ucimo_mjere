@@ -1,29 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../app_state.dart';
-import 'zadatci_button.dart';
+import '../../app_state.dart';
+import '../zadatci_button.dart';
 
-class Postavke extends StatefulWidget {
+class PostavkeVrijeme extends StatefulWidget {
   final void Function(int) switchToTab;
-  const Postavke({
+  const PostavkeVrijeme({
     required this.switchToTab,
     super.key,
   });
 
   @override
-  State<Postavke> createState() => _PostavkeState();
+  State<PostavkeVrijeme> createState() => _PostavkeVrijemeState();
 }
 
-class _PostavkeState extends State<Postavke> {
+class _PostavkeVrijemeState extends State<PostavkeVrijeme> {
   late AppState appState;
 
   onSwitchMethodPostupak(bool newValue) {
     setState(() {
       if (newValue == true) {
-        appState.postupakShown = true;
+        appState.postupakShownVrijeme = true;
       } else {
-        appState.postupakShown = false;
+        appState.postupakShownVrijeme = false;
       }
     });
   }
@@ -31,9 +31,9 @@ class _PostavkeState extends State<Postavke> {
   onSwitchMethodRjesenje(bool newValue) {
     setState(() {
       if (newValue == true) {
-        appState.rjesenjeShown = true;
+        appState.rjesenjeShownVrijeme = true;
       } else {
-        appState.rjesenjeShown = false;
+        appState.rjesenjeShownVrijeme = false;
       }
     });
   }
@@ -92,8 +92,8 @@ class _PostavkeState extends State<Postavke> {
                         : screenHeight / 31 * (appState.fontSize - 0.3),
                     color: appState.fontColor)),
           ),
-          buildSwitchOption(
-              'Postupak', appState.postupakShown, onSwitchMethodPostupak),
+          buildSwitchOption('Postupak', appState.postupakShownVrijeme,
+              onSwitchMethodPostupak),
           SizedBox(
             height: screenHeight / 30,
           ),
@@ -106,8 +106,8 @@ class _PostavkeState extends State<Postavke> {
                         : screenHeight / 31 * (appState.fontSize - 0.3),
                     color: appState.fontColor)),
           ),
-          buildSwitchOption(
-              'Rješenje', appState.rjesenjeShown, onSwitchMethodRjesenje),
+          buildSwitchOption('Rješenje', appState.rjesenjeShownVrijeme,
+              onSwitchMethodRjesenje),
           SizedBox(
             height: screenHeight / 30,
           ),
@@ -115,7 +115,7 @@ class _PostavkeState extends State<Postavke> {
             padding: EdgeInsets.symmetric(
                 horizontal: screenWidth / 43, vertical: screenHeight / 300),
             child: Text(
-              'Težina zadatka: ${appState.currentSliderValue.round()}',
+              'Težina zadatka: ${appState.currentSliderValueVrijeme.round()}',
               style: TextStyle(
                   fontSize: screenHeight / 31, color: appState.fontColor),
             ),
@@ -152,12 +152,12 @@ class _PostavkeState extends State<Postavke> {
               child: Slider(
                 min: 1,
                 max: 4,
-                value: appState.currentSliderValue,
+                value: appState.currentSliderValueVrijeme,
                 divisions: 3,
-                label: '${appState.currentSliderValue.round()}',
+                label: '${appState.currentSliderValueVrijeme.round()}',
                 onChanged: (value) {
                   setState(() {
-                    appState.currentSliderValue = value;
+                    appState.currentSliderValueVrijeme = value;
                   });
                 },
               ),

@@ -61,7 +61,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
     valueFromIndex = Random().nextInt(5);
     valueToIndex = 0;
     numValue = Random().nextInt(10) + 1;
-    switch (appState.currentSliderValue.round()) {
+    switch (appState.currentSliderValueDuljina.round()) {
       case 1:
         if (valueFromIndex == 0) {
           valueFromIndex++;
@@ -249,8 +249,8 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
 
       if (isCorrect && appState.helpButtonShown == true) {
         appState.helpButtonShown = false;
-        appState.postupakShown = false;
-      } else if (!isCorrect && appState.postupakShown == false) {
+        appState.postupakShownDuljina = false;
+      } else if (!isCorrect && appState.postupakShownDuljina == false) {
         appState.helpButtonShown = true;
       }
 
@@ -427,10 +427,10 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
                   ),
                   onPressed: () {
                     setState(() {
-                      if (appState.postupakShown == false) {
-                        appState.postupakShown = true;
-                      } else if (appState.postupakShown == true) {
-                        appState.postupakShown = false;
+                      if (appState.postupakShownDuljina == false) {
+                        appState.postupakShownDuljina = true;
+                      } else if (appState.postupakShownDuljina == true) {
+                        appState.postupakShownDuljina = false;
                       }
                     });
                   },
@@ -534,7 +534,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Visibility(
-              visible: appState.rjesenjeShown,
+              visible: appState.rjesenjeShownDuljina,
               child: OutlinedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -590,7 +590,7 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
       Padding(
         padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
         child: Visibility(
-            visible: appState.postupakShown,
+            visible: appState.postupakShownDuljina,
             child: Container(
               width: double.maxFinite,
               color: const Color.fromARGB(255, 232, 196, 80),
