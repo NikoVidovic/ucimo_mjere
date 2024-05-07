@@ -19,8 +19,10 @@ class _ZadatciButtonState extends State<ZadatciButton> {
     double screenHeight = MediaQuery.of(context).size.height;
     return OutlinedButton(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(
-                const Color.fromARGB(255, 22, 56, 74)),
+            backgroundColor: appState.backgroundColor == Colors.white
+                ? MaterialStateProperty.all<Color>(
+                    const Color.fromARGB(255, 22, 56, 74))
+                : MaterialStateProperty.all<Color>(appState.fontColor),
             foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
             minimumSize: MaterialStateProperty.all<Size>(
                 Size.square(screenWidth / 25))), // Adjust the size as needed
@@ -29,7 +31,8 @@ class _ZadatciButtonState extends State<ZadatciButton> {
         },
         child: Text(
           'UNESITE VLASTITI ZADATAK',
-          style: TextStyle(fontSize: screenHeight / 38),
+          style: TextStyle(
+              fontSize: screenHeight / 38, color: appState.backgroundColor),
         ));
   }
 
@@ -75,6 +78,7 @@ class _ZadatciButtonState extends State<ZadatciButton> {
                       menuStyle: MenuStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               appState.backgroundColor)),
+                      textStyle: TextStyle(color: appState.fontColor),
                       dropdownMenuEntries: [
                         DropdownMenuEntry(
                             value: "value1",
@@ -132,6 +136,7 @@ class _ZadatciButtonState extends State<ZadatciButton> {
                       menuStyle: MenuStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               appState.backgroundColor)),
+                      textStyle: TextStyle(color: appState.fontColor),
                       dropdownMenuEntries: [
                         DropdownMenuEntry(
                             value: "value1",

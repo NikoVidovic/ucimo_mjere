@@ -52,7 +52,7 @@ class _PostavkeState extends State<Postavke> {
                     fontSize: screenHeight / 18, color: appState.fontColor),
               ),
               SizedBox(
-                width: screenWidth / 3,
+                width: screenWidth / 2.3,
               ),
               ElevatedButton(
                   style: ButtonStyle(
@@ -64,7 +64,11 @@ class _PostavkeState extends State<Postavke> {
                   onPressed: () {},
                   child: Text(
                     "SPREMI",
-                    style: TextStyle(color: appState.backgroundColor),
+                    style: TextStyle(
+                        color: appState.backgroundColor,
+                        fontSize: appState.fontSize == 1
+                            ? screenHeight / 35
+                            : screenHeight / 35 * (appState.fontSize - 0.2)),
                   ))
             ],
           ),
@@ -116,9 +120,12 @@ class _PostavkeState extends State<Postavke> {
             child: SliderTheme(
               data: SliderTheme.of(context).copyWith(
                 trackHeight: screenHeight / 40,
-                activeTrackColor: const Color.fromARGB(255, 22, 56, 74),
-                inactiveTrackColor:
-                    const Color.fromARGB(255, 22, 56, 74).withOpacity(0.4),
+                activeTrackColor: appState.backgroundColor == Colors.white
+                    ? const Color.fromARGB(255, 22, 56, 74)
+                    : appState.fontColor,
+                inactiveTrackColor: appState.backgroundColor == Colors.white
+                    ? const Color.fromARGB(255, 22, 56, 74).withOpacity(0.4)
+                    : appState.fontColor.withOpacity(0.4),
                 thumbShape: RoundSliderThumbShape(
                   enabledThumbRadius: screenHeight / 50,
                 ),
