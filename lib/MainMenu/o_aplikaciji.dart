@@ -28,6 +28,7 @@ class _OAplikacijiState extends State<OAplikaciji> {
           imageWidth: 0,
           sizedBoxWidth: screenWidth / 1.55,
           infoShown: false,
+          settingsShown: true,
         ),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(children: [

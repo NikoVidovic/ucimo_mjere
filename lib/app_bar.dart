@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/MainMenu/o_aplikaciji.dart';
 import 'accessability.dart';
@@ -12,6 +13,7 @@ class AppBarCustom extends StatefulWidget implements PreferredSizeWidget {
   final double imageWidth;
   final double sizedBoxWidth;
   final bool infoShown;
+  final bool settingsShown;
   const AppBarCustom(
       {super.key,
       required this.title,
@@ -20,7 +22,8 @@ class AppBarCustom extends StatefulWidget implements PreferredSizeWidget {
       required this.imagePath,
       required this.imageWidth,
       required this.sizedBoxWidth,
-      required this.infoShown});
+      required this.infoShown,
+      required this.settingsShown});
 
   @override
   State<AppBarCustom> createState() => _AppBarCustomState();
@@ -69,14 +72,17 @@ class _AppBarCustomState extends State<AppBarCustom> {
                         color: Colors.white, fontSize: screenHeight / 40),
                   )),
             ),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AccessSettings()));
-                },
-                icon: const Icon(Icons.settings))
+            Visibility(
+              visible: widget.settingsShown,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AccessSettings()));
+                  },
+                  icon: const Icon(Icons.settings)),
+            )
           ],
         ),
         toolbarHeight: widget.height,

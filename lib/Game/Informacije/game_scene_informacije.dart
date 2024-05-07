@@ -54,6 +54,7 @@ class _GameInformacijeState extends State<GameInformacije> {
         imageWidth: screenWidth / 17,
         sizedBoxWidth: screenHeight / 1.75,
         infoShown: false,
+        settingsShown: true,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),

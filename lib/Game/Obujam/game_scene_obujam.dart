@@ -51,6 +51,7 @@ class _GameObujamState extends State<GameObujam> {
         imageWidth: screenWidth / 20,
         sizedBoxWidth: screenWidth / 2.1,
         infoShown: false,
+        settingsShown: true,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),

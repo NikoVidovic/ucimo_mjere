@@ -54,6 +54,7 @@ class _GameTemperaturaState extends State<GameTemperatura> {
         imageWidth: screenWidth / 28,
         sizedBoxWidth: screenWidth / 2.22,
         infoShown: false,
+        settingsShown: true,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),

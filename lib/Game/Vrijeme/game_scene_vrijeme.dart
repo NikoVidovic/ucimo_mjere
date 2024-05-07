@@ -51,6 +51,7 @@ class _GameVrijemeState extends State<GameVrijeme> {
         imageWidth: screenWidth / 22,
         sizedBoxWidth: screenWidth / 2.05,
         infoShown: false,
+        settingsShown: true,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),

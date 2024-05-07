@@ -51,6 +51,7 @@ class _GameMasaState extends State<GameMasa> {
         imageWidth: screenWidth / 23,
         sizedBoxWidth: screenWidth / 1.97,
         infoShown: false,
+        settingsShown: true,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),

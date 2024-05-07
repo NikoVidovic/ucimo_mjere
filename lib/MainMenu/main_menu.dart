@@ -36,6 +36,7 @@ class _MainMenuState extends State<MainMenu> {
           imageWidth: 0,
           sizedBoxWidth: screenWidth / 1.85,
           infoShown: true,
+          settingsShown: true,
         ),
         body: Row(children: [
           Column(

@@ -51,6 +51,7 @@ class _GamePovrsinaState extends State<GamePovrsina> {
         imageWidth: screenWidth / 17,
         sizedBoxWidth: screenWidth / 2.25,
         infoShown: false,
+        settingsShown: true,
       ),
       bottomNavigationBar: Container(
         color: const Color.fromARGB(255, 22, 56, 74),
