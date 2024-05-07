@@ -25,7 +25,7 @@ class _GameVrijemeState extends State<GameVrijeme> {
   @override
   void initState() {
     super.initState();
-    pages = [const ZadatciVrijeme(), const Postavke()];
+    pages = [const ZadatciVrijeme(), Postavke(switchToTab: navigateBottomBar)];
   }
 
   void navigateBottomBar(int index) {

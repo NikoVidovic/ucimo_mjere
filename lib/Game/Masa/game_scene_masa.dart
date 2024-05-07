@@ -25,7 +25,7 @@ class _GameMasaState extends State<GameMasa> {
   @override
   void initState() {
     super.initState();
-    pages = [const ZadatciMasa(), const Postavke()];
+    pages = [const ZadatciMasa(), Postavke(switchToTab: navigateBottomBar)];
   }
 
   void navigateBottomBar(int index) {

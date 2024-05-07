@@ -25,7 +25,10 @@ class _GameTemperaturaState extends State<GameTemperatura> {
   @override
   void initState() {
     super.initState();
-    pages = [const ZadatciTemperatura(), const Postavke()];
+    pages = [
+      const ZadatciTemperatura(),
+      Postavke(switchToTab: navigateBottomBar)
+    ];
   }
 
   void navigateBottomBar(int index) {

@@ -1,11 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hello_world/Game/Duljina/game_scene_duljina.dart';
+import 'package:hello_world/Game/Duljina/zadatci_duljina.dart';
 import 'package:provider/provider.dart';
 import '../app_state.dart';
 import 'zadatci_button.dart';
 
 class Postavke extends StatefulWidget {
-  const Postavke({super.key});
+  final void Function(int) switchToTab;
+  const Postavke({
+    required this.switchToTab,
+    super.key,
+  });
 
   @override
   State<Postavke> createState() => _PostavkeState();
@@ -61,7 +67,9 @@ class _PostavkeState extends State<Postavke> {
                               const Color.fromARGB(255, 22, 56, 74))
                           : MaterialStateProperty.all<Color>(
                               appState.fontColor)),
-                  onPressed: () {},
+                  onPressed: () {
+                    widget.switchToTab(0);
+                  },
                   child: Text(
                     "SPREMI",
                     style: TextStyle(

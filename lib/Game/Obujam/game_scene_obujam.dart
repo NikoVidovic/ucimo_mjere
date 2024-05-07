@@ -25,7 +25,7 @@ class _GameObujamState extends State<GameObujam> {
   @override
   void initState() {
     super.initState();
-    pages = [const ZadatciObujam(), const Postavke()];
+    pages = [const ZadatciObujam(), Postavke(switchToTab: navigateBottomBar)];
   }
 
   void navigateBottomBar(int index) {

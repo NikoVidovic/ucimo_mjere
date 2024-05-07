@@ -25,7 +25,7 @@ class _GameDuljinaState extends State<GameDuljina> {
   @override
   void initState() {
     super.initState();
-    pages = [const ZadatciDuljina(), const Postavke()];
+    pages = [const ZadatciDuljina(), Postavke(switchToTab: navigateBottomBar)];
   }
 
   void navigateBottomBar(int index) {

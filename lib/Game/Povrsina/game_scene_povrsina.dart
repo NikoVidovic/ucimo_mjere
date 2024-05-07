@@ -25,7 +25,7 @@ class _GamePovrsinaState extends State<GamePovrsina> {
   @override
   void initState() {
     super.initState();
-    pages = [const ZadatciPovrsina(), const Postavke()];
+    pages = [const ZadatciPovrsina(), Postavke(switchToTab: navigateBottomBar)];
   }
 
   void navigateBottomBar(int index) {

@@ -25,7 +25,10 @@ class _GameInformacijeState extends State<GameInformacije> {
   @override
   void initState() {
     super.initState();
-    pages = [const ZadatciInformacije(), const Postavke()];
+    pages = [
+      const ZadatciInformacije(),
+      Postavke(switchToTab: navigateBottomBar)
+    ];
   }
 
   void navigateBottomBar(int index) {
