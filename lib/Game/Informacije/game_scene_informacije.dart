@@ -61,6 +61,7 @@ class _GameInformacijeState extends State<GameInformacije> {
           padding: EdgeInsets.symmetric(
               horizontal: screenWidth / 3.5, vertical: screenHeight / 57),
           child: GNav(
+              selectedIndex: selectedIndex,
               backgroundColor: const Color.fromARGB(255, 22, 56, 74),
               color: Colors.white,
               activeColor: Colors.white,
