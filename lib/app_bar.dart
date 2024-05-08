@@ -71,6 +71,9 @@ class _AppBarCustomState extends State<AppBarCustom> {
                         color: Colors.white, fontSize: screenHeight / 40),
                   )),
             ),
+            SizedBox(
+              width: screenWidth / 30,
+            ),
             Visibility(
               visible: widget.settingsShown,
               child: IconButton(
