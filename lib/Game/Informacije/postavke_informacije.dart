@@ -19,7 +19,7 @@ List<String> typesOfTask = ['Decimalni višekratnici', 'Binarni višekratnici'];
 
 class _PostavkeInformacijeState extends State<PostavkeInformacije> {
   late AppState appState;
-  String currentTypeOfTask = typesOfTask[0];
+  //String currentTypeOfTask = typesOfTask[0];
 
   onSwitchMethodPostupak(bool newValue) {
     setState(() {
@@ -46,6 +46,8 @@ class _PostavkeInformacijeState extends State<PostavkeInformacije> {
     appState = Provider.of<AppState>(context);
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    String currentTypeOfTask =
+        appState.decimalni == true ? typesOfTask[0] : typesOfTask[1];
     return Padding(
       padding: EdgeInsets.only(left: screenWidth / 20),
       child: ListView(
@@ -126,27 +128,63 @@ class _PostavkeInformacijeState extends State<PostavkeInformacije> {
           ),
           Column(
             children: [
-              ListTile(
-                title: const Text('Decimalni višekratnici'),
-                leading: Radio(
-                    value: typesOfTask[0],
-                    groupValue: currentTypeOfTask,
-                    onChanged: (value) {
-                      setState(() {
-                        currentTypeOfTask = value.toString();
-                      });
-                    }),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    currentTypeOfTask = typesOfTask[0];
+                    appState.decimalni = true;
+                  });
+                },
+                child: ListTile(
+                  title: Text('Decimalni višekratnici',
+                      style: TextStyle(
+                          fontSize: appState.fontSize == 1
+                              ? screenHeight / 23
+                              : screenHeight / 23 * (appState.fontSize - 0.3),
+                          color: appState.fontColor)),
+                  leading: Radio(
+                      value: typesOfTask[0],
+                      groupValue: currentTypeOfTask,
+                      activeColor: appState.fontColor,
+                      fillColor:
+                          MaterialStateProperty.all<Color>(appState.fontColor),
+                      onChanged: (value) {
+                        setState(() {
+                          currentTypeOfTask = value.toString();
+                          appState.decimalni = true;
+                        });
+                      }),
+                ),
               ),
-              ListTile(
-                title: const Text('Binarni višekratnici'),
-                leading: Radio(
-                    value: typesOfTask[1],
-                    groupValue: currentTypeOfTask,
-                    onChanged: (value) {
-                      setState(() {
-                        currentTypeOfTask = value.toString();
-                      });
-                    }),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    currentTypeOfTask = typesOfTask[1];
+                    appState.decimalni = false;
+                  });
+                },
+                child: ListTile(
+                  title: Text(
+                    'Binarni višekratnici',
+                    style: TextStyle(
+                        fontSize: appState.fontSize == 1
+                            ? screenHeight / 23
+                            : screenHeight / 23 * (appState.fontSize - 0.3),
+                        color: appState.fontColor),
+                  ),
+                  leading: Radio(
+                      value: typesOfTask[1],
+                      groupValue: currentTypeOfTask,
+                      activeColor: appState.fontColor,
+                      fillColor:
+                          MaterialStateProperty.all<Color>(appState.fontColor),
+                      onChanged: (value) {
+                        setState(() {
+                          currentTypeOfTask = value.toString();
+                          appState.decimalni = false;
+                        });
+                      }),
+                ),
               )
             ],
           ),

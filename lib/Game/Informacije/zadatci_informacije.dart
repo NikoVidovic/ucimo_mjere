@@ -23,7 +23,8 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
   late Animation<double> sizeAnimation;
 
   int numValue = Random().nextInt(10) + 1;
-  var values = ['B', "KB", "MB", "GB", "TB"];
+  var valuesDecimalni = ['B', "KB", "MB", "GB", "TB"];
+  var valuesBinarni = ['B', "KiB", "MiB", "GiB", "TiB"];
   int valueFromIndex = Random().nextInt(5);
   int valueToIndex = 0;
   double opacity = 1;
@@ -76,7 +77,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
         valueToIndex = valueFromIndex - 2;
         break;
       case 3:
-        if (valueFromIndex == values.length - 1) {
+        if (valueFromIndex == valuesDecimalni.length - 1) {
           valueFromIndex--;
         }
         if (valueFromIndex == 0) {
@@ -94,160 +95,336 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
   }
 
   double setUnitTo(String from, String to) {
-    switch (from) {
-      case 'B':
-        if (to == "KB") {
-          return 1 / 100;
-        }
-        if (to == "MB") {
-          return 1 / 1000000;
-        }
-        if (to == "GB") {
-          return 1 / 1000000000;
-        }
-        if (to == "TB") {
-          return 1 / 1000000000000;
-        }
-        break;
-      case 'KB':
-        if (to == "B") {
-          return 100;
-        }
-        if (to == "MB") {
-          return 1 / 100;
-        }
-        if (to == "GB") {
-          return 1 / 1000000;
-        }
-        if (to == "TB") {
-          return 1 / 1000000000;
-        }
-        break;
-      case 'MB':
-        if (to == "B") {
-          return 1000000;
-        }
-        if (to == "KB") {
-          return 1000;
-        }
-        if (to == "GB") {
-          return 1 / 1000;
-        }
-        if (to == "TB") {
-          return 1 / 1000000;
-        }
-        break;
-      case 'GB':
-        if (to == "B") {
-          return 1000000000;
-        }
-        if (to == "KB") {
-          return 1000000;
-        }
-        if (to == "MB") {
-          return 1000;
-        }
-        if (to == "TB") {
-          return 1 / 1000;
-        }
-        break;
-      case 'TB':
-        if (to == "B") {
-          return 1000000000000;
-        }
-        if (to == "KB") {
-          return 1000000000;
-        }
-        if (to == "MB") {
-          return 1000000;
-        }
-        if (to == "GB") {
-          return 1000;
-        }
-        break;
-      default:
+    if (appState.decimalni == true) {
+      switch (from) {
+        case 'B':
+          if (to == "KB") {
+            return 1 / 100;
+          }
+          if (to == "MB") {
+            return 1 / 1000000;
+          }
+          if (to == "GB") {
+            return 1 / 1000000000;
+          }
+          if (to == "TB") {
+            return 1 / 1000000000000;
+          }
+          break;
+        case 'KB':
+          if (to == "B") {
+            return 100;
+          }
+          if (to == "MB") {
+            return 1 / 100;
+          }
+          if (to == "GB") {
+            return 1 / 1000000;
+          }
+          if (to == "TB") {
+            return 1 / 1000000000;
+          }
+          break;
+        case 'MB':
+          if (to == "B") {
+            return 1000000;
+          }
+          if (to == "KB") {
+            return 1000;
+          }
+          if (to == "GB") {
+            return 1 / 1000;
+          }
+          if (to == "TB") {
+            return 1 / 1000000;
+          }
+          break;
+        case 'GB':
+          if (to == "B") {
+            return 1000000000;
+          }
+          if (to == "KB") {
+            return 1000000;
+          }
+          if (to == "MB") {
+            return 1000;
+          }
+          if (to == "TB") {
+            return 1 / 1000;
+          }
+          break;
+        case 'TB':
+          if (to == "B") {
+            return 1000000000000;
+          }
+          if (to == "KB") {
+            return 1000000000;
+          }
+          if (to == "MB") {
+            return 1000000;
+          }
+          if (to == "GB") {
+            return 1000;
+          }
+          break;
+        default:
+      }
+      return 1;
+    } else {
+      switch (from) {
+        case 'B':
+          if (to == "KiB") {
+            return 1 / 1024;
+          }
+          if (to == "MiB") {
+            double value = 1 / 1024 / 1024;
+            return double.parse(value.toStringAsFixed(10));
+          }
+          if (to == "GiB") {
+            double value = 1 / 1024 / 1024 / 1024;
+            return double.parse(value.toStringAsFixed(12));
+          }
+          if (to == "TiB") {
+            double value = 1 / 1024 / 1024 / 1024 / 1024;
+            return double.parse(value.toStringAsFixed(15));
+          }
+          break;
+        case 'KiB':
+          if (to == "B") {
+            return 1024;
+          }
+          if (to == "MiB") {
+            return 1 / 1024;
+          }
+          if (to == "GiB") {
+            double value = 1 / 1024 / 1024;
+            return double.parse(value.toStringAsFixed(10));
+          }
+          if (to == "TiB") {
+            double value = 1 / 1024 / 1024 / 1024;
+            return double.parse(value.toStringAsFixed(12));
+          }
+          break;
+        case 'MiB':
+          if (to == "B") {
+            return 1024 * 1024;
+          }
+          if (to == "KiB") {
+            return 1024;
+          }
+          if (to == "GiB") {
+            return 1 / 1024;
+          }
+          if (to == "TiB") {
+            double value = 1 / 1024 / 1024;
+            return double.parse(value.toStringAsFixed(10));
+          }
+          break;
+        case 'GiB':
+          if (to == "B") {
+            return 1024 * 1024 * 1024;
+          }
+          if (to == "KiB") {
+            return 1024 * 1024;
+          }
+          if (to == "MiB") {
+            return 1024;
+          }
+          if (to == "TiB") {
+            return 1 / 1024;
+          }
+          break;
+        case 'TiB':
+          if (to == "B") {
+            return 1024 * 1024 * 1024 * 1024;
+          }
+          if (to == "KiB") {
+            return 1024 * 1024 * 1024;
+          }
+          if (to == "MiB") {
+            return 1024 * 1024;
+          }
+          if (to == "GiB") {
+            return 1024;
+          }
+          break;
+        default:
+      }
+      return 1;
     }
-    return 1;
   }
 
   void checkAnswer(int num, String from, String to) {
     bool isCorrect = false;
     setState(() {
       FocusManager.instance.primaryFocus?.unfocus();
-      switch (from) {
-        case 'B':
-          if (to == "KB" && controller.text == (num / 100).toString()) {
-            isCorrect = true;
-          }
-          if (to == "MB" && controller.text == (num / 1000000).toString()) {
-            isCorrect = true;
-          }
-          if (to == "GB" && controller.text == (num / 1000000000).toString()) {
-            isCorrect = true;
-          }
-          if (to == "TB" &&
-              controller.text == (num / 1000000000000).toString()) {
-            isCorrect = true;
-          }
-          break;
-        case 'KB':
-          if (to == "B" && controller.text == (num * 100).toString()) {
-            isCorrect = true;
-          }
-          if (to == "MB" && controller.text == (num / 100).toString()) {
-            isCorrect = true;
-          }
-          if (to == "GB" && controller.text == (num / 1000000).toString()) {
-            isCorrect = true;
-          }
-          if (to == "TB" && controller.text == (num / 1000000000).toString()) {
-            isCorrect = true;
-          }
-          break;
-        case 'MB':
-          if (to == "B" && controller.text == (num * 1000000).toString()) {
-            isCorrect = true;
-          }
-          if (to == "KB" && controller.text == (num * 1000).toString()) {
-            isCorrect = true;
-          }
-          if (to == "GB" && controller.text == (num / 1000).toString()) {
-            isCorrect = true;
-          }
-          if (to == "TB" && controller.text == (num / 1000000).toString()) {
-            isCorrect = true;
-          }
-          break;
-        case 'GB':
-          if (to == "B" && controller.text == (num * 1000000000).toString()) {
-            isCorrect = true;
-          }
-          if (to == "KB" && controller.text == (num * 1000000).toString()) {
-            isCorrect = true;
-          }
-          if (to == "MB" && controller.text == (num * 1000).toString()) {
-            isCorrect = true;
-          }
-          if (to == "TB" && controller.text == (num / 1000).toString()) {
-            isCorrect = true;
-          }
-          break;
-        case 'TB':
-          if (to == "B" &&
-              controller.text == (num * 1000000000000).toString()) {
-            isCorrect = true;
-          }
-          if (to == "KB" && controller.text == (num * 1000000000).toString()) {
-            isCorrect = true;
-          }
-          if (to == "MB" && controller.text == (num * 1000000).toString()) {
-            isCorrect = true;
-          }
-          if (to == "GB" && controller.text == (num * 1000).toString()) {
-            isCorrect = true;
-          }
-          break;
-        default:
+      if (appState.decimalni == true) {
+        switch (from) {
+          case 'B':
+            if (to == "KB" && controller.text == (num / 100).toString()) {
+              isCorrect = true;
+            }
+            if (to == "MB" && controller.text == (num / 1000000).toString()) {
+              isCorrect = true;
+            }
+            if (to == "GB" &&
+                controller.text == (num / 1000000000).toString()) {
+              isCorrect = true;
+            }
+            if (to == "TB" &&
+                controller.text == (num / 1000000000000).toString()) {
+              isCorrect = true;
+            }
+            break;
+          case 'KB':
+            if (to == "B" && controller.text == (num * 100).toString()) {
+              isCorrect = true;
+            }
+            if (to == "MB" && controller.text == (num / 100).toString()) {
+              isCorrect = true;
+            }
+            if (to == "GB" && controller.text == (num / 1000000).toString()) {
+              isCorrect = true;
+            }
+            if (to == "TB" &&
+                controller.text == (num / 1000000000).toString()) {
+              isCorrect = true;
+            }
+            break;
+          case 'MB':
+            if (to == "B" && controller.text == (num * 1000000).toString()) {
+              isCorrect = true;
+            }
+            if (to == "KB" && controller.text == (num * 1000).toString()) {
+              isCorrect = true;
+            }
+            if (to == "GB" && controller.text == (num / 1000).toString()) {
+              isCorrect = true;
+            }
+            if (to == "TB" && controller.text == (num / 1000000).toString()) {
+              isCorrect = true;
+            }
+            break;
+          case 'GB':
+            if (to == "B" && controller.text == (num * 1000000000).toString()) {
+              isCorrect = true;
+            }
+            if (to == "KB" && controller.text == (num * 1000000).toString()) {
+              isCorrect = true;
+            }
+            if (to == "MB" && controller.text == (num * 1000).toString()) {
+              isCorrect = true;
+            }
+            if (to == "TB" && controller.text == (num / 1000).toString()) {
+              isCorrect = true;
+            }
+            break;
+          case 'TB':
+            if (to == "B" &&
+                controller.text == (num * 1000000000000).toString()) {
+              isCorrect = true;
+            }
+            if (to == "KB" &&
+                controller.text == (num * 1000000000).toString()) {
+              isCorrect = true;
+            }
+            if (to == "MB" && controller.text == (num * 1000000).toString()) {
+              isCorrect = true;
+            }
+            if (to == "GB" && controller.text == (num * 1000).toString()) {
+              isCorrect = true;
+            }
+            break;
+          default:
+        }
+      } else {
+        switch (from) {
+          case 'B':
+            if (to == "KiB" && controller.text == (num / 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "MiB" &&
+                controller.text == (num / 1024 / 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "GiB" &&
+                controller.text == (num / 1024 / 1024 / 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "TiB" &&
+                controller.text ==
+                    (num / 1024 / 1024 / 1024 / 1024).toString()) {
+              isCorrect = true;
+            }
+            break;
+          case 'KiB':
+            if (to == "B" && controller.text == (num * 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "MiB" && controller.text == (num / 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "GiB" &&
+                controller.text == (num / 1024 / 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "TiB" &&
+                controller.text == (num / 1024 / 1024 / 1024).toString()) {
+              isCorrect = true;
+            }
+            break;
+          case 'MiB':
+            if (to == "B" &&
+                controller.text == (num * 1024 * 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "KiB" && controller.text == (num * 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "GiB" && controller.text == (num / 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "TiB" &&
+                controller.text == (num / 1024 / 1024).toString()) {
+              isCorrect = true;
+            }
+            break;
+          case 'GiB':
+            if (to == "B" &&
+                controller.text == (num * 1024 * 1024 * 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "KiB" &&
+                controller.text == (num * 1024 * 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "MiB" && controller.text == (num * 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "TiB" && controller.text == (num / 1024).toString()) {
+              isCorrect = true;
+            }
+            break;
+          case 'TiB':
+            if (to == "B" &&
+                controller.text ==
+                    (num * 1024 * 1024 * 1024 * 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "KiB" &&
+                controller.text == (num * 1024 * 1024 * 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "MiB" &&
+                controller.text == (num * 1024 * 1024).toString()) {
+              isCorrect = true;
+            }
+            if (to == "GiB" && controller.text == (num * 1024).toString()) {
+              isCorrect = true;
+            }
+            break;
+          default:
+        }
       }
       if (isCorrect && appState.helpButtonShown == true) {
         appState.helpButtonShown = false;
@@ -296,78 +473,154 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
 
   completeSolution(int num, String from, String to) {
     setState(() {
-      switch (from) {
-        case 'B':
-          if (to == "KB") {
-            controller.text = (num / 100).toString();
-          }
-          if (to == "MB") {
-            controller.text = (num / 1000000).toString();
-          }
-          if (to == "GB") {
-            controller.text = (num / 1000000000).toString();
-          }
-          if (to == "TB") {
-            controller.text = (num / 1000000000000).toString();
-          }
-          break;
-        case 'KB':
-          if (to == "B") {
-            controller.text = (num * 100).toString();
-          }
-          if (to == "MB") {
-            controller.text = (num / 100).toString();
-          }
-          if (to == "GB") {
-            controller.text = (num / 1000000).toString();
-          }
-          if (to == "TB") {
-            controller.text = (num / 1000000000).toString();
-          }
-          break;
-        case 'MB':
-          if (to == "B") {
-            controller.text = (num * 1000000).toString();
-          }
-          if (to == "KB") {
-            controller.text = (num * 1000).toString();
-          }
-          if (to == "GB") {
-            controller.text = (num / 1000).toString();
-          }
-          if (to == "TB") {
-            controller.text = (num / 1000000).toString();
-          }
-          break;
-        case 'GB':
-          if (to == "B") {
-            controller.text = (num * 1000000000).toString();
-          }
-          if (to == "KB") {
-            controller.text = (num * 1000000).toString();
-          }
-          if (to == "MB") {
-            controller.text = (num * 1000).toString();
-          }
-          if (to == "TB") {
-            controller.text = (num / 1000).toString();
-          }
-          break;
-        case 'TB':
-          if (to == "B") {
-            controller.text = (num * 1000000000000).toString();
-          }
-          if (to == "KB") {
-            controller.text = (num * 1000000000).toString();
-          }
-          if (to == "MB") {
-            controller.text = (num * 1000000).toString();
-          }
-          if (to == "GB") {
-            controller.text = (num * 1000).toString();
-          }
-          break;
-        default:
+      if (appState.decimalni == true) {
+        switch (from) {
+          case 'B':
+            if (to == "KB") {
+              controller.text = (num / 100).toString();
+            }
+            if (to == "MB") {
+              controller.text = (num / 1000000).toString();
+            }
+            if (to == "GB") {
+              controller.text = (num / 1000000000).toString();
+            }
+            if (to == "TB") {
+              controller.text = (num / 1000000000000).toString();
+            }
+            break;
+          case 'KB':
+            if (to == "B") {
+              controller.text = (num * 100).toString();
+            }
+            if (to == "MB") {
+              controller.text = (num / 100).toString();
+            }
+            if (to == "GB") {
+              controller.text = (num / 1000000).toString();
+            }
+            if (to == "TB") {
+              controller.text = (num / 1000000000).toString();
+            }
+            break;
+          case 'MB':
+            if (to == "B") {
+              controller.text = (num * 1000000).toString();
+            }
+            if (to == "KB") {
+              controller.text = (num * 1000).toString();
+            }
+            if (to == "GB") {
+              controller.text = (num / 1000).toString();
+            }
+            if (to == "TB") {
+              controller.text = (num / 1000000).toString();
+            }
+            break;
+          case 'GB':
+            if (to == "B") {
+              controller.text = (num * 1000000000).toString();
+            }
+            if (to == "KB") {
+              controller.text = (num * 1000000).toString();
+            }
+            if (to == "MB") {
+              controller.text = (num * 1000).toString();
+            }
+            if (to == "TB") {
+              controller.text = (num / 1000).toString();
+            }
+            break;
+          case 'TB':
+            if (to == "B") {
+              controller.text = (num * 1000000000000).toString();
+            }
+            if (to == "KB") {
+              controller.text = (num * 1000000000).toString();
+            }
+            if (to == "MB") {
+              controller.text = (num * 1000000).toString();
+            }
+            if (to == "GB") {
+              controller.text = (num * 1000).toString();
+            }
+            break;
+          default:
+        }
+      } else {
+        switch (from) {
+          case 'B':
+            if (to == "KiB") {
+              controller.text = (num / 1024).toString();
+            }
+            if (to == "MiB") {
+              controller.text = (num / 1024 / 1024).toString();
+            }
+            if (to == "GiB") {
+              controller.text = (num / 1024 / 1024 / 1024).toString();
+            }
+            if (to == "TiB") {
+              controller.text = (num / 1024 / 1024 / 1024 / 1024).toString();
+            }
+            break;
+          case 'KiB':
+            if (to == "B") {
+              controller.text = (num * 1024).toString();
+            }
+            if (to == "MiB") {
+              controller.text = (num / 1024).toString();
+            }
+            if (to == "GiB") {
+              controller.text = (num / 1024 / 1024).toString();
+            }
+            if (to == "TiB") {
+              controller.text = (num / 1024 / 1024 / 1024).toString();
+            }
+            break;
+          case 'MiB':
+            if (to == "B") {
+              controller.text = (num * 1024 * 1024).toString();
+            }
+            if (to == "KiB") {
+              controller.text = (num * 1024).toString();
+            }
+            if (to == "GiB") {
+              controller.text = (num / 1024).toString();
+            }
+            if (to == "TiB") {
+              controller.text = (num / 1024 / 1024).toString();
+            }
+            break;
+          case 'GiB':
+            if (to == "B") {
+              controller.text = (num * 1024 * 1024 * 1024).toString();
+            }
+            if (to == "KiB") {
+              controller.text = (num * 1024 * 1024).toString();
+            }
+            if (to == "MiB") {
+              controller.text = (num * 1024).toString();
+            }
+            if (to == "TiB") {
+              controller.text = (num / 1024).toString();
+            }
+            break;
+          case 'TiB':
+            if (to == "B") {
+              controller.text = (num * 1024 * 1024 * 1024 * 1024).toString();
+            }
+            if (to == "KiB") {
+              controller.text = (num * 1024 * 1024 * 1024).toString();
+            }
+            if (to == "MiB") {
+              controller.text = (num * 1024 * 1024).toString();
+            }
+            if (to == "GiB") {
+              controller.text = (num * 1024).toString();
+            }
+            break;
+          default:
+        }
       }
     });
   }
@@ -442,7 +695,9 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
                 appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 300,
           ),
           Text(
-            "${values[valueFromIndex]} = ",
+            appState.decimalni == true
+                ? "${valuesDecimalni[valueFromIndex]} = "
+                : "${valuesBinarni[valueFromIndex]} = ",
             style: TextStyle(
                 fontSize: appState.fontSize == 1
                     ? screenHeight / 18
@@ -487,7 +742,9 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
             width: screenWidth / 150,
           ),
           Text(
-            values[valueToIndex],
+            appState.decimalni == true
+                ? valuesDecimalni[valueToIndex]
+                : valuesBinarni[valueToIndex],
             style: TextStyle(
                 fontSize: appState.fontSize == 1
                     ? screenHeight / 18
@@ -530,8 +787,14 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
                           BorderSide(color: appState.fontColor, width: 1.5))),
                   onPressed: () {
                     setState(() {
-                      completeSolution(numValue, values[valueFromIndex],
-                          values[valueToIndex]);
+                      completeSolution(
+                          numValue,
+                          appState.decimalni == true
+                              ? valuesDecimalni[valueFromIndex]
+                              : valuesBinarni[valueFromIndex],
+                          appState.decimalni == true
+                              ? valuesDecimalni[valueToIndex]
+                              : valuesBinarni[valueToIndex]);
                     });
                   },
                   child: Text('RJEŠENJE',
@@ -553,7 +816,13 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
                       Size.square(screenWidth / 35))),
               onPressed: () {
                 checkAnswer(
-                    numValue, values[valueFromIndex], values[valueToIndex]);
+                    numValue,
+                    appState.decimalni == true
+                        ? valuesDecimalni[valueFromIndex]
+                        : valuesBinarni[valueFromIndex],
+                    appState.decimalni == true
+                        ? valuesDecimalni[valueToIndex]
+                        : valuesBinarni[valueToIndex]);
               },
               child: Text('PROVJERI',
                   style: TextStyle(
@@ -575,7 +844,9 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
               child: Padding(
                 padding: EdgeInsets.only(left: screenWidth / 200),
                 child: Text(
-                  '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
+                  appState.decimalni == true
+                      ? '1 ${valuesDecimalni[valueFromIndex]} = ${setUnitTo(valuesDecimalni[valueFromIndex], valuesDecimalni[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${valuesDecimalni[valueToIndex]}\n$numValue ${valuesDecimalni[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(valuesDecimalni[valueFromIndex], valuesDecimalni[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${valuesDecimalni[valueToIndex]}'
+                      : '1 ${valuesBinarni[valueFromIndex]} = ${setUnitTo(valuesBinarni[valueFromIndex], valuesBinarni[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${valuesBinarni[valueToIndex]}\n$numValue ${valuesBinarni[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(valuesBinarni[valueFromIndex], valuesBinarni[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${valuesBinarni[valueToIndex]}',
                   style: TextStyle(fontSize: screenHeight / 25),
                   textAlign: TextAlign.left,
                 ),

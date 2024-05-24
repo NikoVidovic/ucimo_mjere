@@ -22,6 +22,7 @@ class AppState extends ChangeNotifier {
   double _fontSize = 1;
   bool _tocnoVisible = false;
   bool _netocno = false;
+  bool _decimalni = true;
 
   double _currentSliderValueDuljina = 1;
   double _currentSliderValueInformacije = 1;
@@ -52,6 +53,7 @@ class AppState extends ChangeNotifier {
   double get fontSize => _fontSize;
   bool get tocnoVisible => _tocnoVisible;
   bool get netocno => _netocno;
+  bool get decimalni => _decimalni;
 
   double get currentSliderValueDuljina => _currentSliderValueDuljina;
   double get currentSliderValueInformacije => _currentSliderValueInformacije;
@@ -193,6 +195,11 @@ class AppState extends ChangeNotifier {
 
   set netocno(bool newValue) {
     _netocno = newValue;
+    notifyListeners();
+  }
+
+  set decimalni(bool value) {
+    _decimalni = value;
     notifyListeners();
   }
 }
