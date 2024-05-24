@@ -15,8 +15,11 @@ class PostavkeInformacije extends StatefulWidget {
   State<PostavkeInformacije> createState() => _PostavkeInformacijeState();
 }
 
+List<String> typesOfTask = ['Decimalni višekratnici', 'Binarni višekratnici'];
+
 class _PostavkeInformacijeState extends State<PostavkeInformacije> {
   late AppState appState;
+  String currentTypeOfTask = typesOfTask[0];
 
   onSwitchMethodPostupak(bool newValue) {
     setState(() {
@@ -110,6 +113,42 @@ class _PostavkeInformacijeState extends State<PostavkeInformacije> {
               onSwitchMethodRjesenje),
           SizedBox(
             height: screenHeight / 30,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: screenWidth / 43),
+            child: Text(
+                'Želiš li vježbati s decimalnim (10) ili binarnim (1024) višekratnicima?',
+                style: TextStyle(
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 31
+                        : screenHeight / 31 * (appState.fontSize - 0.3),
+                    color: appState.fontColor)),
+          ),
+          Column(
+            children: [
+              ListTile(
+                title: const Text('Decimalni višekratnici'),
+                leading: Radio(
+                    value: typesOfTask[0],
+                    groupValue: currentTypeOfTask,
+                    onChanged: (value) {
+                      setState(() {
+                        currentTypeOfTask = value.toString();
+                      });
+                    }),
+              ),
+              ListTile(
+                title: const Text('Binarni višekratnici'),
+                leading: Radio(
+                    value: typesOfTask[1],
+                    groupValue: currentTypeOfTask,
+                    onChanged: (value) {
+                      setState(() {
+                        currentTypeOfTask = value.toString();
+                      });
+                    }),
+              )
+            ],
           ),
           Padding(
             padding: EdgeInsets.symmetric(
