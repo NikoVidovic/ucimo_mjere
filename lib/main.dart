@@ -17,6 +17,9 @@ void main() {
   );
 }
 
+//TODO: prilikom rjesavanja svih zadataka pitati za daljnje rjesavanje
+//TODO: handleati izlazak iz zadatka prilikom povratka prije rjesavanja svih  - tesitrati, mozda ni ne treba!
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   // This widget is the root of your application.
