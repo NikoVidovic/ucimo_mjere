@@ -23,6 +23,7 @@ class AppState extends ChangeNotifier {
   bool _tocnoVisible = false;
   bool _netocno = false;
   bool _decimalni = true;
+  final List<int> _selfTask = [];
 
   double _currentSliderValueDuljina = 1;
   double _currentSliderValueInformacije = 1;
@@ -54,6 +55,7 @@ class AppState extends ChangeNotifier {
   bool get tocnoVisible => _tocnoVisible;
   bool get netocno => _netocno;
   bool get decimalni => _decimalni;
+  List<int> get selfTask => _selfTask;
 
   double get currentSliderValueDuljina => _currentSliderValueDuljina;
   double get currentSliderValueInformacije => _currentSliderValueInformacije;
@@ -62,6 +64,21 @@ class AppState extends ChangeNotifier {
   double get currentSliderValuePovrsina => _currentSliderValuePovrsina;
   double get currentSliderValueTemperatura => _currentSliderValueTemperatura;
   double get currentSliderValueVrijeme => _currentSliderValueVrijeme;
+
+  void addItem(int item) {
+    _selfTask.add(item);
+    notifyListeners();
+  }
+
+  void removeItemAt(int index) {
+    _selfTask.removeAt(index);
+    notifyListeners();
+  }
+
+  void removeItem(int item) {
+    _selfTask.remove(item);
+    notifyListeners();
+  }
 
   set postupakShownDuljina(bool shown) {
     _postupakShownDuljina = shown;
