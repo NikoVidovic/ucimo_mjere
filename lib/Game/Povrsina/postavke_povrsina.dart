@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hello_world/Game/Povrsina/povrsina_zadatci_button.dart';
 import 'package:provider/provider.dart';
 import '../../app_state.dart';
-import '../zadatci_button.dart';
 
 class PostavkePovrsina extends StatefulWidget {
   final void Function(int) switchToTab;
@@ -166,7 +166,7 @@ class _PostavkePovrsinaState extends State<PostavkePovrsina> {
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: screenWidth / 43, vertical: screenHeight / 300),
-            child: const ZadatciButton(),
+            child: const ZadatciButtonPovrsina(),
           )
         ],
       ),

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../app_state.dart';
+import '../../app_state.dart';
 
-class ZadatciButton extends StatefulWidget {
-  const ZadatciButton({super.key});
+class ZadatciButtonTemperatura extends StatefulWidget {
+  const ZadatciButtonTemperatura({super.key});
 
   @override
-  State<ZadatciButton> createState() => _ZadatciButtonState();
+  State<ZadatciButtonTemperatura> createState() =>
+      _ZadatciButtonTemperaturaState();
 }
 
-class _ZadatciButtonState extends State<ZadatciButton> {
+class _ZadatciButtonTemperaturaState extends State<ZadatciButtonTemperatura> {
   late AppState appState;
   @override
   Widget build(BuildContext context) {
@@ -81,32 +82,14 @@ class _ZadatciButtonState extends State<ZadatciButton> {
                       textStyle: TextStyle(color: appState.fontColor),
                       dropdownMenuEntries: [
                         DropdownMenuEntry(
-                            value: "value1",
-                            label: 'value1',
+                            value: 0,
+                            label: 'C',
                             style: ButtonStyle(
                                 foregroundColor: MaterialStatePropertyAll(
                                     appState.fontColor))),
                         DropdownMenuEntry(
-                            value: "value2",
-                            label: 'value2',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: "value3",
-                            label: 'value3',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: "value4",
-                            label: 'value4',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: "value5",
-                            label: 'value5',
+                            value: 1,
+                            label: 'K',
                             style: ButtonStyle(
                                 foregroundColor: MaterialStatePropertyAll(
                                     appState.fontColor))),
@@ -139,32 +122,14 @@ class _ZadatciButtonState extends State<ZadatciButton> {
                       textStyle: TextStyle(color: appState.fontColor),
                       dropdownMenuEntries: [
                         DropdownMenuEntry(
-                            value: "value1",
-                            label: 'value1',
+                            value: 0,
+                            label: 'C',
                             style: ButtonStyle(
                                 foregroundColor: MaterialStatePropertyAll(
                                     appState.fontColor))),
                         DropdownMenuEntry(
-                            value: "value2",
-                            label: 'value2',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: "value3",
-                            label: 'value3',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: "value4",
-                            label: 'value4',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: "value5",
-                            label: 'value5',
+                            value: 1,
+                            label: 'K',
                             style: ButtonStyle(
                                 foregroundColor: MaterialStatePropertyAll(
                                     appState.fontColor))),

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hello_world/Game/Obujam/obujam_zadatci_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../app_state.dart';
-import '../zadatci_button.dart';
 
 class PostavkeObujam extends StatefulWidget {
   final void Function(int) switchToTab;
@@ -167,7 +167,7 @@ class _PostavkeObujamState extends State<PostavkeObujam> {
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: screenWidth / 43, vertical: screenHeight / 300),
-            child: const ZadatciButton(),
+            child: const ZadatciButtonObujam(),
           )
         ],
       ),
