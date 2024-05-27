@@ -59,37 +59,46 @@ class _ZadatciMasaState extends State<ZadatciMasa>
   }
 
   void generateIndexAndNumber() {
-    valueFromIndex = Random().nextInt(4);
-    valueToIndex = 0;
-    numValue = Random().nextInt(5) + 1;
-    switch (appState.currentSliderValueMasa.round()) {
-      case 1:
-        if (valueFromIndex == 0) {
-          valueFromIndex++;
-        }
-        valueToIndex = valueFromIndex - 1;
-        break;
-      case 2:
-        if (valueFromIndex == 0 || valueFromIndex == 1) {
-          valueFromIndex += 2;
-        }
-        valueToIndex = valueFromIndex - 2;
-        break;
-      case 3:
-        if (valueFromIndex == values.length - 1) {
-          valueFromIndex--;
-        }
-        if (valueFromIndex == 0) {
-          valueFromIndex++;
-        }
-        valueToIndex =
-            (Random().nextBool()) ? valueFromIndex + 1 : valueFromIndex - 1;
-        break;
-      case 4:
-      default:
-        while (valueFromIndex == valueToIndex) {
-          valueToIndex = Random().nextInt(4);
-        }
+    if (appState.selfTask.isEmpty) {
+      valueFromIndex = Random().nextInt(4);
+      valueToIndex = 0;
+      numValue = Random().nextInt(5) + 1;
+      switch (appState.currentSliderValueMasa.round()) {
+        case 1:
+          if (valueFromIndex == 0) {
+            valueFromIndex++;
+          }
+          valueToIndex = valueFromIndex - 1;
+          break;
+        case 2:
+          if (valueFromIndex == 0 || valueFromIndex == 1) {
+            valueFromIndex += 2;
+          }
+          valueToIndex = valueFromIndex - 2;
+          break;
+        case 3:
+          if (valueFromIndex == values.length - 1) {
+            valueFromIndex--;
+          }
+          if (valueFromIndex == 0) {
+            valueFromIndex++;
+          }
+          valueToIndex =
+              (Random().nextBool()) ? valueFromIndex + 1 : valueFromIndex - 1;
+          break;
+        case 4:
+        default:
+          while (valueFromIndex == valueToIndex) {
+            valueToIndex = Random().nextInt(4);
+          }
+      }
+    } else {
+      valueFromIndex = appState.selfTask[1];
+      valueToIndex = appState.selfTask[2];
+      numValue = appState.selfTask[0];
+      appState.selfTask.removeAt(0);
+      appState.selfTask.removeAt(0);
+      appState.selfTask.removeAt(0);
     }
   }
 

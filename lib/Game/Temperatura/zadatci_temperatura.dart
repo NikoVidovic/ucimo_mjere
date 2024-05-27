@@ -61,26 +61,35 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
   }
 
   void generateIndexAndNumber() {
-    switch (appState.currentSliderValueTemperatura) {
-      case 1:
-      case 2:
-        celsius = 100;
-        kelvin = 300;
-        numValue = (valueFromIndex == 1)
-            ? Random().nextInt(kelvin)
-            : Random().nextInt(celsius);
-        break;
-      case 3:
-      case 4:
-      default:
-        celsius = (300 - 273.15).toInt();
-        kelvin = 400;
-        valueFromIndex = Random().nextInt(values.length);
-        valueToIndex = (valueFromIndex + 1) % values.length;
-        numValue = (valueFromIndex == 1)
-            ? Random().nextInt(kelvin)
-            : Random().nextInt(celsius);
-        break;
+    if (appState.selfTask.isEmpty) {
+      switch (appState.currentSliderValueTemperatura) {
+        case 1:
+        case 2:
+          celsius = 100;
+          kelvin = 300;
+          numValue = (valueFromIndex == 1)
+              ? Random().nextInt(kelvin)
+              : Random().nextInt(celsius);
+          break;
+        case 3:
+        case 4:
+        default:
+          celsius = (300 - 273.15).toInt();
+          kelvin = 400;
+          valueFromIndex = Random().nextInt(values.length);
+          valueToIndex = (valueFromIndex + 1) % values.length;
+          numValue = (valueFromIndex == 1)
+              ? Random().nextInt(kelvin)
+              : Random().nextInt(celsius);
+          break;
+      }
+    } else {
+      valueFromIndex = appState.selfTask[1];
+      valueToIndex = appState.selfTask[2];
+      numValue = appState.selfTask[0];
+      appState.selfTask.removeAt(0);
+      appState.selfTask.removeAt(0);
+      appState.selfTask.removeAt(0);
     }
   }
 

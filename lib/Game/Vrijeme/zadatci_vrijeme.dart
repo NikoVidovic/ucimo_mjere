@@ -59,27 +59,36 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
   }
 
   void generateIndexAndNumber() {
-    valueFromIndex = Random().nextInt(5);
-    valueToIndex = 0;
-    numValue = Random().nextInt(3) + 1;
-    switch (appState.currentSliderValueVrijeme) {
-      case 1:
-      case 2:
-        if (valueFromIndex == 0) {
-          valueFromIndex++;
-        }
-        valueToIndex = valueFromIndex - 1;
-        break;
+    if (appState.selfTask.isEmpty) {
+      valueFromIndex = Random().nextInt(5);
+      valueToIndex = 0;
+      numValue = Random().nextInt(3) + 1;
+      switch (appState.currentSliderValueVrijeme) {
+        case 1:
+        case 2:
+          if (valueFromIndex == 0) {
+            valueFromIndex++;
+          }
+          valueToIndex = valueFromIndex - 1;
+          break;
 
-      case 3:
-      case 4:
-      default:
-        if (valueFromIndex == 0 || valueFromIndex == 1) {
-          valueFromIndex += 2;
-        }
-        valueToIndex =
-            (Random().nextBool()) ? valueFromIndex - 1 : valueFromIndex - 2;
-        break;
+        case 3:
+        case 4:
+        default:
+          if (valueFromIndex == 0 || valueFromIndex == 1) {
+            valueFromIndex += 2;
+          }
+          valueToIndex =
+              (Random().nextBool()) ? valueFromIndex - 1 : valueFromIndex - 2;
+          break;
+      }
+    } else {
+      valueFromIndex = appState.selfTask[1];
+      valueToIndex = appState.selfTask[2];
+      numValue = appState.selfTask[0];
+      appState.selfTask.removeAt(0);
+      appState.selfTask.removeAt(0);
+      appState.selfTask.removeAt(0);
     }
   }
 

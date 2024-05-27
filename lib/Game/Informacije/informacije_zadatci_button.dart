@@ -13,6 +13,29 @@ class ZadatciButtonInformacije extends StatefulWidget {
 
 class _ZadatciButtonInformacijeState extends State<ZadatciButtonInformacije> {
   late AppState appState;
+  late TextEditingController _textFieldController;
+  int? _selectedValue1;
+  int? _selectedValue2;
+
+  @override
+  void initState() {
+    super.initState();
+    _textFieldController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _textFieldController.dispose();
+    super.dispose();
+  }
+
+  void fillTheList(valueFrom, valueTo, numberString) {
+    appState.addItem(int.parse(numberString));
+    appState.addItem(valueFrom);
+    appState.addItem(valueTo);
+    _textFieldController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     appState = Provider.of<AppState>(context);
@@ -52,6 +75,7 @@ class _ZadatciButtonInformacijeState extends State<ZadatciButtonInformacije> {
               children: [
                 Expanded(
                   child: TextField(
+                    controller: _textFieldController,
                     keyboardType: TextInputType.number,
                     style: TextStyle(
                         fontSize: screenHeight / 35, color: appState.fontColor),
@@ -68,6 +92,11 @@ class _ZadatciButtonInformacijeState extends State<ZadatciButtonInformacije> {
                 ),
                 Flexible(
                   child: DropdownMenu(
+                      onSelected: (value1) {
+                        setState(() {
+                          _selectedValue1 = value1;
+                        });
+                      },
                       width: screenWidth / 4,
                       label: Text(
                         'Odaberite mjernu jedinicu',
@@ -126,6 +155,11 @@ class _ZadatciButtonInformacijeState extends State<ZadatciButtonInformacije> {
                 ),
                 Flexible(
                   child: DropdownMenu(
+                      onSelected: (value2) {
+                        setState(() {
+                          _selectedValue2 = value2;
+                        });
+                      },
                       width: screenWidth / 4,
                       label: Text(
                         'Odaberite mjernu jedinicu',
@@ -176,7 +210,50 @@ class _ZadatciButtonInformacijeState extends State<ZadatciButtonInformacije> {
           ),
           actions: [
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    if (_selectedValue1 == _selectedValue2) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Odaberite različite mjerne jedinice!'),
+                          duration: Duration(seconds: 3), // Snackbar duration
+                        ),
+                      );
+                    } else if (_textFieldController.text == "") {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Upišite broj!'),
+                          duration: Duration(seconds: 3), // Snackbar duration
+                        ),
+                      );
+                    } else if (_selectedValue1 == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                              'Upišite mjernu jedinicu iz koje želite pretvarati!'),
+                          duration: Duration(seconds: 3), // Snackbar duration
+                        ),
+                      );
+                    } else if (_selectedValue2 == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                              'Upišite mjernu jedinicu u koju želite pretvarati!'),
+                          duration: Duration(seconds: 3), // Snackbar duration
+                        ),
+                      );
+                    } else {
+                      fillTheList(_selectedValue1, _selectedValue2,
+                          _textFieldController.text);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Zadatak uspješno dodan!'),
+                          duration: Duration(seconds: 3), // Snackbar duration
+                        ),
+                      );
+                    }
+                  });
+                },
                 child: Text("DODAJ ZADATAK",
                     style: TextStyle(
                         fontSize: screenHeight / 45,

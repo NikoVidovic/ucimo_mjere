@@ -32,6 +32,7 @@ class _ZadatciButtonDuljinaState extends State<ZadatciButtonDuljina> {
     appState.addItem(int.parse(numberString));
     appState.addItem(valueFrom);
     appState.addItem(valueTo);
+    _textFieldController.clear();
   }
 
   @override
