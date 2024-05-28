@@ -97,9 +97,6 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
       valueFromIndex = appState.selfTask[1];
       valueToIndex = appState.selfTask[2];
       numValue = appState.selfTask[0];
-      appState.selfTask.removeAt(0);
-      appState.selfTask.removeAt(0);
-      appState.selfTask.removeAt(0);
     }
   }
 
@@ -263,7 +260,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
     }
   }
 
-  void checkAnswer(int num, String from, String to) {
+  bool checkAnswer(int num, String from, String to) {
     bool isCorrect = false;
     setState(() {
       FocusManager.instance.primaryFocus?.unfocus();
@@ -478,6 +475,8 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
         });
       }
     });
+
+    return isCorrect;
   }
 
   completeSolution(int num, String from, String to) {
@@ -824,7 +823,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
                   minimumSize: MaterialStateProperty.all<Size>(
                       Size.square(screenWidth / 35))),
               onPressed: () {
-                checkAnswer(
+                var isCorrect = checkAnswer(
                     numValue,
                     appState.decimalni == true
                         ? valuesDecimalni[valueFromIndex]
@@ -832,6 +831,17 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
                     appState.decimalni == true
                         ? valuesDecimalni[valueToIndex]
                         : valuesBinarni[valueToIndex]);
+                if (appState.task &&
+                    appState.selfTask.isNotEmpty &&
+                    isCorrect) {
+                  appState.selfTask.removeAt(0);
+                  appState.selfTask.removeAt(0);
+                  appState.selfTask.removeAt(0);
+                }
+                if (appState.task && appState.selfTask.isEmpty) {
+                  openDialog(screenWidth, screenHeight, appState.fontColor);
+                  appState.task = false;
+                }
               },
               child: Text('PROVJERI',
                   style: TextStyle(
@@ -864,4 +874,42 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
       )
     ]);
   }
+
+  Future openDialog(screenWidth, screenHeight, fontColor) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            backgroundColor: appState.backgroundColor,
+            title: Text(
+              "Bravo! Uspješno ste rješili sve vlastite zadatke! Želite li nastaviti s vježbanjem?",
+              style: TextStyle(
+                  fontSize: screenWidth / 50, color: appState.fontColor),
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 200.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "DA",
+                          style: TextStyle(
+                              fontSize: screenHeight / 35, color: fontColor),
+                        )),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("NE",
+                            style: TextStyle(
+                                fontSize: screenHeight / 35, color: fontColor)))
+                  ],
+                ),
+              )
+            ],
+          ));
 }

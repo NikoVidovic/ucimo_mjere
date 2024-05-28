@@ -96,9 +96,6 @@ class _ZadatciMasaState extends State<ZadatciMasa>
       valueFromIndex = appState.selfTask[1];
       valueToIndex = appState.selfTask[2];
       numValue = appState.selfTask[0];
-      appState.selfTask.removeAt(0);
-      appState.selfTask.removeAt(0);
-      appState.selfTask.removeAt(0);
     }
   }
 
@@ -153,7 +150,7 @@ class _ZadatciMasaState extends State<ZadatciMasa>
     return 1;
   }
 
-  void checkAnswer(int num, String from, String to) {
+  bool checkAnswer(int num, String from, String to) {
     bool isCorrect = false;
     setState(() {
       FocusManager.instance.primaryFocus?.unfocus();
@@ -245,6 +242,7 @@ class _ZadatciMasaState extends State<ZadatciMasa>
         });
       }
     });
+    return isCorrect;
   }
 
   completeSolution(int num, String from, String to) {
@@ -481,8 +479,19 @@ class _ZadatciMasaState extends State<ZadatciMasa>
                   minimumSize: MaterialStateProperty.all<Size>(
                       Size.square(screenWidth / 35))),
               onPressed: () {
-                checkAnswer(
+                var isCorrect = checkAnswer(
                     numValue, values[valueFromIndex], values[valueToIndex]);
+                if (appState.task &&
+                    appState.selfTask.isNotEmpty &&
+                    isCorrect) {
+                  appState.selfTask.removeAt(0);
+                  appState.selfTask.removeAt(0);
+                  appState.selfTask.removeAt(0);
+                }
+                if (appState.task && appState.selfTask.isEmpty) {
+                  openDialog(screenWidth, screenHeight, appState.fontColor);
+                  appState.task = false;
+                }
               },
               child: Text('PROVJERI',
                   style: TextStyle(
@@ -513,4 +522,42 @@ class _ZadatciMasaState extends State<ZadatciMasa>
       )
     ]);
   }
+
+  Future openDialog(screenWidth, screenHeight, fontColor) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            backgroundColor: appState.backgroundColor,
+            title: Text(
+              "Bravo! Uspješno ste rješili sve vlastite zadatke! Želite li nastaviti s vježbanjem?",
+              style: TextStyle(
+                  fontSize: screenWidth / 50, color: appState.fontColor),
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 200.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "DA",
+                          style: TextStyle(
+                              fontSize: screenHeight / 35, color: fontColor),
+                        )),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("NE",
+                            style: TextStyle(
+                                fontSize: screenHeight / 35, color: fontColor)))
+                  ],
+                ),
+              )
+            ],
+          ));
 }

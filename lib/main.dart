@@ -17,8 +17,8 @@ void main() {
   );
 }
 
-//TODO: prilikom rjesavanja svih zadataka pitati za daljnje rjesavanje
-//TODO: handleati izlazak iz zadatka prilikom povratka prije rjesavanja svih  - tesitrati, mozda ni ne treba!
+//TODO: dodati info o tome da se rješavaju vlastiti zadatci
+//TODO: dodati liste za svaku kategoriju
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

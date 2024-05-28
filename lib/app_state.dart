@@ -24,6 +24,7 @@ class AppState extends ChangeNotifier {
   bool _netocno = false;
   bool _decimalni = true;
   final List<int> _selfTask = [];
+  bool _task = false;
 
   double _currentSliderValueDuljina = 1;
   double _currentSliderValueInformacije = 1;
@@ -56,6 +57,7 @@ class AppState extends ChangeNotifier {
   bool get netocno => _netocno;
   bool get decimalni => _decimalni;
   List<int> get selfTask => _selfTask;
+  bool get task => _task;
 
   double get currentSliderValueDuljina => _currentSliderValueDuljina;
   double get currentSliderValueInformacije => _currentSliderValueInformacije;
@@ -217,6 +219,11 @@ class AppState extends ChangeNotifier {
 
   set decimalni(bool value) {
     _decimalni = value;
+    notifyListeners();
+  }
+
+  set task(bool value) {
+    _task = value;
     notifyListeners();
   }
 }

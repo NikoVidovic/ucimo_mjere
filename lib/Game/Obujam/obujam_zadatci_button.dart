@@ -29,6 +29,7 @@ class _ZadatciButtonObujamState extends State<ZadatciButtonObujam> {
   }
 
   void fillTheList(valueFrom, valueTo, numberString) {
+    appState.task = true;
     appState.addItem(int.parse(numberString));
     appState.addItem(valueFrom);
     appState.addItem(valueTo);

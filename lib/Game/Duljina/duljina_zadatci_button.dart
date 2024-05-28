@@ -29,6 +29,7 @@ class _ZadatciButtonDuljinaState extends State<ZadatciButtonDuljina> {
   }
 
   void fillTheList(valueFrom, valueTo, numberString) {
+    appState.task = true;
     appState.addItem(int.parse(numberString));
     appState.addItem(valueFrom);
     appState.addItem(valueTo);
