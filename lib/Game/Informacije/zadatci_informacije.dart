@@ -444,6 +444,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
         appState.tocnoVisible = true;
         String audioPath = "yes.mp3";
         playSound(audioPath);
+        appState.animationGoing = true;
         opacity = 0; // Initially set opacity to 0
         flickerTimer =
             Timer.periodic(const Duration(milliseconds: 300), (timer) {
@@ -455,6 +456,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
         // Delay clearing the text field after the animation duration
         Future.delayed(const Duration(milliseconds: 1500), () {
           setState(() {
+            appState.animationGoing = false;
             generateIndexAndNumber();
             controller.clear();
             opacity =
@@ -638,242 +640,267 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
     appState = Provider.of<AppState>(context);
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return Column(children: [
-      Padding(
-        padding:
-            EdgeInsets.only(top: screenHeight / 100, right: screenWidth / 1.9),
-        child: Text(
-          "Preračunaj mjeru!\nOdgovor upiši na crtu i klikni na gumb 'PROVJERI'!",
-          style: TextStyle(
-              fontSize: appState.fontSize == 1
-                  ? screenHeight / 30
-                  : screenHeight / 30 * (appState.fontSize - 0.2),
-              color: appState.fontColor),
-          textAlign: TextAlign.left,
-        ),
-      ),
-      Padding(
-        padding: EdgeInsets.only(
-            top: screenHeight / 500,
-            left: screenWidth / 43,
-            right: appState.fontSize == 1
-                ? screenWidth / 5
-                : screenWidth / 4 * (appState.fontSize - 0.85)),
-        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Visibility(
-              visible: appState.helpButtonShown,
-              maintainSize: true,
-              maintainAnimation: true,
-              maintainState: true,
-              child: ElevatedButton(
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                      EdgeInsets.all(screenWidth / 120),
+    return Stack(
+      children: [
+        Column(children: [
+          Padding(
+            padding: EdgeInsets.only(
+                top: screenHeight / 100, right: screenWidth / 1.9),
+            child: Text(
+              "Preračunaj mjeru!\nOdgovor upiši na crtu i klikni na gumb 'PROVJERI'!",
+              style: TextStyle(
+                  fontSize: appState.fontSize == 1
+                      ? screenHeight / 30
+                      : screenHeight / 30 * (appState.fontSize - 0.2),
+                  color: appState.fontColor),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                top: screenHeight / 500,
+                left: screenWidth / 43,
+                right: appState.fontSize == 1
+                    ? screenWidth / 5
+                    : screenWidth / 4 * (appState.fontSize - 0.85)),
+            child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Visibility(
+                  visible: appState.helpButtonShown,
+                  maintainSize: true,
+                  maintainAnimation: true,
+                  maintainState: true,
+                  child: ElevatedButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                          EdgeInsets.all(screenWidth / 120),
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          if (appState.postupakShownInformacije == false) {
+                            appState.postupakShownInformacije = true;
+                          } else if (appState.postupakShownInformacije ==
+                              true) {
+                            appState.postupakShownInformacije = false;
+                          }
+                        });
+                      },
+                      child: Text(
+                        'Trebaš pomoć?',
+                        style: TextStyle(
+                            fontSize: appState.fontSize == 1
+                                ? screenHeight / 31
+                                : screenHeight /
+                                    31 *
+                                    (appState.fontSize - 0.35)),
+                      ))),
+              SizedBox(
+                width:
+                    appState.fontSize == 1 ? screenWidth / 8 : screenWidth / 16,
+              ),
+              Text(
+                numValue.toString(),
+                style: TextStyle(
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 18
+                        : screenHeight / 18 * (appState.fontSize - 0.25),
+                    color: appState.fontColor),
+              ),
+              SizedBox(
+                width: appState.fontSize == 1
+                    ? screenWidth / 150
+                    : screenWidth / 300,
+              ),
+              Text(
+                appState.decimalni == true
+                    ? "${valuesDecimalni[valueFromIndex]} = "
+                    : "${valuesBinarni[valueFromIndex]} = ",
+                style: TextStyle(
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 18
+                        : screenHeight / 18 * (appState.fontSize - 0.25),
+                    color: appState.fontColor),
+              ),
+              SizedBox(
+                width: appState.fontSize == 1
+                    ? screenWidth / 150
+                    : screenWidth / 800,
+              ),
+              Expanded(
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 300),
+                  opacity: opacity,
+                  child: AnimatedPadding(
+                    duration: const Duration(milliseconds: 200),
+                    padding: EdgeInsets.only(
+                        top: sizeAnimation.value, right: sizeAnimation.value),
+                    child: TextField(
+                      style: TextStyle(
+                          fontSize: appState.fontSize == 1
+                              ? screenHeight / 25
+                              : screenHeight / 25 * (appState.fontSize),
+                          color: appState.fontColor),
+                      textAlign: TextAlign.center,
+                      controller: controller,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        hintText: 'Unesite rješenje',
+                        hintStyle: TextStyle(
+                            fontSize: appState.fontSize == 1
+                                ? screenHeight / 50
+                                : screenHeight / 50 * (appState.fontSize - 0.3),
+                            color: appState.fontColor),
+                        alignLabelWithHint: true,
+                      ),
                     ),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      if (appState.postupakShownInformacije == false) {
-                        appState.postupakShownInformacije = true;
-                      } else if (appState.postupakShownInformacije == true) {
-                        appState.postupakShownInformacije = false;
-                      }
-                    });
-                  },
-                  child: Text(
-                    'Trebaš pomoć?',
-                    style: TextStyle(
-                        fontSize: appState.fontSize == 1
-                            ? screenHeight / 31
-                            : screenHeight / 31 * (appState.fontSize - 0.35)),
-                  ))),
-          SizedBox(
-            width: appState.fontSize == 1 ? screenWidth / 8 : screenWidth / 16,
-          ),
-          Text(
-            numValue.toString(),
-            style: TextStyle(
-                fontSize: appState.fontSize == 1
-                    ? screenHeight / 18
-                    : screenHeight / 18 * (appState.fontSize - 0.25),
-                color: appState.fontColor),
-          ),
-          SizedBox(
-            width:
-                appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 300,
-          ),
-          Text(
-            appState.decimalni == true
-                ? "${valuesDecimalni[valueFromIndex]} = "
-                : "${valuesBinarni[valueFromIndex]} = ",
-            style: TextStyle(
-                fontSize: appState.fontSize == 1
-                    ? screenHeight / 18
-                    : screenHeight / 18 * (appState.fontSize - 0.25),
-                color: appState.fontColor),
-          ),
-          SizedBox(
-            width:
-                appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 800,
-          ),
-          Expanded(
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 300),
-              opacity: opacity,
-              child: AnimatedPadding(
-                duration: const Duration(milliseconds: 200),
-                padding: EdgeInsets.only(
-                    top: sizeAnimation.value, right: sizeAnimation.value),
-                child: TextField(
-                  style: TextStyle(
-                      fontSize: appState.fontSize == 1
-                          ? screenHeight / 25
-                          : screenHeight / 25 * (appState.fontSize),
-                      color: appState.fontColor),
-                  textAlign: TextAlign.center,
-                  controller: controller,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: 'Unesite rješenje',
-                    hintStyle: TextStyle(
-                        fontSize: appState.fontSize == 1
-                            ? screenHeight / 50
-                            : screenHeight / 50 * (appState.fontSize - 0.3),
-                        color: appState.fontColor),
-                    alignLabelWithHint: true,
                   ),
                 ),
               ),
-            ),
+              SizedBox(
+                width: screenWidth / 150,
+              ),
+              Text(
+                appState.decimalni == true
+                    ? valuesDecimalni[valueToIndex]
+                    : valuesBinarni[valueToIndex],
+                style: TextStyle(
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 18
+                        : screenHeight / 18 * (appState.fontSize - 0.25),
+                    color: appState.fontColor),
+              ),
+              SizedBox(
+                width: screenWidth / 30,
+              ),
+              Visibility(
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                visible: appState.tocnoVisible,
+                child: Image.asset(
+                  appState.netocno == false
+                      ? 'assets/tocno.png'
+                      : 'assets/netocno.png',
+                  width: screenWidth / 15,
+                  height: screenHeight / 13,
+                ),
+              )
+            ]),
           ),
           SizedBox(
-            width: screenWidth / 150,
+            height: appState.fontSize == 1 ? 0 : screenHeight / 200,
           ),
-          Text(
-            appState.decimalni == true
-                ? valuesDecimalni[valueToIndex]
-                : valuesBinarni[valueToIndex],
-            style: TextStyle(
-                fontSize: appState.fontSize == 1
-                    ? screenHeight / 18
-                    : screenHeight / 18 * (appState.fontSize - 0.25),
-                color: appState.fontColor),
-          ),
-          SizedBox(
-            width: screenWidth / 30,
-          ),
-          Visibility(
-            maintainSize: true,
-            maintainAnimation: true,
-            maintainState: true,
-            visible: appState.tocnoVisible,
-            child: Image.asset(
-              appState.netocno == false
-                  ? 'assets/tocno.png'
-                  : 'assets/netocno.png',
-              width: screenWidth / 15,
-              height: screenHeight / 13,
-            ),
-          )
-        ]),
-      ),
-      SizedBox(
-        height: appState.fontSize == 1 ? 0 : screenHeight / 200,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Visibility(
-              visible: appState.rjesenjeShownInformacije,
-              child: OutlinedButton(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Visibility(
+                  visible: appState.rjesenjeShownInformacije,
+                  child: OutlinedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color.fromARGB(255, 212, 171, 36)),
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          side: MaterialStateProperty.all<BorderSide>(
+                              BorderSide(
+                                  color: appState.fontColor, width: 1.5))),
+                      onPressed: () {
+                        setState(() {
+                          completeSolution(
+                              numValue,
+                              appState.decimalni == true
+                                  ? valuesDecimalni[valueFromIndex]
+                                  : valuesBinarni[valueFromIndex],
+                              appState.decimalni == true
+                                  ? valuesDecimalni[valueToIndex]
+                                  : valuesBinarni[valueToIndex]);
+                        });
+                      },
+                      child: Text('RJEŠENJE',
+                          style: TextStyle(
+                              fontSize: appState.fontSize == 1
+                                  ? screenHeight / 35
+                                  : screenHeight /
+                                      35 *
+                                      (appState.fontSize - 0.25),
+                              color: Colors.black)))),
+              SizedBox(
+                width: screenWidth / 150,
+              ),
+              OutlinedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
-                          const Color.fromARGB(255, 212, 171, 36)),
+                          const Color.fromARGB(255, 22, 56, 74)),
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
-                      side: MaterialStateProperty.all<BorderSide>(
-                          BorderSide(color: appState.fontColor, width: 1.5))),
+                      minimumSize: MaterialStateProperty.all<Size>(
+                          Size.square(screenWidth / 35))),
                   onPressed: () {
-                    setState(() {
-                      completeSolution(
-                          numValue,
-                          appState.decimalni == true
-                              ? valuesDecimalni[valueFromIndex]
-                              : valuesBinarni[valueFromIndex],
-                          appState.decimalni == true
-                              ? valuesDecimalni[valueToIndex]
-                              : valuesBinarni[valueToIndex]);
-                    });
+                    var isCorrect = checkAnswer(
+                        numValue,
+                        appState.decimalni == true
+                            ? valuesDecimalni[valueFromIndex]
+                            : valuesBinarni[valueFromIndex],
+                        appState.decimalni == true
+                            ? valuesDecimalni[valueToIndex]
+                            : valuesBinarni[valueToIndex]);
+                    if (appState.taskInformacije &&
+                        appState.selfTaskInformacije.isNotEmpty &&
+                        isCorrect) {
+                      appState.selfTaskInformacije.removeAt(0);
+                      appState.selfTaskInformacije.removeAt(0);
+                      appState.selfTaskInformacije.removeAt(0);
+                    }
+                    if (appState.taskInformacije &&
+                        appState.selfTaskInformacije.isEmpty) {
+                      openDialog(screenWidth, screenHeight, appState.fontColor);
+                      appState.taskInformacije = false;
+                    }
                   },
-                  child: Text('RJEŠENJE',
+                  child: Text('PROVJERI',
                       style: TextStyle(
                           fontSize: appState.fontSize == 1
                               ? screenHeight / 35
-                              : screenHeight / 35 * (appState.fontSize - 0.25),
-                          color: Colors.black)))),
-          SizedBox(
-            width: screenWidth / 150,
+                              : screenHeight /
+                                  35 *
+                                  (appState.fontSize - 0.25)))),
+            ],
           ),
-          OutlinedButton(
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 22, 56, 74)),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  minimumSize: MaterialStateProperty.all<Size>(
-                      Size.square(screenWidth / 35))),
-              onPressed: () {
-                var isCorrect = checkAnswer(
-                    numValue,
-                    appState.decimalni == true
-                        ? valuesDecimalni[valueFromIndex]
-                        : valuesBinarni[valueFromIndex],
-                    appState.decimalni == true
-                        ? valuesDecimalni[valueToIndex]
-                        : valuesBinarni[valueToIndex]);
-                if (appState.taskInformacije &&
-                    appState.selfTaskInformacije.isNotEmpty &&
-                    isCorrect) {
-                  appState.selfTaskInformacije.removeAt(0);
-                  appState.selfTaskInformacije.removeAt(0);
-                  appState.selfTaskInformacije.removeAt(0);
-                }
-                if (appState.taskInformacije &&
-                    appState.selfTaskInformacije.isEmpty) {
-                  openDialog(screenWidth, screenHeight, appState.fontColor);
-                  appState.taskInformacije = false;
-                }
-              },
-              child: Text('PROVJERI',
-                  style: TextStyle(
-                      fontSize: appState.fontSize == 1
-                          ? screenHeight / 35
-                          : screenHeight / 35 * (appState.fontSize - 0.25)))),
-        ],
-      ),
-      SizedBox(
-        height: appState.fontSize == 1 ? 0 : screenHeight / 200,
-      ),
-      Padding(
-        padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
-        child: Visibility(
-            visible: appState.postupakShownInformacije,
-            child: Container(
-              width: double.maxFinite,
-              color: const Color.fromARGB(255, 232, 196, 80),
-              child: Padding(
-                padding: EdgeInsets.only(left: screenWidth / 200),
-                child: Text(
-                  appState.decimalni == true
-                      ? '1 ${valuesDecimalni[valueFromIndex]} = ${setUnitTo(valuesDecimalni[valueFromIndex], valuesDecimalni[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${valuesDecimalni[valueToIndex]}\n$numValue ${valuesDecimalni[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(valuesDecimalni[valueFromIndex], valuesDecimalni[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${valuesDecimalni[valueToIndex]}'
-                      : '1 ${valuesBinarni[valueFromIndex]} = ${setUnitTo(valuesBinarni[valueFromIndex], valuesBinarni[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${valuesBinarni[valueToIndex]}\n$numValue ${valuesBinarni[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(valuesBinarni[valueFromIndex], valuesBinarni[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${valuesBinarni[valueToIndex]}',
-                  style: TextStyle(fontSize: screenHeight / 25),
-                  textAlign: TextAlign.left,
-                ),
+          SizedBox(
+            height: appState.fontSize == 1 ? 0 : screenHeight / 200,
+          ),
+          Padding(
+            padding:
+                EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
+            child: Visibility(
+                visible: appState.postupakShownInformacije,
+                child: Container(
+                  width: double.maxFinite,
+                  color: const Color.fromARGB(255, 232, 196, 80),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: screenWidth / 200),
+                    child: Text(
+                      appState.decimalni == true
+                          ? '1 ${valuesDecimalni[valueFromIndex]} = ${setUnitTo(valuesDecimalni[valueFromIndex], valuesDecimalni[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${valuesDecimalni[valueToIndex]}\n$numValue ${valuesDecimalni[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(valuesDecimalni[valueFromIndex], valuesDecimalni[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${valuesDecimalni[valueToIndex]}'
+                          : '1 ${valuesBinarni[valueFromIndex]} = ${setUnitTo(valuesBinarni[valueFromIndex], valuesBinarni[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${valuesBinarni[valueToIndex]}\n$numValue ${valuesBinarni[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(valuesBinarni[valueFromIndex], valuesBinarni[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${valuesBinarni[valueToIndex]}',
+                      style: TextStyle(fontSize: screenHeight / 25),
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                )),
+          )
+        ]),
+        if (appState.animationGoing)
+          Positioned.fill(
+            child: AbsorbPointer(
+              absorbing: true,
+              child: Container(
+                color: Colors.transparent, // Fully transparent
               ),
-            )),
-      )
-    ]);
+            ),
+          ),
+      ],
+    );
   }
 
   Future openDialog(screenWidth, screenHeight, fontColor) => showDialog(

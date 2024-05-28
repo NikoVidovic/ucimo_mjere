@@ -213,6 +213,7 @@ class _ZadatciMasaState extends State<ZadatciMasa>
         appState.tocnoVisible = true;
         String audioPath = "yes.mp3";
         playSound(audioPath);
+        appState.animationGoing = true;
         opacity = 0;
         flickerTimer =
             Timer.periodic(const Duration(milliseconds: 300), (timer) {
@@ -223,6 +224,7 @@ class _ZadatciMasaState extends State<ZadatciMasa>
 
         Future.delayed(const Duration(milliseconds: 1500), () {
           setState(() {
+            appState.animationGoing = false;
             generateIndexAndNumber();
             controller.clear();
             opacity = 1;
@@ -302,224 +304,241 @@ class _ZadatciMasaState extends State<ZadatciMasa>
     appState = Provider.of<AppState>(context);
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return Column(children: [
-      Padding(
-        padding:
-            EdgeInsets.only(top: screenHeight / 100, right: screenWidth / 1.9),
-        child: Text(
-          "Preračunaj mjeru!\nOdgovor upiši na crtu i klikni na gumb 'PROVJERI'!",
-          style: TextStyle(
-              fontSize: appState.fontSize == 1
-                  ? screenHeight / 30
-                  : screenHeight / 30 * (appState.fontSize - 0.2),
-              color: appState.fontColor),
-          textAlign: TextAlign.left,
+    return Stack(children: [
+      Column(children: [
+        Padding(
+          padding: EdgeInsets.only(
+              top: screenHeight / 100, right: screenWidth / 1.9),
+          child: Text(
+            "Preračunaj mjeru!\nOdgovor upiši na crtu i klikni na gumb 'PROVJERI'!",
+            style: TextStyle(
+                fontSize: appState.fontSize == 1
+                    ? screenHeight / 30
+                    : screenHeight / 30 * (appState.fontSize - 0.2),
+                color: appState.fontColor),
+            textAlign: TextAlign.left,
+          ),
         ),
-      ),
-      Padding(
-        padding: EdgeInsets.only(
-            top: screenHeight / 500,
-            left: screenWidth / 43,
-            right: appState.fontSize == 1
-                ? screenWidth / 5
-                : screenWidth / 4 * (appState.fontSize - 0.85)),
-        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Visibility(
-              visible: appState.helpButtonShown,
+        Padding(
+          padding: EdgeInsets.only(
+              top: screenHeight / 500,
+              left: screenWidth / 43,
+              right: appState.fontSize == 1
+                  ? screenWidth / 5
+                  : screenWidth / 4 * (appState.fontSize - 0.85)),
+          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Visibility(
+                visible: appState.helpButtonShown,
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                child: ElevatedButton(
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                        EdgeInsets.all(screenWidth / 120),
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        if (appState.postupakShownMasa == false) {
+                          appState.postupakShownMasa = true;
+                        } else if (appState.postupakShownMasa == true) {
+                          appState.postupakShownMasa = false;
+                        }
+                      });
+                    },
+                    child: Text(
+                      'Trebaš pomoć?',
+                      style: TextStyle(
+                          fontSize: appState.fontSize == 1
+                              ? screenHeight / 31
+                              : screenHeight / 31 * (appState.fontSize - 0.35)),
+                    ))),
+            SizedBox(
+              width:
+                  appState.fontSize == 1 ? screenWidth / 8 : screenWidth / 16,
+            ),
+            Text(
+              numValue.toString(),
+              style: TextStyle(
+                  fontSize: appState.fontSize == 1
+                      ? screenHeight / 18
+                      : screenHeight / 18 * (appState.fontSize - 0.25),
+                  color: appState.fontColor),
+            ),
+            SizedBox(
+              width: appState.fontSize == 1
+                  ? screenWidth / 150
+                  : screenWidth / 300,
+            ),
+            Text(
+              "${values[valueFromIndex]} = ",
+              style: TextStyle(
+                  fontSize: appState.fontSize == 1
+                      ? screenHeight / 18
+                      : screenHeight / 18 * (appState.fontSize - 0.25),
+                  color: appState.fontColor),
+            ),
+            SizedBox(
+              width: appState.fontSize == 1
+                  ? screenWidth / 150
+                  : screenWidth / 800,
+            ),
+            Expanded(
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 300),
+                opacity: opacity,
+                child: AnimatedPadding(
+                  duration: const Duration(milliseconds: 200),
+                  padding: EdgeInsets.only(
+                      top: sizeAnimation.value, right: sizeAnimation.value),
+                  child: TextField(
+                    style: TextStyle(
+                        fontSize: appState.fontSize == 1
+                            ? screenHeight / 25
+                            : screenHeight / 25 * (appState.fontSize),
+                        color: appState.fontColor),
+                    textAlign: TextAlign.center,
+                    controller: controller,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      hintText: 'Unesite rješenje',
+                      hintStyle: TextStyle(
+                          fontSize: appState.fontSize == 1
+                              ? screenHeight / 50
+                              : screenHeight / 50 * (appState.fontSize - 0.3),
+                          color: appState.fontColor),
+                      alignLabelWithHint: true,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: screenWidth / 150,
+            ),
+            Text(
+              values[valueToIndex],
+              style: TextStyle(
+                  fontSize: appState.fontSize == 1
+                      ? screenHeight / 18
+                      : screenHeight / 18 * (appState.fontSize - 0.25),
+                  color: appState.fontColor),
+            ),
+            SizedBox(
+              width: screenWidth / 30,
+            ),
+            Visibility(
               maintainSize: true,
               maintainAnimation: true,
               maintainState: true,
-              child: ElevatedButton(
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                      EdgeInsets.all(screenWidth / 120),
-                    ),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      if (appState.postupakShownMasa == false) {
-                        appState.postupakShownMasa = true;
-                      } else if (appState.postupakShownMasa == true) {
-                        appState.postupakShownMasa = false;
-                      }
-                    });
-                  },
-                  child: Text(
-                    'Trebaš pomoć?',
+              visible: appState.tocnoVisible,
+              child: Image.asset(
+                appState.netocno == false
+                    ? 'assets/tocno.png'
+                    : 'assets/netocno.png',
+                width: screenWidth / 15,
+                height: screenHeight / 13,
+              ),
+            )
+          ]),
+        ),
+        SizedBox(
+          height: appState.fontSize == 1 ? 0 : screenHeight / 200,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Visibility(
+                visible: appState.rjesenjeShownMasa,
+                child: OutlinedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 212, 171, 36)),
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        minimumSize: MaterialStateProperty.all<Size>(
+                            Size.square(screenWidth / 35)),
+                        side: MaterialStateProperty.all<BorderSide>(
+                            BorderSide(color: appState.fontColor, width: 1.5))),
+                    onPressed: () {
+                      setState(() {
+                        completeSolution(numValue, values[valueFromIndex],
+                            values[valueToIndex]);
+                      });
+                    },
+                    child: Text('RJEŠENJE',
+                        style: TextStyle(
+                            fontSize: appState.fontSize == 1
+                                ? screenHeight / 35
+                                : screenHeight /
+                                    35 *
+                                    (appState.fontSize - 0.25),
+                            color: Colors.black)))),
+            SizedBox(
+              width: screenWidth / 150,
+            ),
+            OutlinedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 22, 56, 74)),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    minimumSize: MaterialStateProperty.all<Size>(
+                        Size.square(screenWidth / 35))),
+                onPressed: () {
+                  var isCorrect = checkAnswer(
+                      numValue, values[valueFromIndex], values[valueToIndex]);
+                  if (appState.taskMasa &&
+                      appState.selfTaskMasa.isNotEmpty &&
+                      isCorrect) {
+                    appState.selfTaskMasa.removeAt(0);
+                    appState.selfTaskMasa.removeAt(0);
+                    appState.selfTaskMasa.removeAt(0);
+                  }
+                  if (appState.taskMasa && appState.selfTaskMasa.isEmpty) {
+                    openDialog(screenWidth, screenHeight, appState.fontColor);
+                    appState.taskMasa = false;
+                  }
+                },
+                child: Text('PROVJERI',
                     style: TextStyle(
                         fontSize: appState.fontSize == 1
-                            ? screenHeight / 31
-                            : screenHeight / 31 * (appState.fontSize - 0.35)),
-                  ))),
-          SizedBox(
-            width: appState.fontSize == 1 ? screenWidth / 8 : screenWidth / 16,
-          ),
-          Text(
-            numValue.toString(),
-            style: TextStyle(
-                fontSize: appState.fontSize == 1
-                    ? screenHeight / 18
-                    : screenHeight / 18 * (appState.fontSize - 0.25),
-                color: appState.fontColor),
-          ),
-          SizedBox(
-            width:
-                appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 300,
-          ),
-          Text(
-            "${values[valueFromIndex]} = ",
-            style: TextStyle(
-                fontSize: appState.fontSize == 1
-                    ? screenHeight / 18
-                    : screenHeight / 18 * (appState.fontSize - 0.25),
-                color: appState.fontColor),
-          ),
-          SizedBox(
-            width:
-                appState.fontSize == 1 ? screenWidth / 150 : screenWidth / 800,
-          ),
-          Expanded(
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 300),
-              opacity: opacity,
-              child: AnimatedPadding(
-                duration: const Duration(milliseconds: 200),
-                padding: EdgeInsets.only(
-                    top: sizeAnimation.value, right: sizeAnimation.value),
-                child: TextField(
-                  style: TextStyle(
-                      fontSize: appState.fontSize == 1
-                          ? screenHeight / 25
-                          : screenHeight / 25 * (appState.fontSize),
-                      color: appState.fontColor),
-                  textAlign: TextAlign.center,
-                  controller: controller,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: 'Unesite rješenje',
-                    hintStyle: TextStyle(
-                        fontSize: appState.fontSize == 1
-                            ? screenHeight / 50
-                            : screenHeight / 50 * (appState.fontSize - 0.3),
-                        color: appState.fontColor),
-                    alignLabelWithHint: true,
+                            ? screenHeight / 35
+                            : screenHeight / 35 * (appState.fontSize - 0.25)))),
+          ],
+        ),
+        SizedBox(
+          height: appState.fontSize == 1 ? 0 : screenHeight / 200,
+        ),
+        Padding(
+          padding:
+              EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
+          child: Visibility(
+              visible: appState.postupakShownMasa,
+              child: Container(
+                width: double.maxFinite,
+                color: const Color.fromARGB(255, 232, 196, 80),
+                child: Padding(
+                  padding: EdgeInsets.only(left: screenWidth / 200),
+                  child: Text(
+                    '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
+                    style: TextStyle(fontSize: screenHeight / 25),
+                    textAlign: TextAlign.left,
                   ),
                 ),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: screenWidth / 150,
-          ),
-          Text(
-            values[valueToIndex],
-            style: TextStyle(
-                fontSize: appState.fontSize == 1
-                    ? screenHeight / 18
-                    : screenHeight / 18 * (appState.fontSize - 0.25),
-                color: appState.fontColor),
-          ),
-          SizedBox(
-            width: screenWidth / 30,
-          ),
-          Visibility(
-            maintainSize: true,
-            maintainAnimation: true,
-            maintainState: true,
-            visible: appState.tocnoVisible,
-            child: Image.asset(
-              appState.netocno == false
-                  ? 'assets/tocno.png'
-                  : 'assets/netocno.png',
-              width: screenWidth / 15,
-              height: screenHeight / 13,
-            ),
-          )
-        ]),
-      ),
-      SizedBox(
-        height: appState.fontSize == 1 ? 0 : screenHeight / 200,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Visibility(
-              visible: appState.rjesenjeShownMasa,
-              child: OutlinedButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          const Color.fromARGB(255, 212, 171, 36)),
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                      minimumSize: MaterialStateProperty.all<Size>(
-                          Size.square(screenWidth / 35)),
-                      side: MaterialStateProperty.all<BorderSide>(
-                          BorderSide(color: appState.fontColor, width: 1.5))),
-                  onPressed: () {
-                    setState(() {
-                      completeSolution(numValue, values[valueFromIndex],
-                          values[valueToIndex]);
-                    });
-                  },
-                  child: Text('RJEŠENJE',
-                      style: TextStyle(
-                          fontSize: appState.fontSize == 1
-                              ? screenHeight / 35
-                              : screenHeight / 35 * (appState.fontSize - 0.25),
-                          color: Colors.black)))),
-          SizedBox(
-            width: screenWidth / 150,
-          ),
-          OutlinedButton(
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 22, 56, 74)),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  minimumSize: MaterialStateProperty.all<Size>(
-                      Size.square(screenWidth / 35))),
-              onPressed: () {
-                var isCorrect = checkAnswer(
-                    numValue, values[valueFromIndex], values[valueToIndex]);
-                if (appState.taskMasa &&
-                    appState.selfTaskMasa.isNotEmpty &&
-                    isCorrect) {
-                  appState.selfTaskMasa.removeAt(0);
-                  appState.selfTaskMasa.removeAt(0);
-                  appState.selfTaskMasa.removeAt(0);
-                }
-                if (appState.taskMasa && appState.selfTaskMasa.isEmpty) {
-                  openDialog(screenWidth, screenHeight, appState.fontColor);
-                  appState.taskMasa = false;
-                }
-              },
-              child: Text('PROVJERI',
-                  style: TextStyle(
-                      fontSize: appState.fontSize == 1
-                          ? screenHeight / 35
-                          : screenHeight / 35 * (appState.fontSize - 0.25)))),
-        ],
-      ),
-      SizedBox(
-        height: appState.fontSize == 1 ? 0 : screenHeight / 200,
-      ),
-      Padding(
-        padding: EdgeInsets.only(right: screenWidth / 3, left: screenWidth / 3),
-        child: Visibility(
-            visible: appState.postupakShownMasa,
+              )),
+        )
+      ]),
+      if (appState.animationGoing)
+        Positioned.fill(
+          child: AbsorbPointer(
+            absorbing: true,
             child: Container(
-              width: double.maxFinite,
-              color: const Color.fromARGB(255, 232, 196, 80),
-              child: Padding(
-                padding: EdgeInsets.only(left: screenWidth / 200),
-                child: Text(
-                  '1 ${values[valueFromIndex]} = ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')} ${values[valueToIndex]}\n$numValue ${values[valueFromIndex]} = ($numValue \u2022 ${setUnitTo(values[valueFromIndex], values[valueToIndex]).toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '')}) ${values[valueToIndex]}',
-                  style: TextStyle(fontSize: screenHeight / 25),
-                  textAlign: TextAlign.left,
-                ),
-              ),
-            )),
-      )
+              color: Colors.transparent, // Fully transparent
+            ),
+          ),
+        ),
     ]);
   }
 

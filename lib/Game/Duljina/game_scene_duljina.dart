@@ -42,48 +42,61 @@ class _GameDuljinaState extends State<GameDuljina> {
     appState = Provider.of<AppState>(context);
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      backgroundColor: appState.backgroundColor,
-      resizeToAvoidBottomInset: false,
-      body: pages[selectedIndex],
-      appBar: AppBarCustom(
-        title: widget.title,
-        height: screenHeight / 8,
-        imageShown: true,
-        imagePath: 'assets/kategorija1.png',
-        imageWidth: screenWidth / 11,
-        sizedBoxWidth: screenWidth / 2.25,
-        infoShown: false,
-        settingsShown: true,
-      ),
-      bottomNavigationBar: Container(
-        color: const Color.fromARGB(255, 22, 56, 74),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: screenWidth / 3.5, vertical: screenHeight / 57),
-          child: GNav(
-              selectedIndex: selectedIndex,
-              backgroundColor: const Color.fromARGB(255, 22, 56, 74),
-              color: Colors.white,
-              activeColor: Colors.white,
-              tabBackgroundColor: const Color.fromARGB(255, 77, 134, 165),
-              gap: 8,
-              padding: EdgeInsets.all(screenHeight / 50),
-              onTabChange: (index) {
-                navigateBottomBar(index);
-              },
-              tabs: [
-                GButton(
-                    icon: Icons.videogame_asset,
-                    iconSize: screenWidth / 45,
-                    text: 'Zadatci'),
-                GButton(
-                    icon: Icons.key_outlined,
-                    iconSize: screenWidth / 45,
-                    text: 'Prilagodba zadataka')
-              ]),
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: appState.backgroundColor,
+          resizeToAvoidBottomInset: false,
+          body: pages[selectedIndex],
+          appBar: AppBarCustom(
+            title: widget.title,
+            height: screenHeight / 8,
+            imageShown: true,
+            imagePath: 'assets/kategorija1.png',
+            imageWidth: screenWidth / 11,
+            sizedBoxWidth: screenWidth / 2.25,
+            infoShown: false,
+            settingsShown: true,
+          ),
+          bottomNavigationBar: Container(
+            color: const Color.fromARGB(255, 22, 56, 74),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth / 3.5, vertical: screenHeight / 57),
+              child: GNav(
+                  selectedIndex: selectedIndex,
+                  backgroundColor: const Color.fromARGB(255, 22, 56, 74),
+                  color: Colors.white,
+                  activeColor: Colors.white,
+                  tabBackgroundColor: const Color.fromARGB(255, 77, 134, 165),
+                  gap: 8,
+                  padding: EdgeInsets.all(screenHeight / 50),
+                  onTabChange: (index) {
+                    navigateBottomBar(index);
+                  },
+                  tabs: [
+                    GButton(
+                        icon: Icons.videogame_asset,
+                        iconSize: screenWidth / 45,
+                        text: 'Zadatci'),
+                    GButton(
+                        icon: Icons.key_outlined,
+                        iconSize: screenWidth / 45,
+                        text: 'Prilagodba zadataka')
+                  ]),
+            ),
+          ),
         ),
-      ),
+        if (appState.animationGoing)
+          Positioned.fill(
+            child: AbsorbPointer(
+              absorbing: true,
+              child: Container(
+                color: Colors.transparent, // Fully transparent
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

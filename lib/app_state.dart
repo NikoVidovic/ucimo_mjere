@@ -37,6 +37,7 @@ class AppState extends ChangeNotifier {
   bool _taskPovrsina = false;
   bool _taskTemperatura = false;
   bool _taskVrijeme = false;
+  bool _animationGoing = false;
 
   double _currentSliderValueDuljina = 1;
   double _currentSliderValueInformacije = 1;
@@ -82,6 +83,7 @@ class AppState extends ChangeNotifier {
   bool get taskPovrsina => _taskPovrsina;
   bool get taskTemperatura => _taskTemperatura;
   bool get taskVrijeme => _taskVrijeme;
+  bool get animationGoing => _animationGoing;
 
   double get currentSliderValueDuljina => _currentSliderValueDuljina;
   double get currentSliderValueInformacije => _currentSliderValueInformacije;
@@ -333,6 +335,11 @@ class AppState extends ChangeNotifier {
 
   set taskVrijeme(bool value) {
     _taskVrijeme = value;
+    notifyListeners();
+  }
+
+  set animationGoing(bool value) {
+    _animationGoing = value;
     notifyListeners();
   }
 }
