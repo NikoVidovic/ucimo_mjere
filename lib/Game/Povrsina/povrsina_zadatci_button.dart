@@ -28,10 +28,10 @@ class _ZadatciButtonPovrsinaState extends State<ZadatciButtonPovrsina> {
   }
 
   void fillTheList(valueFrom, valueTo, numberString) {
-    appState.taskObujam = true;
-    appState.addItemObujam(int.parse(numberString));
-    appState.addItemObujam(valueFrom);
-    appState.addItemObujam(valueTo);
+    appState.taskPovrsina = true;
+    appState.addItemPovrsina(int.parse(numberString));
+    appState.addItemPovrsina(valueFrom);
+    appState.addItemPovrsina(valueTo);
     _textFieldController.clear();
   }
 
