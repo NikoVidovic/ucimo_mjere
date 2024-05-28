@@ -61,7 +61,7 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
   }
 
   void generateIndexAndNumber() {
-    if (appState.selfTask.isEmpty) {
+    if (appState.selfTaskTemperatura.isEmpty) {
       switch (appState.currentSliderValueTemperatura) {
         case 1:
         case 2:
@@ -84,9 +84,9 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
           break;
       }
     } else {
-      valueFromIndex = appState.selfTask[1];
-      valueToIndex = appState.selfTask[2];
-      numValue = appState.selfTask[0];
+      valueFromIndex = appState.selfTaskTemperatura[1];
+      valueToIndex = appState.selfTaskTemperatura[2];
+      numValue = appState.selfTaskTemperatura[0];
     }
   }
 
@@ -371,16 +371,17 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
               onPressed: () {
                 var isCorrect = checkAnswer(
                     numValue, values[valueFromIndex], values[valueToIndex]);
-                if (appState.task &&
-                    appState.selfTask.isNotEmpty &&
+                if (appState.taskTemperatura &&
+                    appState.selfTaskTemperatura.isNotEmpty &&
                     isCorrect) {
-                  appState.selfTask.removeAt(0);
-                  appState.selfTask.removeAt(0);
-                  appState.selfTask.removeAt(0);
+                  appState.selfTaskTemperatura.removeAt(0);
+                  appState.selfTaskTemperatura.removeAt(0);
+                  appState.selfTaskTemperatura.removeAt(0);
                 }
-                if (appState.task && appState.selfTask.isEmpty) {
+                if (appState.taskTemperatura &&
+                    appState.selfTaskTemperatura.isEmpty) {
                   openDialog(screenWidth, screenHeight, appState.fontColor);
-                  appState.task = false;
+                  appState.taskTemperatura = false;
                 }
               },
               child: Text('PROVJERI',

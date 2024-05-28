@@ -30,10 +30,10 @@ class _ZadatciButtonInformacijeState extends State<ZadatciButtonInformacije> {
   }
 
   void fillTheList(valueFrom, valueTo, numberString) {
-    appState.task = true;
-    appState.addItem(int.parse(numberString));
-    appState.addItem(valueFrom);
-    appState.addItem(valueTo);
+    appState.taskInformacije = true;
+    appState.addItemInformacije(int.parse(numberString));
+    appState.addItemInformacije(valueFrom);
+    appState.addItemInformacije(valueTo);
     _textFieldController.clear();
   }
 

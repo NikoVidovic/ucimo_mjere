@@ -23,8 +23,20 @@ class AppState extends ChangeNotifier {
   bool _tocnoVisible = false;
   bool _netocno = false;
   bool _decimalni = true;
-  final List<int> _selfTask = [];
-  bool _task = false;
+  final List<int> _selfTaskDuljina = [];
+  final List<int> _selfTaskInformacije = [];
+  final List<int> _selfTaskMasa = [];
+  final List<int> _selfTaskObujam = [];
+  final List<int> _selfTaskPovrsina = [];
+  final List<int> _selfTaskTemperatura = [];
+  final List<int> _selfTaskVrijeme = [];
+  bool _taskDuljina = false;
+  bool _taskInformacije = false;
+  bool _taskMasa = false;
+  bool _taskObujam = false;
+  bool _taskPovrsina = false;
+  bool _taskTemperatura = false;
+  bool _taskVrijeme = false;
 
   double _currentSliderValueDuljina = 1;
   double _currentSliderValueInformacije = 1;
@@ -56,8 +68,20 @@ class AppState extends ChangeNotifier {
   bool get tocnoVisible => _tocnoVisible;
   bool get netocno => _netocno;
   bool get decimalni => _decimalni;
-  List<int> get selfTask => _selfTask;
-  bool get task => _task;
+  List<int> get selfTaskDuljina => _selfTaskDuljina;
+  List<int> get selfTaskInformacije => _selfTaskInformacije;
+  List<int> get selfTaskMasa => _selfTaskMasa;
+  List<int> get selfTaskObujam => _selfTaskObujam;
+  List<int> get selfTaskPovrsina => _selfTaskPovrsina;
+  List<int> get selfTaskTemperatura => _selfTaskTemperatura;
+  List<int> get selfTaskVrijeme => _selfTaskVrijeme;
+  bool get taskDuljina => _taskDuljina;
+  bool get taskInformacije => _taskInformacije;
+  bool get taskMasa => _taskMasa;
+  bool get taskObujam => _taskObujam;
+  bool get taskPovrsina => _taskPovrsina;
+  bool get taskTemperatura => _taskTemperatura;
+  bool get taskVrijeme => _taskVrijeme;
 
   double get currentSliderValueDuljina => _currentSliderValueDuljina;
   double get currentSliderValueInformacije => _currentSliderValueInformacije;
@@ -67,18 +91,73 @@ class AppState extends ChangeNotifier {
   double get currentSliderValueTemperatura => _currentSliderValueTemperatura;
   double get currentSliderValueVrijeme => _currentSliderValueVrijeme;
 
-  void addItem(int item) {
-    _selfTask.add(item);
+  void addItemDuljina(int item) {
+    _selfTaskDuljina.add(item);
     notifyListeners();
   }
 
-  void removeItemAt(int index) {
-    _selfTask.removeAt(index);
+  void removeItemAtDuljina(int index) {
+    _selfTaskDuljina.removeAt(index);
     notifyListeners();
   }
 
-  void removeItem(int item) {
-    _selfTask.remove(item);
+  void addItemInformacije(int item) {
+    _selfTaskInformacije.add(item);
+    notifyListeners();
+  }
+
+  void removeItemAtInformacije(int index) {
+    _selfTaskInformacije.removeAt(index);
+    notifyListeners();
+  }
+
+  void addItemMasa(int item) {
+    _selfTaskMasa.add(item);
+    notifyListeners();
+  }
+
+  void removeItemAtMasa(int index) {
+    _selfTaskMasa.removeAt(index);
+    notifyListeners();
+  }
+
+  void addItemObujam(int item) {
+    _selfTaskObujam.add(item);
+    notifyListeners();
+  }
+
+  void removeItemAtObujam(int index) {
+    _selfTaskObujam.removeAt(index);
+    notifyListeners();
+  }
+
+  void addItemPovrsina(int item) {
+    _selfTaskPovrsina.add(item);
+    notifyListeners();
+  }
+
+  void removeItemAtPovrsina(int index) {
+    _selfTaskPovrsina.removeAt(index);
+    notifyListeners();
+  }
+
+  void addItemTemperatura(int item) {
+    _selfTaskTemperatura.add(item);
+    notifyListeners();
+  }
+
+  void removeItemAtTemperatura(int index) {
+    _selfTaskTemperatura.removeAt(index);
+    notifyListeners();
+  }
+
+  void addItemVrijeme(int item) {
+    _selfTaskVrijeme.add(item);
+    notifyListeners();
+  }
+
+  void removeItemAtVrijeme(int index) {
+    _selfTaskVrijeme.removeAt(index);
     notifyListeners();
   }
 
@@ -222,8 +301,38 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  set task(bool value) {
-    _task = value;
+  set taskDuljina(bool value) {
+    _taskDuljina = value;
+    notifyListeners();
+  }
+
+  set taskInformacije(bool value) {
+    _taskInformacije = value;
+    notifyListeners();
+  }
+
+  set taskMasa(bool value) {
+    _taskMasa = value;
+    notifyListeners();
+  }
+
+  set taskObujam(bool value) {
+    _taskObujam = value;
+    notifyListeners();
+  }
+
+  set taskPovrsina(bool value) {
+    _taskPovrsina = value;
+    notifyListeners();
+  }
+
+  set taskTemperatura(bool value) {
+    _taskTemperatura = value;
+    notifyListeners();
+  }
+
+  set taskVrijeme(bool value) {
+    _taskVrijeme = value;
     notifyListeners();
   }
 }

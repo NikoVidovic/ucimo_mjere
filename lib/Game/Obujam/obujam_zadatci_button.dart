@@ -29,10 +29,10 @@ class _ZadatciButtonObujamState extends State<ZadatciButtonObujam> {
   }
 
   void fillTheList(valueFrom, valueTo, numberString) {
-    appState.task = true;
-    appState.addItem(int.parse(numberString));
-    appState.addItem(valueFrom);
-    appState.addItem(valueTo);
+    appState.taskMasa = true;
+    appState.addItemMasa(int.parse(numberString));
+    appState.addItemMasa(valueFrom);
+    appState.addItemMasa(valueTo);
     _textFieldController.clear();
   }
 

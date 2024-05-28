@@ -29,10 +29,10 @@ class _ZadatciButtonVrijemeState extends State<ZadatciButtonVrijeme> {
   }
 
   void fillTheList(valueFrom, valueTo, numberString) {
-    appState.task = true;
-    appState.addItem(int.parse(numberString));
-    appState.addItem(valueFrom);
-    appState.addItem(valueTo);
+    appState.taskVrijeme = true;
+    appState.addItemVrijeme(int.parse(numberString));
+    appState.addItemVrijeme(valueFrom);
+    appState.addItemVrijeme(valueTo);
     _textFieldController.clear();
   }
 

@@ -60,7 +60,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
   }
 
   void generateIndexAndNumber() {
-    if (appState.selfTask.isEmpty) {
+    if (appState.selfTaskInformacije.isEmpty) {
       valueFromIndex = Random().nextInt(5);
       valueToIndex = 0;
       numValue = Random().nextInt(10) + 1;
@@ -94,9 +94,9 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
           }
       }
     } else {
-      valueFromIndex = appState.selfTask[1];
-      valueToIndex = appState.selfTask[2];
-      numValue = appState.selfTask[0];
+      valueFromIndex = appState.selfTaskInformacije[1];
+      valueToIndex = appState.selfTaskInformacije[2];
+      numValue = appState.selfTaskInformacije[0];
     }
   }
 
@@ -831,16 +831,17 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
                     appState.decimalni == true
                         ? valuesDecimalni[valueToIndex]
                         : valuesBinarni[valueToIndex]);
-                if (appState.task &&
-                    appState.selfTask.isNotEmpty &&
+                if (appState.taskInformacije &&
+                    appState.selfTaskInformacije.isNotEmpty &&
                     isCorrect) {
-                  appState.selfTask.removeAt(0);
-                  appState.selfTask.removeAt(0);
-                  appState.selfTask.removeAt(0);
+                  appState.selfTaskInformacije.removeAt(0);
+                  appState.selfTaskInformacije.removeAt(0);
+                  appState.selfTaskInformacije.removeAt(0);
                 }
-                if (appState.task && appState.selfTask.isEmpty) {
+                if (appState.taskInformacije &&
+                    appState.selfTaskInformacije.isEmpty) {
                   openDialog(screenWidth, screenHeight, appState.fontColor);
-                  appState.task = false;
+                  appState.taskInformacije = false;
                 }
               },
               child: Text('PROVJERI',

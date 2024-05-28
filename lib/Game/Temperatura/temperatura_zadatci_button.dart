@@ -30,10 +30,10 @@ class _ZadatciButtonTemperaturaState extends State<ZadatciButtonTemperatura> {
   }
 
   void fillTheList(valueFrom, valueTo, numberString) {
-    appState.task = true;
-    appState.addItem(int.parse(numberString));
-    appState.addItem(valueFrom);
-    appState.addItem(valueTo);
+    appState.taskTemperatura = true;
+    appState.addItemTemperatura(int.parse(numberString));
+    appState.addItemTemperatura(valueFrom);
+    appState.addItemTemperatura(valueTo);
     _textFieldController.clear();
   }
 

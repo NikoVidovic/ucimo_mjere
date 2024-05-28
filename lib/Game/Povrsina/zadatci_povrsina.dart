@@ -59,7 +59,7 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
   }
 
   void generateIndexAndNumber() {
-    if (appState.selfTask.isEmpty) {
+    if (appState.selfTaskPovrsina.isEmpty) {
       valueFromIndex = Random().nextInt(5);
       valueToIndex = 0;
       numValue = Random().nextInt(10) + 1;
@@ -93,9 +93,9 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
           }
       }
     } else {
-      valueFromIndex = appState.selfTask[1];
-      valueToIndex = appState.selfTask[2];
-      numValue = appState.selfTask[0];
+      valueFromIndex = appState.selfTaskPovrsina[1];
+      valueToIndex = appState.selfTaskPovrsina[2];
+      numValue = appState.selfTaskPovrsina[0];
     }
   }
 
@@ -589,16 +589,17 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
               onPressed: () {
                 var isCorrect = checkAnswer(
                     numValue, values[valueFromIndex], values[valueToIndex]);
-                if (appState.task &&
-                    appState.selfTask.isNotEmpty &&
+                if (appState.taskPovrsina &&
+                    appState.selfTaskPovrsina.isNotEmpty &&
                     isCorrect) {
-                  appState.selfTask.removeAt(0);
-                  appState.selfTask.removeAt(0);
-                  appState.selfTask.removeAt(0);
+                  appState.selfTaskPovrsina.removeAt(0);
+                  appState.selfTaskPovrsina.removeAt(0);
+                  appState.selfTaskPovrsina.removeAt(0);
                 }
-                if (appState.task && appState.selfTask.isEmpty) {
+                if (appState.taskPovrsina &&
+                    appState.selfTaskPovrsina.isEmpty) {
                   openDialog(screenWidth, screenHeight, appState.fontColor);
-                  appState.task = false;
+                  appState.taskPovrsina = false;
                 }
               },
               child: Text('PROVJERI',
