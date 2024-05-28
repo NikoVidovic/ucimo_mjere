@@ -386,19 +386,38 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
     double screenHeight = MediaQuery.of(context).size.height;
     return Stack(children: [
       Column(children: [
-        Padding(
-          padding: EdgeInsets.only(
-              top: screenHeight / 100, right: screenWidth / 1.9),
-          child: Text(
-            "Preračunaj mjeru!\nOdgovor upiši na crtu i klikni na gumb 'PROVJERI'!",
-            style: TextStyle(
-                fontSize: appState.fontSize == 1
-                    ? screenHeight / 30
-                    : screenHeight / 30 * (appState.fontSize - 0.2),
-                color: appState.fontColor),
-            textAlign: TextAlign.left,
+        Row(children: [
+          Padding(
+            padding: EdgeInsets.only(
+                top: screenHeight / 100, left: screenWidth / 100),
+            child: Text(
+              "Preračunaj mjeru!\nOdgovor upiši na crtu i klikni na gumb 'PROVJERI'!",
+              style: TextStyle(
+                  fontSize: appState.fontSize == 1
+                      ? screenHeight / 30
+                      : screenHeight / 30 * (appState.fontSize - 0.2),
+                  color: appState.fontColor),
+              textAlign: TextAlign.left,
+            ),
           ),
-        ),
+          Visibility(
+              visible: appState.taskPovrsina,
+              child: IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const AlertDialog(
+                            title: Text("Rješavate vlastite zadatke"));
+                      },
+                    );
+                  },
+                  icon: Icon(
+                    Icons.info_outline,
+                    size: screenWidth / 45,
+                    color: appState.fontColor,
+                  )))
+        ]),
         Padding(
           padding: EdgeInsets.only(
               top: screenHeight / 500,
@@ -606,8 +625,10 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
                   }
                   if (appState.taskPovrsina &&
                       appState.selfTaskPovrsina.isEmpty) {
-                    openDialog(screenWidth, screenHeight, appState.fontColor);
-                    appState.taskPovrsina = false;
+                    Future.delayed(const Duration(milliseconds: 1500), () {
+                      openDialog(screenWidth, screenHeight, appState.fontColor);
+                      appState.taskPovrsina = false;
+                    });
                   }
                 },
                 child: Text('PROVJERI',

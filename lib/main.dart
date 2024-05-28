@@ -18,7 +18,6 @@ void main() {
 }
 
 //TODO: dodati info o tome da se rješavaju vlastiti zadatci
-//TODO: dodati liste za svaku kategoriju
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
