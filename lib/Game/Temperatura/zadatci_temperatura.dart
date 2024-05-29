@@ -114,7 +114,8 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
       FocusManager.instance.primaryFocus?.unfocus();
       switch (from) {
         case 'K':
-          if (to == "C" && controller.text == (num - 273.15).toString()) {
+          if (to == "C" &&
+              controller.text == (num - 273.15).toStringAsFixed(2)) {
             isCorrect = true;
           }
           break;
@@ -178,7 +179,7 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
       switch (from) {
         case 'K':
           if (to == "C") {
-            controller.text = (num - 273.15).toString();
+            controller.text = (num - 273.15).toStringAsFixed(2);
           }
           break;
         case 'C':

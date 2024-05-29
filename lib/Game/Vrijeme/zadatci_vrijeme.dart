@@ -96,13 +96,16 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
           return 1 / 1000;
         }
         if (to == "min") {
-          return (1 / 1000) / 60;
+          double value = (1 / 1000) / 60;
+          return double.parse(value.toStringAsFixed(9));
         }
         if (to == "h") {
-          return ((1 / 1000) / 60) / 60;
+          double value = ((1 / 1000) / 60) / 60;
+          return double.parse(value.toStringAsFixed(9));
         }
         if (to == "dan") {
-          return (((1 / 1000) / 60) / 60) / 24;
+          double value = (((1 / 1000) / 60) / 60) / 24;
+          return double.parse(value.toStringAsFixed(10));
         }
         break;
       case 's':
@@ -176,15 +179,17 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
             isCorrect = true;
           }
           if (to == "min" &&
-              controller.text == ((num / 1000) / 60).toString()) {
+              controller.text == ((num / 1000) / 60).toStringAsFixed(9)) {
             isCorrect = true;
           }
           if (to == "h" &&
-              controller.text == (((num / 1000) / 60) / 60).toString()) {
+              controller.text ==
+                  (((num / 1000) / 60) / 60).toStringAsFixed(9)) {
             isCorrect = true;
           }
           if (to == "dan" &&
-              controller.text == ((((num / 1000) / 60) / 60) / 24).toString()) {
+              controller.text ==
+                  ((((num / 1000) / 60) / 60) / 24).toStringAsFixed(10)) {
             isCorrect = true;
           }
           break;
@@ -303,13 +308,14 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
             controller.text = (num / 1000).toString();
           }
           if (to == "min") {
-            controller.text = ((num / 1000) / 60).toString();
+            controller.text = ((num / 1000) / 60).toStringAsFixed(9);
           }
           if (to == "h") {
-            controller.text = (((num / 1000) / 60) / 60).toString();
+            controller.text = (((num / 1000) / 60) / 60).toStringAsFixed(9);
           }
           if (to == "dan") {
-            controller.text = ((((num / 1000) / 60) / 60) / 24).toString();
+            controller.text =
+                ((((num / 1000) / 60) / 60) / 24).toStringAsFixed(10);
           }
           break;
         case 's':

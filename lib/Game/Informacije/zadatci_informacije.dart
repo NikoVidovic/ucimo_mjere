@@ -350,16 +350,17 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
               isCorrect = true;
             }
             if (to == "MiB" &&
-                controller.text == (num / 1024 / 1024).toString()) {
+                controller.text == (num / 1024 / 1024).toStringAsFixed(10)) {
               isCorrect = true;
             }
             if (to == "GiB" &&
-                controller.text == (num / 1024 / 1024 / 1024).toString()) {
+                controller.text ==
+                    (num / 1024 / 1024 / 1024).toStringAsFixed(12)) {
               isCorrect = true;
             }
             if (to == "TiB" &&
                 controller.text ==
-                    (num / 1024 / 1024 / 1024 / 1024).toString()) {
+                    (num / 1024 / 1024 / 1024 / 1024).toStringAsFixed(15)) {
               isCorrect = true;
             }
             break;
@@ -371,11 +372,12 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
               isCorrect = true;
             }
             if (to == "GiB" &&
-                controller.text == (num / 1024 / 1024).toString()) {
+                controller.text == (num / 1024 / 1024).toStringAsFixed(10)) {
               isCorrect = true;
             }
             if (to == "TiB" &&
-                controller.text == (num / 1024 / 1024 / 1024).toString()) {
+                controller.text ==
+                    (num / 1024 / 1024 / 1024).toStringAsFixed(12)) {
               isCorrect = true;
             }
             break;
@@ -391,7 +393,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
               isCorrect = true;
             }
             if (to == "TiB" &&
-                controller.text == (num / 1024 / 1024).toString()) {
+                controller.text == (num / 1024 / 1024).toStringAsFixed(10)) {
               isCorrect = true;
             }
             break;
@@ -566,13 +568,14 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
               controller.text = (num / 1024).toString();
             }
             if (to == "MiB") {
-              controller.text = (num / 1024 / 1024).toString();
+              controller.text = (num / 1024 / 1024).toStringAsFixed(10);
             }
             if (to == "GiB") {
-              controller.text = (num / 1024 / 1024 / 1024).toString();
+              controller.text = (num / 1024 / 1024 / 1024).toStringAsFixed(12);
             }
             if (to == "TiB") {
-              controller.text = (num / 1024 / 1024 / 1024 / 1024).toString();
+              controller.text =
+                  (num / 1024 / 1024 / 1024 / 1024).toStringAsFixed(15);
             }
             break;
           case 'KiB':
@@ -583,10 +586,10 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
               controller.text = (num / 1024).toString();
             }
             if (to == "GiB") {
-              controller.text = (num / 1024 / 1024).toString();
+              controller.text = (num / 1024 / 1024).toStringAsFixed(10);
             }
             if (to == "TiB") {
-              controller.text = (num / 1024 / 1024 / 1024).toString();
+              controller.text = (num / 1024 / 1024 / 1024).toStringAsFixed(12);
             }
             break;
           case 'MiB':
@@ -600,7 +603,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
               controller.text = (num / 1024).toString();
             }
             if (to == "TiB") {
-              controller.text = (num / 1024 / 1024).toString();
+              controller.text = (num / 1024 / 1024).toStringAsFixed(10);
             }
             break;
           case 'GiB':
