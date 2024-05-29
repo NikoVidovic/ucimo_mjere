@@ -18,7 +18,6 @@ void main() {
 }
 
 //TODO: testirati responzivnost, maksimalno razvuci za uski tablet i testirati na svim uredajima
-//TODO: provjeriti vrijednosti pretvaranja u svim kategorijama
 //TODO: napraviti detaljno testiranje korištenjem aplikacije
 //TODO: napraviti finalni APK i dati Nini na finalno testiranje
 
