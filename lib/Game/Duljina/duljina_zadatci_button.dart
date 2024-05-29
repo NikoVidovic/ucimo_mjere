@@ -215,7 +215,11 @@ class _ZadatciButtonDuljinaState extends State<ZadatciButtonDuljina> {
                 TextButton(
                     onPressed: () {
                       setState(() {
-                        if (_selectedValue1 == _selectedValue2) {
+                        if (_selectedValue1 == null &&
+                            _selectedValue2 == null) {
+                          showTemporaryDialog(
+                              context, 'Odaberite mjerne jedinice!');
+                        } else if (_selectedValue1 == _selectedValue2) {
                           showTemporaryDialog(
                               context, 'Odaberite različite mjerne jedinice!');
                         } else if (_textFieldController.text == "") {
@@ -251,7 +255,7 @@ class _ZadatciButtonDuljinaState extends State<ZadatciButtonDuljina> {
       barrierDismissible: false, // Prevent dismissing by tapping outside
       context: context,
       builder: (context) {
-        Future.delayed(const Duration(seconds: 1), () {
+        Future.delayed(const Duration(milliseconds: 1500), () {
           Navigator.of(context).pop(); // Close the dialog after 2 seconds
         });
         return AlertDialog(

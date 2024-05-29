@@ -59,205 +59,207 @@ class _ZadatciButtonPovrsinaState extends State<ZadatciButtonPovrsina> {
         ));
   }
 
-  Future openDialog(screenWidth, screenHeight, fontColor) => showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          backgroundColor: appState.backgroundColor,
-          title: Text(
-            "Unesite vlastiti zadatak",
-            style: TextStyle(
-                fontSize: screenWidth / 50, color: appState.fontColor),
-          ),
-          content: SizedBox(
-            width: screenWidth / 1.2,
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _textFieldController,
-                    keyboardType: TextInputType.number,
-                    style: TextStyle(
-                        fontSize: screenHeight / 35, color: appState.fontColor),
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      hintText: "Upišite broj",
-                      hintStyle: TextStyle(color: appState.fontColor),
-                      alignLabelWithHint: true,
-                    ),
+  Future openDialog(screenWidth, screenHeight, fontColor) async {
+    var result = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: appState.backgroundColor,
+        title: Text(
+          "Unesite vlastiti zadatak",
+          style:
+              TextStyle(fontSize: screenWidth / 50, color: appState.fontColor),
+        ),
+        content: SizedBox(
+          width: screenWidth / 1.2,
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _textFieldController,
+                  keyboardType: TextInputType.number,
+                  style: TextStyle(
+                      fontSize: screenHeight / 35, color: appState.fontColor),
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    hintText: "Upišite broj",
+                    hintStyle: TextStyle(color: appState.fontColor),
+                    alignLabelWithHint: true,
                   ),
                 ),
-                SizedBox(
-                  width: screenWidth / 100,
-                ),
-                Flexible(
-                  child: DropdownMenu(
-                      onSelected: (value1) {
-                        setState(() {
-                          _selectedValue1 = value1;
-                        });
-                      },
-                      width: screenWidth / 4,
-                      label: Text(
-                        'Odaberite mjernu jedinicu',
-                        style: TextStyle(
-                            fontSize: screenHeight / 35,
-                            color: appState.fontColor),
-                      ),
-                      helperText: 'Mjerna jedinica iz koje se pretvara',
-                      menuStyle: MenuStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              appState.backgroundColor)),
-                      textStyle: TextStyle(color: appState.fontColor),
-                      dropdownMenuEntries: [
-                        DropdownMenuEntry(
-                            value: 0,
-                            label: 'mm',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: 1,
-                            label: 'cm',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: 2,
-                            label: 'dm',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: 3,
-                            label: 'm',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: 4,
-                            label: 'km',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                      ]),
-                ),
-                SizedBox(
-                  width: screenWidth / 100,
-                ),
-                Text(
-                  "=",
-                  style: TextStyle(
-                      fontSize: screenWidth / 50, color: appState.fontColor),
-                ),
-                SizedBox(
-                  width: screenWidth / 100,
-                ),
-                Flexible(
-                  child: DropdownMenu(
-                      onSelected: (value2) {
-                        setState(() {
-                          _selectedValue2 = value2;
-                        });
-                      },
-                      width: screenWidth / 4,
-                      label: Text(
-                        'Odaberite mjernu jedinicu',
-                        style: TextStyle(
-                            fontSize: screenHeight / 35,
-                            color: appState.fontColor),
-                      ),
-                      helperText: 'Mjerna jedinica iz koje se pretvara',
-                      menuStyle: MenuStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              appState.backgroundColor)),
-                      textStyle: TextStyle(color: appState.fontColor),
-                      dropdownMenuEntries: [
-                        DropdownMenuEntry(
-                            value: 0,
-                            label: 'mm',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: 1,
-                            label: 'cm',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: 2,
-                            label: 'dm',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: 3,
-                            label: 'm',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                        DropdownMenuEntry(
-                            value: 4,
-                            label: 'km',
-                            style: ButtonStyle(
-                                foregroundColor: MaterialStatePropertyAll(
-                                    appState.fontColor))),
-                      ]),
-                ),
-              ],
-            ),
+              ),
+              SizedBox(
+                width: screenWidth / 100,
+              ),
+              Flexible(
+                child: DropdownMenu(
+                    onSelected: (value1) {
+                      setState(() {
+                        _selectedValue1 = value1;
+                      });
+                    },
+                    width: screenWidth / 4,
+                    label: Text(
+                      'Odaberite mjernu jedinicu',
+                      style: TextStyle(
+                          fontSize: screenHeight / 35,
+                          color: appState.fontColor),
+                    ),
+                    helperText: 'Mjerna jedinica iz koje se pretvara',
+                    menuStyle: MenuStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            appState.backgroundColor)),
+                    textStyle: TextStyle(color: appState.fontColor),
+                    dropdownMenuEntries: [
+                      DropdownMenuEntry(
+                          value: 0,
+                          label: 'mm',
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStatePropertyAll(
+                                  appState.fontColor))),
+                      DropdownMenuEntry(
+                          value: 1,
+                          label: 'cm',
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStatePropertyAll(
+                                  appState.fontColor))),
+                      DropdownMenuEntry(
+                          value: 2,
+                          label: 'dm',
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStatePropertyAll(
+                                  appState.fontColor))),
+                      DropdownMenuEntry(
+                          value: 3,
+                          label: 'm',
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStatePropertyAll(
+                                  appState.fontColor))),
+                      DropdownMenuEntry(
+                          value: 4,
+                          label: 'km',
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStatePropertyAll(
+                                  appState.fontColor))),
+                    ]),
+              ),
+              SizedBox(
+                width: screenWidth / 100,
+              ),
+              Text(
+                "=",
+                style: TextStyle(
+                    fontSize: screenWidth / 50, color: appState.fontColor),
+              ),
+              SizedBox(
+                width: screenWidth / 100,
+              ),
+              Flexible(
+                child: DropdownMenu(
+                    onSelected: (value2) {
+                      setState(() {
+                        _selectedValue2 = value2;
+                      });
+                    },
+                    width: screenWidth / 4,
+                    label: Text(
+                      'Odaberite mjernu jedinicu',
+                      style: TextStyle(
+                          fontSize: screenHeight / 35,
+                          color: appState.fontColor),
+                    ),
+                    helperText: 'Mjerna jedinica iz koje se pretvara',
+                    menuStyle: MenuStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            appState.backgroundColor)),
+                    textStyle: TextStyle(color: appState.fontColor),
+                    dropdownMenuEntries: [
+                      DropdownMenuEntry(
+                          value: 0,
+                          label: 'mm',
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStatePropertyAll(
+                                  appState.fontColor))),
+                      DropdownMenuEntry(
+                          value: 1,
+                          label: 'cm',
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStatePropertyAll(
+                                  appState.fontColor))),
+                      DropdownMenuEntry(
+                          value: 2,
+                          label: 'dm',
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStatePropertyAll(
+                                  appState.fontColor))),
+                      DropdownMenuEntry(
+                          value: 3,
+                          label: 'm',
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStatePropertyAll(
+                                  appState.fontColor))),
+                      DropdownMenuEntry(
+                          value: 4,
+                          label: 'km',
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStatePropertyAll(
+                                  appState.fontColor))),
+                    ]),
+              ),
+            ],
           ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  setState(() {
-                    if (_selectedValue1 == _selectedValue2) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Odaberite različite mjerne jedinice!'),
-                          duration: Duration(seconds: 3), // Snackbar duration
-                        ),
-                      );
-                    } else if (_textFieldController.text == "") {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Upišite broj!'),
-                          duration: Duration(seconds: 3), // Snackbar duration
-                        ),
-                      );
-                    } else if (_selectedValue1 == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                              'Upišite mjernu jedinicu iz koje želite pretvarati!'),
-                          duration: Duration(seconds: 3), // Snackbar duration
-                        ),
-                      );
-                    } else if (_selectedValue2 == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                              'Upišite mjernu jedinicu u koju želite pretvarati!'),
-                          duration: Duration(seconds: 3), // Snackbar duration
-                        ),
-                      );
-                    } else {
-                      fillTheList(_selectedValue1, _selectedValue2,
-                          _textFieldController.text);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Zadatak uspješno dodan!'),
-                          duration: Duration(seconds: 3), // Snackbar duration
-                        ),
-                      );
-                    }
-                  });
-                },
-                child: Text("DODAJ ZADATAK",
-                    style: TextStyle(
-                        fontSize: screenHeight / 45,
-                        color: appState.fontColor)))
-          ],
         ),
-      );
+        actions: [
+          TextButton(
+              onPressed: () {
+                setState(() {
+                  if (_selectedValue1 == null && _selectedValue2 == null) {
+                    showTemporaryDialog(context, 'Odaberite mjerne jedinice!');
+                  } else if (_selectedValue1 == _selectedValue2) {
+                    showTemporaryDialog(
+                        context, 'Odaberite različite mjerne jedinice!');
+                  } else if (_textFieldController.text == "") {
+                    showTemporaryDialog(context, 'Upišite broj!');
+                  } else if (_selectedValue1 == null) {
+                    showTemporaryDialog(context,
+                        'Upišite mjernu jedinicu iz koje želite pretvarati!');
+                  } else if (_selectedValue2 == null) {
+                    showTemporaryDialog(context,
+                        'Upišite mjernu jedinicu u koju želite pretvarati!');
+                  } else {
+                    fillTheList(_selectedValue1, _selectedValue2,
+                        _textFieldController.text);
+                    showTemporaryDialog(context, 'Zadatak uspješno dodan!');
+                  }
+                });
+              },
+              child: Text("DODAJ ZADATAK",
+                  style: TextStyle(
+                      fontSize: screenHeight / 45, color: appState.fontColor)))
+        ],
+      ),
+    );
+    if (result == null) {
+      _selectedValue1 = null;
+      _selectedValue2 = null;
+    }
+  }
+
+  void showTemporaryDialog(BuildContext context, String message) {
+    showDialog(
+      barrierDismissible: false, // Prevent dismissing by tapping outside
+      context: context,
+      builder: (context) {
+        Future.delayed(const Duration(milliseconds: 1500), () {
+          Navigator.of(context).pop(); // Close the dialog after 2 seconds
+        });
+        return AlertDialog(
+          alignment: Alignment.center,
+          title: Text(
+            message,
+            textAlign: TextAlign.center,
+          ),
+        );
+      },
+    );
+  }
 }
