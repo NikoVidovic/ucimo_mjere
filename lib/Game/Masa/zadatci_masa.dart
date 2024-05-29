@@ -232,6 +232,7 @@ class _ZadatciMasaState extends State<ZadatciMasa>
           });
         });
       } else {
+        appState.animationGoing = true;
         animationController.forward();
         appState.netocno = true;
         appState.tocnoVisible = true;
@@ -239,6 +240,7 @@ class _ZadatciMasaState extends State<ZadatciMasa>
         playSound(audioPath);
         Future.delayed(const Duration(milliseconds: 200), () {
           setState(() {
+            appState.animationGoing = false;
             animationController.reset();
           });
         });

@@ -465,6 +465,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
           });
         });
       } else {
+        appState.animationGoing = true;
         animationController.forward();
         appState.netocno = true;
         appState.tocnoVisible = true;
@@ -472,6 +473,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
         playSound(audioPath);
         Future.delayed(const Duration(milliseconds: 200), () {
           setState(() {
+            appState.animationGoing = false;
             animationController.reset();
           });
         });

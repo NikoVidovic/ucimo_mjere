@@ -278,6 +278,7 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
           });
         });
       } else {
+        appState.animationGoing = true;
         animationController.forward();
         appState.netocno = true;
         appState.tocnoVisible = true;
@@ -285,6 +286,7 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
         playSound(audioPath);
         Future.delayed(const Duration(milliseconds: 200), () {
           setState(() {
+            appState.animationGoing = false;
             animationController.reset();
           });
         });

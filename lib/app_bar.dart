@@ -68,7 +68,10 @@ class _AppBarCustomState extends State<AppBarCustom> {
                   child: Text(
                     'O aplikaciji',
                     style: TextStyle(
-                        color: Colors.white, fontSize: screenHeight / 40),
+                        color: Colors.white,
+                        fontSize: appState.fontSize == 1
+                            ? screenHeight / 40
+                            : screenHeight / 40 * (appState.fontSize - 0.2)),
                   )),
             ),
             SizedBox(

@@ -290,6 +290,7 @@ class _ZadatciObujamState extends State<ZadatciObujam>
           });
         });
       } else {
+        appState.animationGoing = true;
         animationController.forward();
         appState.netocno = true;
         appState.tocnoVisible = true;
@@ -297,6 +298,7 @@ class _ZadatciObujamState extends State<ZadatciObujam>
         playSound(audioPath);
         Future.delayed(const Duration(milliseconds: 200), () {
           setState(() {
+            appState.animationGoing = false;
             animationController.reset();
           });
         });

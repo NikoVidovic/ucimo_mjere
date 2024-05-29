@@ -156,6 +156,7 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
           });
         });
       } else {
+        appState.animationGoing = true;
         animationController.forward();
         appState.netocno = true;
         appState.tocnoVisible = true;
@@ -163,6 +164,7 @@ class _ZadatciTemperaturaState extends State<ZadatciTemperatura>
         playSound(audioPath);
         Future.delayed(const Duration(milliseconds: 200), () {
           setState(() {
+            appState.animationGoing = false;
             animationController.reset();
           });
         });
