@@ -17,7 +17,11 @@ void main() {
   );
 }
 
-//TODO: dodati info o tome da se rješavaju vlastiti zadatci
+//TODO: napraviti tekst o palikaciji
+//TODO: testirati responzivnost, maksimalno razvuci za uski tablet i testirati na svim uredajima
+//TODO: provjeriti vrijednosti pretvaranja u svim kategorijama
+//TODO: napraviti detaljno testiranje korištenjem aplikacije
+//TODO: napraviti finalni APK i dati Nini na finalno testiranje
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
