@@ -489,7 +489,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
         switch (from) {
           case 'B':
             if (to == "KB") {
-              controller.text = (num / 100).toString();
+              controller.text = (num / 1000).toString();
             }
             if (to == "MB") {
               controller.text = (num / 1000000).toString();
@@ -503,10 +503,10 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
             break;
           case 'KB':
             if (to == "B") {
-              controller.text = (num * 100).toString();
+              controller.text = (num * 1000).toString();
             }
             if (to == "MB") {
-              controller.text = (num / 100).toString();
+              controller.text = (num / 1000).toString();
             }
             if (to == "GB") {
               controller.text = (num / 1000000).toString();

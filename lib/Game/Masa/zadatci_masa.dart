@@ -282,7 +282,7 @@ class _ZadatciMasaState extends State<ZadatciMasa>
             controller.text = (num * 100).toString();
           }
           if (to == "g") {
-            controller.text = (num * 10000).toString();
+            controller.text = (num * 1000).toString();
           }
           break;
         case 't':

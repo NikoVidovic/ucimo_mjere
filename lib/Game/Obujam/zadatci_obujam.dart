@@ -377,7 +377,7 @@ class _ZadatciObujamState extends State<ZadatciObujam>
             controller.text = (num * 1000000000000).toString();
           }
           if (to == "m") {
-            controller.text = (num * 1000000).toString();
+            controller.text = (num * 1000000000).toString();
           }
           break;
         default:
