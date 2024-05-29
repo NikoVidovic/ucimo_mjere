@@ -26,7 +26,7 @@ class _OAplikacijiState extends State<OAplikaciji> {
           imageShown: false,
           imagePath: '',
           imageWidth: 0,
-          sizedBoxWidth: screenWidth / 1.55,
+          sizedBoxWidth: screenWidth / 1.56,
           infoShown: false,
           settingsShown: true,
         ),

@@ -34,7 +34,7 @@ class _MainMenuState extends State<MainMenu> {
           imageShown: false,
           imagePath: '',
           imageWidth: 0,
-          sizedBoxWidth: screenWidth / 2,
+          sizedBoxWidth: screenWidth / 1.99,
           infoShown: true,
           settingsShown: true,
         ),

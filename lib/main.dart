@@ -17,10 +17,6 @@ void main() {
   );
 }
 
-//TODO: testirati responzivnost, maksimalno razvuci za uski tablet i testirati na svim uredajima
-//TODO: probaj snack barove staviti u fokus
-//TODO: napraviti finalni APK i dati Nini na finalno testiranje
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   // This widget is the root of your application.
