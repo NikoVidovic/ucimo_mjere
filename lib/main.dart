@@ -17,7 +17,6 @@ void main() {
   );
 }
 
-//TODO: napraviti tekst o palikaciji
 //TODO: testirati responzivnost, maksimalno razvuci za uski tablet i testirati na svim uredajima
 //TODO: provjeriti vrijednosti pretvaranja u svim kategorijama
 //TODO: napraviti detaljno testiranje korištenjem aplikacije

@@ -52,9 +52,20 @@ class _OAplikacijiState extends State<OAplikaciji> {
           Container(
             margin:
                 EdgeInsets.only(top: screenHeight / 75, left: screenWidth / 20),
-            child: Text('Ovo je tekst o aplikaciji',
+            child: Text(
+                'Aplikacija je razvijena 2017. uz financijsku potporu Ministarstva znanosti i obrazovanja u okviru '
+                'projekta Učimo matematiku. Partneri su Hrvatska zajednica za Down sindrom, Fakultet elektrotehnike i računarstva Sveučilišta u Zagrebu i O.Š. Trnjanska.\n'
+                '\nNajnovija verzija aplikacije razvijena je 2024. u okviru završnog rada na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu u suradnji '
+                's Edukacijsko-rehabilitacijskim fakultetom u Zagrebu. Ovu verziju aplikacije razvio je student Niko Vidović. Završni rad mentorirala je prof. dr. sc. Željka Car uz asistenticu dr. '
+                'sc. Mateu Žilak.\n'
+                '\nOstale aplikacije pronađite na stranicama kompetencijske mreže ICT-AAC (www.ict-aac.ht).\n'
+                '\nPratite nas na društvenim mrežama: facebook.com/ictaac\n'
+                '\nSva prava pridržana.',
                 style: TextStyle(
-                    fontSize: screenHeight / 38, color: appState.fontColor)),
+                    fontSize: appState.fontSize == 1
+                        ? screenHeight / 38
+                        : screenHeight / 38 * (appState.fontSize - 0.3),
+                    color: appState.fontColor)),
           )
         ])));
   }
