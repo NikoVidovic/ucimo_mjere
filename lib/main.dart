@@ -18,7 +18,6 @@ void main() {
 }
 
 //TODO: testirati responzivnost, maksimalno razvuci za uski tablet i testirati na svim uredajima
-//TODO: smanji tajmer na snackbarevima
 //TODO: probaj snack barove staviti u fokus
 //TODO: napraviti finalni APK i dati Nini na finalno testiranje
 
