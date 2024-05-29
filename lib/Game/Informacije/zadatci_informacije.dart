@@ -105,7 +105,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
       switch (from) {
         case 'B':
           if (to == "KB") {
-            return 1 / 100;
+            return 1 / 1000;
           }
           if (to == "MB") {
             return 1 / 1000000;
@@ -119,10 +119,10 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
           break;
         case 'KB':
           if (to == "B") {
-            return 100;
+            return 1000;
           }
           if (to == "MB") {
-            return 1 / 100;
+            return 1 / 1000;
           }
           if (to == "GB") {
             return 1 / 1000000;
@@ -267,7 +267,7 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
       if (appState.decimalni == true) {
         switch (from) {
           case 'B':
-            if (to == "KB" && controller.text == (num / 100).toString()) {
+            if (to == "KB" && controller.text == (num / 1000).toString()) {
               isCorrect = true;
             }
             if (to == "MB" && controller.text == (num / 1000000).toString()) {
@@ -283,10 +283,10 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
             }
             break;
           case 'KB':
-            if (to == "B" && controller.text == (num * 100).toString()) {
+            if (to == "B" && controller.text == (num * 1000).toString()) {
               isCorrect = true;
             }
-            if (to == "MB" && controller.text == (num / 100).toString()) {
+            if (to == "MB" && controller.text == (num / 1000).toString()) {
               isCorrect = true;
             }
             if (to == "GB" && controller.text == (num / 1000000).toString()) {

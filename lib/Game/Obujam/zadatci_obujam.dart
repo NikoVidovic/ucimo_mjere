@@ -168,7 +168,7 @@ class _ZadatciObujamState extends State<ZadatciObujam>
           return 1000000000000;
         }
         if (to == "m") {
-          return 1000000;
+          return 1000000000;
         }
         break;
       default:
@@ -253,7 +253,7 @@ class _ZadatciObujamState extends State<ZadatciObujam>
               controller.text == (num * 1000000000000).toString()) {
             isCorrect = true;
           }
-          if (to == "m" && controller.text == (num * 1000000).toString()) {
+          if (to == "m" && controller.text == (num * 1000000000).toString()) {
             isCorrect = true;
           }
           break;

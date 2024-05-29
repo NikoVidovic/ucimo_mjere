@@ -131,7 +131,7 @@ class _ZadatciMasaState extends State<ZadatciMasa>
           return 100;
         }
         if (to == "g") {
-          return 10000;
+          return 1000;
         }
         break;
       case 't':
@@ -184,7 +184,7 @@ class _ZadatciMasaState extends State<ZadatciMasa>
           if (to == "dg" && controller.text == (num * 100).toString()) {
             isCorrect = true;
           }
-          if (to == "g" && controller.text == (num * 10000).toString()) {
+          if (to == "g" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
           }
           break;
