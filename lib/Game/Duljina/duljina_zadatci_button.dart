@@ -266,9 +266,11 @@ class _ZadatciButtonDuljinaState extends State<ZadatciButtonDuljina> {
           Navigator.of(context).pop(); // Close the dialog after 2 seconds
         });
         return AlertDialog(
+          backgroundColor: appState.backgroundColor,
           alignment: Alignment.center,
           title: Text(
             message,
+            style: TextStyle(color: appState.fontColor),
             textAlign: TextAlign.center,
           ),
         );
