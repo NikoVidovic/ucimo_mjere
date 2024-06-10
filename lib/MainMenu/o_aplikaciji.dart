@@ -58,7 +58,7 @@ class _OAplikacijiState extends State<OAplikaciji> {
                 '\nNajnovija verzija aplikacije razvijena je 2024. u okviru završnog rada na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu u suradnji '
                 's Edukacijsko-rehabilitacijskim fakultetom u Zagrebu. Ovu verziju aplikacije razvio je student Niko Vidović. Završni rad mentorirala je prof. dr. sc. Željka Car uz asistenticu dr. '
                 'sc. Mateu Žilak. Stručna suradnica: Ivana Vinceković, univ. mag. rehab. educ.\n'
-                '\nOstale aplikacije pronađite na stranicama kompetencijske mreže ICT-AAC (www.ict-aac.hr).\n'
+                '\nOstale aplikacije pronađite na stranicama Kompetencijske mreže ICT-AAC (www.ict-aac.hr).\n'
                 '\nPratite nas na društvenim mrežama: facebook.com/ictaac'
                 '\nUpoznajte se s politikom privatnosti naših aplikacija: http://www.ict-aac.hr/index.php/hr/politika-privatnosti\n'
                 '\nSva prava pridržana.',
