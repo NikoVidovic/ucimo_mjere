@@ -33,9 +33,9 @@ class AppBarCustom extends StatefulWidget implements PreferredSizeWidget {
 class _AppBarCustomState extends State<AppBarCustom> {
   late AppState appState;
   bool isTablet(BuildContext context) =>
-      MediaQuery.of(context).size.width > 1440;
+      MediaQuery.of(context).size.width > 1200;
   bool isPhone(BuildContext context) =>
-      MediaQuery.of(context).size.width <= 1440;
+      MediaQuery.of(context).size.width <= 1200;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;

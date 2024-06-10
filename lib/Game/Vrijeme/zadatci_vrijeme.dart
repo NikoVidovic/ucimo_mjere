@@ -407,9 +407,9 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
   }
 
   bool isTablet(BuildContext context) =>
-      MediaQuery.of(context).size.width > 1440;
+      MediaQuery.of(context).size.width > 1200;
   bool isPhone(BuildContext context) =>
-      MediaQuery.of(context).size.width <= 1440;
+      MediaQuery.of(context).size.width <= 1200;
   @override
   Widget build(BuildContext context) {
     appState = Provider.of<AppState>(context);
