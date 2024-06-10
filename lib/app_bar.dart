@@ -32,6 +32,10 @@ class AppBarCustom extends StatefulWidget implements PreferredSizeWidget {
 
 class _AppBarCustomState extends State<AppBarCustom> {
   late AppState appState;
+  bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width > 1440;
+  bool isPhone(BuildContext context) =>
+      MediaQuery.of(context).size.width <= 1440;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -52,7 +56,12 @@ class _AppBarCustomState extends State<AppBarCustom> {
             SizedBox(
               width: screenWidth / 100,
             ),
-            Text(widget.title, style: const TextStyle(color: Colors.white)),
+            Text(widget.title,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: isTablet(context)
+                        ? screenWidth / 50
+                        : screenWidth / 50)),
             SizedBox(
               width: widget.sizedBoxWidth,
             ),
@@ -69,13 +78,15 @@ class _AppBarCustomState extends State<AppBarCustom> {
                     'O aplikaciji',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: appState.fontSize == 1
-                            ? screenHeight / 40
-                            : screenHeight / 40 * (appState.fontSize - 0.2)),
+                        fontSize: isTablet(context)
+                            ? appState.fontSize == 1
+                                ? screenHeight / 40
+                                : screenHeight / 40 * (appState.fontSize - 0.2)
+                            : screenHeight / 25),
                   )),
             ),
             SizedBox(
-              width: screenWidth / 30,
+              width: isTablet(context) ? screenWidth / 30 : screenWidth / 80,
             ),
             Visibility(
               visible: widget.settingsShown,

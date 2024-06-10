@@ -431,6 +431,10 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
     });
   }
 
+  bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width > 1440;
+  bool isPhone(BuildContext context) =>
+      MediaQuery.of(context).size.width <= 1440;
   @override
   Widget build(BuildContext context) {
     appState = Provider.of<AppState>(context);
@@ -446,9 +450,11 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
               child: Text(
                 "Preračunaj mjeru!\nOdgovor upiši na crtu i klikni na gumb 'PROVJERI'!",
                 style: TextStyle(
-                    fontSize: appState.fontSize == 1
-                        ? screenHeight / 30
-                        : screenHeight / 30 * (appState.fontSize - 0.2),
+                    fontSize: isTablet(context)
+                        ? appState.fontSize == 1
+                            ? screenHeight / 30
+                            : screenHeight / 30 * (appState.fontSize - 0.2)
+                        : screenHeight / 24,
                     color: appState.fontColor),
                 textAlign: TextAlign.left,
               ),
@@ -558,9 +564,17 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
                       decoration: InputDecoration(
                         hintText: 'Unesite rješenje',
                         hintStyle: TextStyle(
-                            fontSize: appState.fontSize == 1
-                                ? screenHeight / 50
-                                : screenHeight / 50 * (appState.fontSize - 0.3),
+                            fontSize: isTablet(context)
+                                ? appState.fontSize == 1
+                                    ? screenHeight / 50
+                                    : screenHeight /
+                                        50 *
+                                        (appState.fontSize - 0.3)
+                                : appState.fontSize == 1
+                                    ? screenHeight / 30
+                                    : screenHeight /
+                                        30 *
+                                        (appState.fontSize - 0.3),
                             color: appState.fontColor),
                         alignLabelWithHint: true,
                       ),
@@ -624,11 +638,13 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
                       },
                       child: Text('RJEŠENJE',
                           style: TextStyle(
-                              fontSize: appState.fontSize == 1
-                                  ? screenHeight / 35
-                                  : screenHeight /
-                                      35 *
-                                      (appState.fontSize - 0.25),
+                              fontSize: isTablet(context)
+                                  ? appState.fontSize == 1
+                                      ? screenHeight / 35
+                                      : screenHeight /
+                                          35 *
+                                          (appState.fontSize - 0.25)
+                                  : screenHeight / 25,
                               color: Colors.black)))),
               SizedBox(
                 width: screenWidth / 150,
@@ -663,9 +679,11 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
                   child: Text(
                     'PROVJERI',
                     style: TextStyle(
-                        fontSize: appState.fontSize == 1
-                            ? screenHeight / 35
-                            : screenHeight / 35 * (appState.fontSize - 0.25)),
+                        fontSize: isTablet(context)
+                            ? appState.fontSize == 1
+                                ? screenHeight / 35
+                                : screenHeight / 35 * (appState.fontSize - 0.25)
+                            : screenHeight / 25),
                   )),
               SizedBox(
                 height: screenHeight / 52,

@@ -12,7 +12,10 @@ class AccessSettings extends StatefulWidget {
 
 class _AccessSettingsState extends State<AccessSettings> {
   late AppState appState;
-
+  bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width > 1440;
+  bool isPhone(BuildContext context) =>
+      MediaQuery.of(context).size.width <= 1440;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -38,7 +41,9 @@ class _AccessSettingsState extends State<AccessSettings> {
               child: Text(
                 'Promjeni pozadinu aplikacije',
                 style: TextStyle(
-                    fontSize: screenHeight / 35 * appState.fontSize,
+                    fontSize: isTablet(context)
+                        ? screenHeight / 35 * appState.fontSize
+                        : screenHeight / 28 * appState.fontSize,
                     color: appState.fontColor),
               ),
             ),

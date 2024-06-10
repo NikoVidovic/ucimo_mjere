@@ -35,6 +35,10 @@ class MyApp extends StatelessWidget {
 
 class PocetnaScena extends StatelessWidget {
   const PocetnaScena({super.key});
+  bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width > 1440;
+  bool isPhone(BuildContext context) =>
+      MediaQuery.of(context).size.width <= 1440;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -56,7 +60,10 @@ class PocetnaScena extends StatelessWidget {
               ),
               Text(
                 "pretvaranje mjernih jedinica",
-                style: TextStyle(fontSize: screenWidth / 70),
+                style: TextStyle(
+                    fontSize: isTablet(context)
+                        ? screenWidth / 70
+                        : screenWidth / 50),
               ),
               Padding(
                 padding: EdgeInsets.only(top: screenHeight / 50),
@@ -75,7 +82,10 @@ class PocetnaScena extends StatelessWidget {
                   child: Text(
                     "Kreni",
                     style: TextStyle(
-                        fontSize: screenWidth / 47, color: Colors.white),
+                        fontSize: isTablet(context)
+                            ? screenWidth / 47
+                            : screenWidth / 37,
+                        color: Colors.white),
                   ),
                 ),
               ),

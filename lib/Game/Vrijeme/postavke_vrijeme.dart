@@ -38,6 +38,10 @@ class _PostavkeVrijemeState extends State<PostavkeVrijeme> {
     });
   }
 
+  bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width > 1440;
+  bool isPhone(BuildContext context) =>
+      MediaQuery.of(context).size.width <= 1440;
   @override
   Widget build(BuildContext context) {
     appState = Provider.of<AppState>(context);
@@ -60,22 +64,25 @@ class _PostavkeVrijemeState extends State<PostavkeVrijeme> {
               ),
               ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: appState.backgroundColor == Colors.white
-                          ? MaterialStateProperty.all<Color>(
-                              const Color.fromARGB(255, 22, 56, 74))
-                          : MaterialStateProperty.all<Color>(
-                              appState.fontColor)),
+                    backgroundColor: appState.backgroundColor == Colors.white
+                        ? MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 22, 56, 74))
+                        : MaterialStateProperty.all<Color>(appState.fontColor),
+                    minimumSize: MaterialStateProperty.all<Size>(
+                        Size.square(screenWidth / 35)),
+                  ),
                   onPressed: () {
                     widget.switchToTab(0);
                   },
-                  child: Text(
-                    "SPREMI",
-                    style: TextStyle(
+                  child: Text("SPREMI",
+                      style: TextStyle(
                         color: appState.backgroundColor,
-                        fontSize: appState.fontSize == 1
-                            ? screenHeight / 35
-                            : screenHeight / 35 * (appState.fontSize - 0.2)),
-                  ))
+                        fontSize: isTablet(context)
+                            ? appState.fontSize == 1
+                                ? screenHeight / 35
+                                : screenHeight / 35 * (appState.fontSize - 0.25)
+                            : screenHeight / 25,
+                      )))
             ],
           ),
           Divider(

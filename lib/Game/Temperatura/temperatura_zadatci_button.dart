@@ -39,6 +39,10 @@ class _ZadatciButtonTemperaturaState extends State<ZadatciButtonTemperatura> {
     _textFieldController.clear();
   }
 
+  bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width > 1440;
+  bool isPhone(BuildContext context) =>
+      MediaQuery.of(context).size.width <= 1440;
   @override
   Widget build(BuildContext context) {
     appState = Provider.of<AppState>(context);
@@ -110,7 +114,9 @@ class _ZadatciButtonTemperaturaState extends State<ZadatciButtonTemperatura> {
                             fontSize: screenHeight / 35,
                             color: appState.fontColor),
                       ),
-                      helperText: 'Mjerna jedinica iz koje se pretvara',
+                      helperText: isTablet(context)
+                          ? 'Mjerna jedinica iz koje se pretvara'
+                          : 'Iz čega se pretvara',
                       menuStyle: MenuStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               appState.backgroundColor)),
@@ -155,7 +161,9 @@ class _ZadatciButtonTemperaturaState extends State<ZadatciButtonTemperatura> {
                             fontSize: screenHeight / 35,
                             color: appState.fontColor),
                       ),
-                      helperText: 'Mjerna jedinica iz koje se pretvara',
+                      helperText: isTablet(context)
+                          ? 'Mjerna jedinica u koju se pretvara'
+                          : 'U što se pretvara',
                       menuStyle: MenuStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                               appState.backgroundColor)),

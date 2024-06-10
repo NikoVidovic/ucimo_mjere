@@ -51,7 +51,7 @@ class _GameMasaState extends State<GameMasa> {
             imageShown: true,
             imagePath: 'assets/vaga.png',
             imageWidth: screenWidth / 23,
-            sizedBoxWidth: screenWidth / 1.97,
+            sizedBoxWidth: screenWidth / 1.99,
             infoShown: false,
             settingsShown: true,
           ),

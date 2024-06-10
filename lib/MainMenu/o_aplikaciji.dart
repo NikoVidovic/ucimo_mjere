@@ -13,6 +13,10 @@ class OAplikaciji extends StatefulWidget {
 
 class _OAplikacijiState extends State<OAplikaciji> {
   late AppState appState;
+  bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width > 1440;
+  bool isPhone(BuildContext context) =>
+      MediaQuery.of(context).size.width <= 1440;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -65,9 +69,13 @@ class _OAplikacijiState extends State<OAplikaciji> {
                   '\nUpoznajte se s politikom privatnosti naših aplikacija: http://www.ict-aac.hr/index.php/hr/politika-privatnosti\n'
                   '\nSva prava pridržana.',
                   style: TextStyle(
-                      fontSize: appState.fontSize == 1
-                          ? screenHeight / 38
-                          : screenHeight / 38 * (appState.fontSize - 0.2),
+                      fontSize: isTablet(context)
+                          ? appState.fontSize == 1
+                              ? screenHeight / 38
+                              : screenHeight / 38 * (appState.fontSize - 0.2)
+                          : appState.fontSize == 1
+                              ? screenHeight / 28
+                              : screenHeight / 28 * (appState.fontSize - 0.2),
                       color: appState.fontColor)),
             )
           ]),
