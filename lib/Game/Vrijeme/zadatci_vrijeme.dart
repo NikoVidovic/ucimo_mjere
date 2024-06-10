@@ -175,21 +175,33 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
       FocusManager.instance.primaryFocus?.unfocus();
       switch (from) {
         case 'ms':
-          if (to == "s" && controller.text == (num / 1000).toString()) {
+          if (to == "s" &&
+              (controller.text == (num / 1000).toString() ||
+                  (controller.text == (num ~/ 1000).toString() &&
+                      num % 1000 == 0))) {
             isCorrect = true;
           }
           if (to == "min" &&
-              controller.text == ((num / 1000) / 60).toStringAsFixed(9)) {
+              (controller.text == ((num / 1000) / 60).toStringAsFixed(9) ||
+                  (controller.text == ((num / 1000) ~/ 60).toStringAsFixed(9) &&
+                      (num ~/ 1000) % 60 == 0))) {
             isCorrect = true;
           }
           if (to == "h" &&
-              controller.text ==
-                  (((num / 1000) / 60) / 60).toStringAsFixed(9)) {
+              (controller.text ==
+                      (((num / 1000) / 60) / 60).toStringAsFixed(9) ||
+                  (controller.text ==
+                          (((num / 1000) / 60) ~/ 60).toStringAsFixed(9) &&
+                      ((num ~/ 1000) ~/ 60) % 60 == 0))) {
             isCorrect = true;
           }
           if (to == "dan" &&
-              controller.text ==
-                  ((((num / 1000) / 60) / 60) / 24).toStringAsFixed(10)) {
+              (controller.text ==
+                      ((((num / 1000) / 60) / 60) / 24).toStringAsFixed(10) ||
+                  (controller.text ==
+                          ((((num / 1000) / 60) / 60) ~/ 24)
+                              .toStringAsFixed(10) &&
+                      (((num ~/ 1000) ~/ 60) ~/ 60) % 24 == 0))) {
             isCorrect = true;
           }
           break;
@@ -197,14 +209,22 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
           if (to == "ms" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
           }
-          if (to == "min" && controller.text == (num / 60).toString()) {
+          if (to == "min" &&
+              (controller.text == (num / 60).toString() ||
+                  (controller.text == (num ~/ 60).toString() &&
+                      num % 60 == 0))) {
             isCorrect = true;
           }
-          if (to == "h" && controller.text == ((num / 60) / 60).toString()) {
+          if (to == "h" &&
+              (controller.text == ((num / 60) / 60).toString() ||
+                  (controller.text == ((num / 60) ~/ 60).toString() &&
+                      (num ~/ 60) % 60 == 0))) {
             isCorrect = true;
           }
           if (to == "dan" &&
-              controller.text == (((num / 60) / 60) / 24).toString()) {
+                  controller.text == (((num / 60) / 60) / 24).toString() ||
+              (controller.text == (((num / 60) / 60) ~/ 24).toString() &&
+                  ((num ~/ 60) ~/ 60) % 24 == 0)) {
             isCorrect = true;
           }
           break;
@@ -215,10 +235,14 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
           if (to == "s" && controller.text == (num * 60).toString()) {
             isCorrect = true;
           }
-          if (to == "h" && controller.text == (num / 60).toString()) {
+          if (to == "h" && controller.text == (num / 60).toString() ||
+              (controller.text == (num ~/ 60).toString() && num % 60 == 0)) {
             isCorrect = true;
           }
-          if (to == "dan" && controller.text == ((num / 60) / 24).toString()) {
+          if (to == "dan" &&
+              (controller.text == ((num / 60) / 24).toString() ||
+                  (controller.text == ((num / 60) ~/ 24).toString() &&
+                      (num ~/ 60) % 24 == 0))) {
             isCorrect = true;
           }
           break;
@@ -232,7 +256,10 @@ class _ZadatciVrijemeState extends State<ZadatciVrijeme>
           if (to == "min" && controller.text == (num * 60).toString()) {
             isCorrect = true;
           }
-          if (to == "dan" && controller.text == (num / 24).toString()) {
+          if (to == "dan" &&
+              (controller.text == (num / 24).toString() ||
+                  (controller.text == (num ~/ 24).toString() &&
+                      num % 24 == 0))) {
             isCorrect = true;
           }
           break;
