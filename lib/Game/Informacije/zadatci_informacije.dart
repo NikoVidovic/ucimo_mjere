@@ -267,18 +267,28 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
       if (appState.decimalni == true) {
         switch (from) {
           case 'B':
-            if (to == "KB" && controller.text == (num / 1000).toString()) {
+            if (to == "KB" &&
+                (controller.text == (num / 1000).toString() ||
+                    (controller.text == (num ~/ 1000).toString() &&
+                        num % 1000 == 0))) {
               isCorrect = true;
             }
-            if (to == "MB" && controller.text == (num / 1000000).toString()) {
+            if (to == "MB" &&
+                (controller.text == (num / 1000000).toString() ||
+                    (controller.text == (num ~/ 1000000).toString() &&
+                        num % 1000000 == 0))) {
               isCorrect = true;
             }
             if (to == "GB" &&
-                controller.text == (num / 1000000000).toString()) {
+                (controller.text == (num / 1000000000).toString() ||
+                    (controller.text == (num ~/ 1000000000).toString() &&
+                        num % 1000000000 == 0))) {
               isCorrect = true;
             }
             if (to == "TB" &&
-                controller.text == (num / 1000000000000).toString()) {
+                (controller.text == (num / 1000000000000).toString() ||
+                    (controller.text == (num ~/ 1000000000000).toString() &&
+                        num % 1000000000000 == 0))) {
               isCorrect = true;
             }
             break;
@@ -286,14 +296,22 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
             if (to == "B" && controller.text == (num * 1000).toString()) {
               isCorrect = true;
             }
-            if (to == "MB" && controller.text == (num / 1000).toString()) {
+            if (to == "MB" &&
+                (controller.text == (num / 1000).toString() ||
+                    (controller.text == (num ~/ 1000).toString() &&
+                        num % 1000 == 0))) {
               isCorrect = true;
             }
-            if (to == "GB" && controller.text == (num / 1000000).toString()) {
+            if (to == "GB" &&
+                (controller.text == (num / 1000000).toString() ||
+                    (controller.text == (num ~/ 1000000).toString() &&
+                        num % 1000000 == 0))) {
               isCorrect = true;
             }
             if (to == "TB" &&
-                controller.text == (num / 1000000000).toString()) {
+                (controller.text == (num / 1000000000).toString() ||
+                    (controller.text == (num ~/ 1000000000).toString() &&
+                        num % 1000000000 == 0))) {
               isCorrect = true;
             }
             break;
@@ -304,10 +322,15 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
             if (to == "KB" && controller.text == (num * 1000).toString()) {
               isCorrect = true;
             }
-            if (to == "GB" && controller.text == (num / 1000).toString()) {
+            if (to == "GB" &&
+                (controller.text == (num / 1000).toString() ||
+                    controller.text == (num ~/ 1000).toString())) {
               isCorrect = true;
             }
-            if (to == "TB" && controller.text == (num / 1000000).toString()) {
+            if (to == "TB" &&
+                (controller.text == (num / 1000000).toString() ||
+                    (controller.text == (num ~/ 1000000).toString() &&
+                        num % 1000000 == 0))) {
               isCorrect = true;
             }
             break;
@@ -321,7 +344,10 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
             if (to == "MB" && controller.text == (num * 1000).toString()) {
               isCorrect = true;
             }
-            if (to == "TB" && controller.text == (num / 1000).toString()) {
+            if (to == "TB" &&
+                (controller.text == (num / 1000).toString() ||
+                    (controller.text == (num ~/ 1000).toString() &&
+                        num % 1000 == 0))) {
               isCorrect = true;
             }
             break;
@@ -346,21 +372,34 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
       } else {
         switch (from) {
           case 'B':
-            if (to == "KiB" && controller.text == (num / 1024).toString()) {
+            if (to == "KiB" &&
+                (controller.text == (num / 1024).toString() ||
+                    (controller.text == (num ~/ 1024).toString() &&
+                        num % 1024 == 0))) {
               isCorrect = true;
             }
             if (to == "MiB" &&
-                controller.text == (num / 1024 / 1024).toStringAsFixed(10)) {
+                (controller.text == (num / 1024 / 1024).toStringAsFixed(10) ||
+                    (controller.text ==
+                            (num / 1024 ~/ 1024).toStringAsFixed(10) &&
+                        num % 1024 % 1024 == 0))) {
               isCorrect = true;
             }
             if (to == "GiB" &&
-                controller.text ==
-                    (num / 1024 / 1024 / 1024).toStringAsFixed(12)) {
+                (controller.text ==
+                        (num / 1024 / 1024 / 1024).toStringAsFixed(12) ||
+                    (controller.text ==
+                            (num / 1024 / 1024 ~/ 1024).toStringAsFixed(12) &&
+                        num % 1024 % 1024 % 1024 == 0))) {
               isCorrect = true;
             }
             if (to == "TiB" &&
-                controller.text ==
-                    (num / 1024 / 1024 / 1024 / 1024).toStringAsFixed(15)) {
+                (controller.text ==
+                        (num / 1024 / 1024 / 1024 / 1024).toStringAsFixed(15) ||
+                    (controller.text ==
+                            (num / 1024 / 1024 / 1024 ~/ 1024)
+                                .toStringAsFixed(15) &&
+                        num % 1024 % 1024 % 1024 % 1024 == 0))) {
               isCorrect = true;
             }
             break;
@@ -368,16 +407,25 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
             if (to == "B" && controller.text == (num * 1024).toString()) {
               isCorrect = true;
             }
-            if (to == "MiB" && controller.text == (num / 1024).toString()) {
+            if (to == "MiB" &&
+                (controller.text == (num / 1024).toString() ||
+                    (controller.text == (num ~/ 1024).toString() &&
+                        num % 1024 == 0))) {
               isCorrect = true;
             }
             if (to == "GiB" &&
-                controller.text == (num / 1024 / 1024).toStringAsFixed(10)) {
+                (controller.text == (num / 1024 / 1024).toStringAsFixed(10) ||
+                    (controller.text ==
+                            (num / 1024 ~/ 1024).toStringAsFixed(10) &&
+                        num % 1024 % 1024 == 0))) {
               isCorrect = true;
             }
             if (to == "TiB" &&
-                controller.text ==
-                    (num / 1024 / 1024 / 1024).toStringAsFixed(12)) {
+                (controller.text ==
+                        (num / 1024 / 1024 / 1024).toStringAsFixed(12) ||
+                    (controller.text ==
+                            (num / 1024 / 1024 ~/ 1024).toStringAsFixed(12) &&
+                        num % 1024 % 1024 % 1024 == 0))) {
               isCorrect = true;
             }
             break;
@@ -389,11 +437,17 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
             if (to == "KiB" && controller.text == (num * 1024).toString()) {
               isCorrect = true;
             }
-            if (to == "GiB" && controller.text == (num / 1024).toString()) {
+            if (to == "GiB" &&
+                (controller.text == (num / 1024).toString() ||
+                    (controller.text == (num ~/ 1024).toString() &&
+                        num % 1024 == 0))) {
               isCorrect = true;
             }
             if (to == "TiB" &&
-                controller.text == (num / 1024 / 1024).toStringAsFixed(10)) {
+                (controller.text == (num / 1024 / 1024).toStringAsFixed(10) ||
+                    (controller.text ==
+                            (num / 1024 ~/ 1024).toStringAsFixed(10) &&
+                        num % 1024 % 1024 == 0))) {
               isCorrect = true;
             }
             break;
@@ -409,7 +463,10 @@ class _ZadatciInformacijeState extends State<ZadatciInformacije>
             if (to == "MiB" && controller.text == (num * 1024).toString()) {
               isCorrect = true;
             }
-            if (to == "TiB" && controller.text == (num / 1024).toString()) {
+            if (to == "TiB" &&
+                (controller.text == (num / 1024).toString() ||
+                    (controller.text == (num ~/ 1024).toString() &&
+                        num % 1024 == 0))) {
               isCorrect = true;
             }
             break;

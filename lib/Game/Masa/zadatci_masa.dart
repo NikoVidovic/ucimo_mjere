@@ -156,21 +156,36 @@ class _ZadatciMasaState extends State<ZadatciMasa>
       FocusManager.instance.primaryFocus?.unfocus();
       switch (from) {
         case 'g':
-          if (to == "t" && controller.text == (num / 1000000).toString()) {
+          if (to == "t" &&
+              (controller.text == (num / 1000000).toString() ||
+                  (controller.text == (num ~/ 1000000).toString() &&
+                      num % 1000000 == 0))) {
             isCorrect = true;
           }
-          if (to == "kg" && controller.text == (num / 1000).toString()) {
+          if (to == "kg" &&
+              (controller.text == (num / 1000).toString() ||
+                  (controller.text == (num ~/ 1000).toString() &&
+                      num % 1000 == 0))) {
             isCorrect = true;
           }
-          if (to == "dg" && controller.text == (num / 10).toString()) {
+          if (to == "dg" &&
+              (controller.text == (num / 10).toString() ||
+                  (controller.text == (num ~/ 10).toString() &&
+                      num % 10 == 0))) {
             isCorrect = true;
           }
           break;
         case 'dg':
-          if (to == "t" && controller.text == (num / 100000).toString()) {
+          if (to == "t" &&
+              (controller.text == (num / 100000).toString() ||
+                  (controller.text == (num ~/ 100000).toString() &&
+                      num % 100000 == 0))) {
             isCorrect = true;
           }
-          if (to == "kg" && controller.text == (num / 100).toString()) {
+          if (to == "kg" &&
+              (controller.text == (num / 100).toString() ||
+                  (controller.text == (num ~/ 100).toString() &&
+                      num % 100 == 0))) {
             isCorrect = true;
           }
           if (to == "g" && controller.text == (num * 10).toString()) {
@@ -178,7 +193,10 @@ class _ZadatciMasaState extends State<ZadatciMasa>
           }
           break;
         case 'kg':
-          if (to == "t" && controller.text == (num / 1000).toString()) {
+          if (to == "t" &&
+              (controller.text == (num / 1000).toString() ||
+                  (controller.text == (num ~/ 1000).toString() &&
+                      num % 1000 == 0))) {
             isCorrect = true;
           }
           if (to == "dg" && controller.text == (num * 100).toString()) {

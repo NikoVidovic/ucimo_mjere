@@ -182,17 +182,28 @@ class _ZadatciObujamState extends State<ZadatciObujam>
       FocusManager.instance.primaryFocus?.unfocus();
       switch (from) {
         case 'mm':
-          if (to == "cm" && controller.text == (num / 1000).toString()) {
+          if (to == "cm" &&
+              (controller.text == (num / 1000).toString() ||
+                  (controller.text == (num ~/ 1000).toString() &&
+                      num % 1000 == 0))) {
             isCorrect = true;
           }
-          if (to == "dm" && controller.text == (num / 1000000).toString()) {
+          if (to == "dm" &&
+              (controller.text == (num / 1000000).toString() ||
+                  (controller.text == (num ~/ 1000000).toString() &&
+                      num ~/ 1000000 == 0))) {
             isCorrect = true;
           }
-          if (to == "m" && controller.text == (num / 1000000000).toString()) {
+          if (to == "m" &&
+              (controller.text == (num / 1000000000).toString() ||
+                  (controller.text == (num ~/ 1000000000).toString() &&
+                      num % 1000000000 == 0))) {
             isCorrect = true;
           }
           if (to == "km" &&
-              controller.text == (num / 1000000000000000000).toString()) {
+              (controller.text == (num / 1000000000000000000).toString() ||
+                  controller.text == (num ~/ 1000000000000000000).toString() &&
+                      num % 1000000000000000000 == 0)) {
             isCorrect = true;
           }
           break;
@@ -200,14 +211,22 @@ class _ZadatciObujamState extends State<ZadatciObujam>
           if (to == "mm" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
           }
-          if (to == "dm" && controller.text == (num / 1000).toString()) {
+          if (to == "dm" &&
+              (controller.text == (num / 1000).toString() ||
+                  (controller.text == (num ~/ 1000).toString() &&
+                      num % 1000 == 0))) {
             isCorrect = true;
           }
-          if (to == "m" && controller.text == (num / 1000000).toString()) {
+          if (to == "m" &&
+              (controller.text == (num / 1000000).toString() ||
+                  controller.text == (num ~/ 1000000).toString() &&
+                      num % 1000000 == 0)) {
             isCorrect = true;
           }
           if (to == "km" &&
-              controller.text == (num / 1000000000000000).toString()) {
+              (controller.text == (num / 1000000000000000).toString() ||
+                  controller.text == (num ~/ 1000000000000000).toString() &&
+                      num % 1000000000000000 == 0)) {
             isCorrect = true;
           }
           break;
@@ -218,11 +237,16 @@ class _ZadatciObujamState extends State<ZadatciObujam>
           if (to == "cm" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
           }
-          if (to == "m" && controller.text == (num / 1000).toString()) {
+          if (to == "m" &&
+              (controller.text == (num / 1000).toString() ||
+                  controller.text == (num ~/ 1000).toString() &&
+                      num % 1000 == 0)) {
             isCorrect = true;
           }
           if (to == "km" &&
-              controller.text == (num / 1000000000000).toString()) {
+              (controller.text == (num / 1000000000000).toString() ||
+                  controller.text == (num ~/ 1000000000000).toString() &&
+                      num % 1000000000000 == 0)) {
             isCorrect = true;
           }
           break;
@@ -236,7 +260,10 @@ class _ZadatciObujamState extends State<ZadatciObujam>
           if (to == "dm" && controller.text == (num * 1000).toString()) {
             isCorrect = true;
           }
-          if (to == "km" && controller.text == (num / 1000000000).toString()) {
+          if (to == "km" &&
+              (controller.text == (num / 1000000000).toString() ||
+                  controller.text == (num ~/ 1000000000).toString() &&
+                      num % 1000000000 == 0)) {
             isCorrect = true;
           }
           break;

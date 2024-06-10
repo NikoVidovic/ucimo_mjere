@@ -184,27 +184,48 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
       FocusManager.instance.primaryFocus?.unfocus();
       switch (from) {
         case 'mm':
-          if (to == "km" && controller.text == (num / 1000000).toString()) {
+          if (to == "km" &&
+              (controller.text == (num / 1000000).toString() ||
+                  (controller.text == (num ~/ 1000000).toString() &&
+                      num % 1000000 == 0))) {
             isCorrect = true;
           }
-          if (to == "m" && controller.text == (num / 1000).toString()) {
+          if (to == "m" &&
+              (controller.text == (num / 1000).toString() ||
+                  (controller.text == (num ~/ 1000).toString() &&
+                      num % 1000 == 0))) {
             isCorrect = true;
           }
-          if (to == "dm" && controller.text == (num / 100).toString()) {
+          if (to == "dm" &&
+              (controller.text == (num / 100).toString() ||
+                  (controller.text == (num ~/ 100).toString() &&
+                      num % 100 == 0))) {
             isCorrect = true;
           }
-          if (to == "cm" && controller.text == (num / 10).toString()) {
+          if (to == "cm" &&
+              (controller.text == (num / 10).toString() ||
+                  (controller.text == (num ~/ 10).toString() &&
+                      num % 10 == 0))) {
             isCorrect = true;
           }
           break;
         case 'cm':
-          if (to == "km" && controller.text == (num / 100000).toString()) {
+          if (to == "km" &&
+              (controller.text == (num / 100000).toString() ||
+                  (controller.text == (num ~/ 100000).toString() &&
+                      num % 100000 == 0))) {
             isCorrect = true;
           }
-          if (to == "m" && controller.text == (num / 100).toString()) {
+          if (to == "m" &&
+              (controller.text == (num / 100).toString() ||
+                  (controller.text == (num ~/ 100).toString() &&
+                      num % 100 == 0))) {
             isCorrect = true;
           }
-          if (to == "dm" && controller.text == (num / 10).toString()) {
+          if (to == "dm" &&
+              (controller.text == (num / 10).toString() ||
+                  (controller.text == (num ~/ 10).toString() &&
+                      num % 10 == 0))) {
             isCorrect = true;
           }
           if (to == "mm" && controller.text == (num * 10).toString()) {
@@ -212,10 +233,16 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
           }
           break;
         case 'dm':
-          if (to == "km" && controller.text == (num / 10000).toString()) {
+          if (to == "km" &&
+              (controller.text == (num / 10000).toString() ||
+                  (controller.text == (num ~/ 10000).toString() &&
+                      num % 10000 == 0))) {
             isCorrect = true;
           }
-          if (to == "m" && controller.text == (num / 10).toString()) {
+          if (to == "m" &&
+              (controller.text == (num / 10).toString() ||
+                  (controller.text == (num ~/ 10).toString() &&
+                      num % 10 == 0))) {
             isCorrect = true;
           }
           if (to == "cm" && controller.text == (num * 10).toString()) {
@@ -226,7 +253,10 @@ class _ZadatciDuljinaState extends State<ZadatciDuljina>
           }
           break;
         case 'm':
-          if (to == "km" && controller.text == (num / 1000).toString()) {
+          if (to == "km" &&
+              (controller.text == (num / 1000).toString() ||
+                  (controller.text == (num ~/ 1000).toString() &&
+                      num % 1000 == 0))) {
             isCorrect = true;
           }
           if (to == "dm" && controller.text == (num * 10).toString()) {

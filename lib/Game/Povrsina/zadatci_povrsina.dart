@@ -182,17 +182,28 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
       FocusManager.instance.primaryFocus?.unfocus();
       switch (from) {
         case 'mm':
-          if (to == "cm" && controller.text == (num / 100).toString()) {
+          if (to == "cm" &&
+              (controller.text == (num / 100).toString() ||
+                  (controller.text == (num ~/ 100).toString() &&
+                      num % 100 == 0))) {
             isCorrect = true;
           }
-          if (to == "dm" && controller.text == (num / 10000).toString()) {
+          if (to == "dm" &&
+              (controller.text == (num / 10000).toString() ||
+                  (controller.text == (num ~/ 10000).toString() &&
+                      num % 10000 == 0))) {
             isCorrect = true;
           }
-          if (to == "m" && controller.text == (num / 1000000).toString()) {
+          if (to == "m" &&
+              (controller.text == (num / 1000000).toString() ||
+                  (controller.text == (num ~/ 1000000).toString() &&
+                      num % 1000000 == 0))) {
             isCorrect = true;
           }
           if (to == "km" &&
-              controller.text == (num / 1000000000000).toString()) {
+              (controller.text == (num / 1000000000000).toString() ||
+                  (controller.text == (num ~/ 1000000000000).toString() &&
+                      num % 1000000000000 == 0))) {
             isCorrect = true;
           }
           break;
@@ -200,13 +211,22 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
           if (to == "mm" && controller.text == (num * 100).toString()) {
             isCorrect = true;
           }
-          if (to == "dm" && controller.text == (num / 100).toString()) {
+          if (to == "dm" &&
+              (controller.text == (num / 100).toString() ||
+                  (controller.text == (num ~/ 100).toString() &&
+                      num % 100 == 0))) {
             isCorrect = true;
           }
-          if (to == "m" && controller.text == (num / 10000).toString()) {
+          if (to == "m" &&
+              (controller.text == (num / 10000).toString() ||
+                  (controller.text == (num ~/ 10000).toString() &&
+                      num % 10000 == 0))) {
             isCorrect = true;
           }
-          if (to == "km" && controller.text == (num / 10000000000).toString()) {
+          if (to == "km" &&
+              (controller.text == (num / 10000000000).toString() ||
+                  (controller.text == (num ~/ 10000000000).toString() &&
+                      num % 10000000000 == 0))) {
             isCorrect = true;
           }
           break;
@@ -217,10 +237,16 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
           if (to == "cm" && controller.text == (num * 100).toString()) {
             isCorrect = true;
           }
-          if (to == "m" && controller.text == (num / 100).toString()) {
+          if (to == "m" &&
+              (controller.text == (num / 100).toString() ||
+                  (controller.text == (num ~/ 100).toString() &&
+                      num % 100 == 0))) {
             isCorrect = true;
           }
-          if (to == "km" && controller.text == (num / 100000000).toString()) {
+          if (to == "km" &&
+              (controller.text == (num / 100000000).toString() ||
+                  (controller.text == (num ~/ 100000000).toString() &&
+                      num % 100000000 == 0))) {
             isCorrect = true;
           }
           break;
@@ -234,7 +260,10 @@ class _ZadatciPovrsinaState extends State<ZadatciPovrsina>
           if (to == "dm" && controller.text == (num * 100).toString()) {
             isCorrect = true;
           }
-          if (to == "km" && controller.text == (num / 1000000).toString()) {
+          if (to == "km" &&
+              (controller.text == (num / 1000000).toString() ||
+                  (controller.text == (num ~/ 1000000).toString() &&
+                      num % 1000000 == 0))) {
             isCorrect = true;
           }
           break;
