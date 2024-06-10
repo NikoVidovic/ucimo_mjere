@@ -45,9 +45,10 @@ class PocetnaScena extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/pocetnaScena.png'), fit: BoxFit.cover)),
+              image: const AssetImage('assets/pocetnaScena.png'),
+              fit: isTablet(context) ? BoxFit.cover : BoxFit.contain)),
       child: Padding(
         padding:
             EdgeInsets.only(top: screenHeight / 2.5, right: screenWidth / 20),
