@@ -39,7 +39,7 @@ class _AccessSettingsState extends State<AccessSettings> {
               padding: EdgeInsets.only(
                   left: screenWidth / 43, top: screenHeight / 40),
               child: Text(
-                'Promjeni pozadinu aplikacije',
+                'Promijeni pozadinu aplikacije',
                 style: TextStyle(
                     fontSize: isTablet(context)
                         ? screenHeight / 35 * appState.fontSize
